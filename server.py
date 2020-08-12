@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    """Show homepage"""
+    """View homepage."""
 
     return render_template('homepage.html')
 
