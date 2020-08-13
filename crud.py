@@ -65,7 +65,7 @@ def get_parks():
 
     # Park.query.all()
     # return Park.query.all()
-    return Park.query.filter(Park.designation == 'national park') #test this after i get data!
+    return Park.query.filter(Park.designation == 'national park').all() #test this after i get data!
 
 
 def get_park_by_id(park_id):
@@ -157,7 +157,18 @@ def get_bucketlist_by_park(park):
 
 
 #BucketlistItem
-def 
+def create_bucketlist_item(bucketlist_id, item_id, activity_id):
+    """Create and return a bucketlist item."""
+
+    item = BucketlistItem(bucketlist_id=bucketlist_id, 
+                        item_id=item_id, 
+                        activity_id=activity_id)
+
+    db.session.add(item)
+    db.session.commit()
+
+    return item
+
     # item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
     # activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
