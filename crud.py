@@ -2,6 +2,7 @@
 
 #importing classes from model.py
 from model import db, User, Park, Activity, Bucketlist, BucketlistItem, connect_to_db
+# from datetime import datetime
 
 
 #User
@@ -44,7 +45,7 @@ def get_user_by_username(username):
     return User.query.filter(User.username == username).first()
 
 
-#Park 
+#Park
 def create_park(park_name, state_code, designation, imageURL):
     """Create and return a new park."""
 
@@ -89,6 +90,39 @@ def get_park_by_park_designation(designation):
     """Return a park by the park designation (ntl park, ntl monument, ntl rec area)."""
 
     return Park.query.filter(Park.designation == designation).first()
+
+
+#Activity
+def create_activity(activity_name, park, bucketlistitem):
+    """Create and return a new activity."""
+
+    activity = Activity(activity_name=activity_name, 
+                        park=park, 
+                        bucketlistitem=bucketlistitem)
+    
+    db.session.add(activity)
+    db.session.commit()
+
+    return activity
+
+
+def get_activities():
+    """Return all activities."""
+
+    return Activity.query.all()
+
+
+def get_activity_by_id(activity_id):
+    """Return activity by primary key."""
+
+    return Activity.query.get(activity_id)
+
+
+def get_activity_name(activity_name):
+    """Return an activity by the name."""
+
+    return Activity.query.filter(Activity.activity_name == activity_name).first()
+
 
 
 
