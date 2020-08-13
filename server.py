@@ -3,9 +3,14 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db
 import crud
+import os
+import sys
 from jinja2 import StrictUndefined 
 
 app = Flask(__name__)
+app.secret_key = "lans"
+app.jinja_env.undefined = StrictUndefined
+
 
 
 

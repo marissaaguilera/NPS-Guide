@@ -124,6 +124,50 @@ def get_activity_name(activity_name):
     return Activity.query.filter(Activity.activity_name == activity_name).first()
 
 
+#Bucketlist
+def create_bucketlist(user, park, bucketlistitem):
+    """Create and return a new bucketlist."""
+
+    bucketlist = Bucketlist(user=user, 
+                            park=park, 
+                            bucketlistitem=bucketlistitem)
+
+    return bucketlist
+
+def get_bucketlists():
+    """Return all bucketlists."""
+
+    return Bucketlist.query.all()
+
+def get_bucketlist_by_id(bucketlist_id):
+    """Return a bucketlist by the primary key."""
+
+    return Bucketlist.query.get(bucketlist_id)
+
+def get_bucketlist_by_user(user):
+    """Retrun all bucketlists by a user."""
+
+    return Bucketlist.query.filter(Bucketlist.user == user).all()
+
+
+def get_bucketlist_by_park(park):
+    """Retrun a users bucketlist by a park."""
+
+    return Bucketlist.query.filter(Bucketlist.park == park).all()
+
+
+#BucketlistItem
+def 
+    # item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
+    # activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
+    # order = db.Column(db.Integer, nullable=True) #favorite to least favorite / have order by date, time 
+    # #date of event = db.Column(db.dateTime) #ascending order by date in the bucketlist 
+    # #orderby as a field ()date option 
+    # bucketlists = db.relationship('Bucketlist')
+    # activities = db.relationship('Activity')
+
+
 
 
 
