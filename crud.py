@@ -63,8 +63,8 @@ def get_parks():
     """Return all parks."""
 
     # Park.query.all()
-
-    return Park.query.filter(Park.designation == 'national park') #test this!
+    # return Park.query.all()
+    return Park.query.filter(Park.designation == 'national park') #test this after i get data!
 
 
 def get_park_by_id(park_id):
@@ -73,11 +73,28 @@ def get_park_by_id(park_id):
     return Park.query.get(park_id)
 
 
+def get_park_by_park_name(park_name):
+    """Return a park by the park name."""
+
+    return Park.query.filter(Park.park_name == park_name).first()
+
+
+def get_parks_by_state(state_code):
+    """Return parks by the state."""
+
+    return Park.query.filter(Park.state_code == state_code).all()
+
+
+def get_park_by_park_designation(designation):
+    """Return a park by the park designation (ntl park, ntl monument, ntl rec area)."""
+
+    return Park.query.filter(Park.designation == designation).first()
 
 
 
 
 
+#.all, .first, .filter, .get, .filterby
 
 if __name__ == '__main__':
     from server import app
