@@ -18,7 +18,7 @@ model.connect_to_db(server.app)
 model.db.create_all()
 
 
-# Create 100 users;
+# Create 100 users
 for user in range(100):
 
     extension = ['@gmail.com', '@yahoo.com', '@hotmail.com']
@@ -36,6 +36,25 @@ for user in range(100):
 
     print(user)
 
+#Create parks
+# def create_park(park_name, state_code, designation, imageURL):
+
+
+
+# Create activities
+# def create_activity(activity_name, park, bucketlistitem):
+
+
+
+# Create bucketlist
+# def create_bucketlist(user, park, bucketlistitem):
+
+
+
+#Create bucketlist item
+# def create_bucketlist_item(bucketlist_id, item_id, activity_id):
+
+
 
 
     #want to do this for every table, for the create function 
@@ -45,9 +64,5 @@ for user in range(100):
 
 #have api file, make api request, get response, use response in seed file and create a 
 #api.py for api calls 
-
-
-#python3 -i model.py
-#psql npsdb (this gets me into my database)
 
 #if des == national park else continue 
