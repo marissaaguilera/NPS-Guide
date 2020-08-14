@@ -111,7 +111,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///npsdb', echo=True):
     print('Connected to the db!')
 
 #My database is called "npsdb"
-#createdb npsdb, db.create_all(), python3 -i model.py 
+#createdb npsdb, python3 -i model.py, db.create_all(), quit(), psql npsdb 
 
 if __name__ == '__main__':
     from server import app
