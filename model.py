@@ -34,7 +34,7 @@ class Park(db.Model):
     park_name = db.Column(db.String, nullable=False)
     state_code = db.Column(db.String)
     designation = db.Column(db.String)  #designation (national park, national monument, national rec area)
-    imageURL = db.Column(db.String)
+    siteURL = db.Column(db.String)
 
     activities = db.relationship('Activity')
     bucketlists = db.relationship('Bucketlist')

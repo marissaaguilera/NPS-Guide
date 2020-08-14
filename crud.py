@@ -46,13 +46,13 @@ def get_user_by_username(username):
 
 
 #Park
-def create_park(park_name, state_code, designation, imageURL):
+def create_park(park_name, state_code, designation, siteURL):
     """Create and return a new park."""
 
     park = Park(park_name=park_name, 
                 state_code=state_code, 
                 designation=designation, 
-                imageURL=imageURL)
+                siteURL=siteURL)
     
     db.session.add(park)
     db.session.commit()
