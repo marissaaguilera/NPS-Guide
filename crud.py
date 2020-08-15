@@ -5,6 +5,9 @@ from model import db, User, Park, Activity, Bucketlist, BucketlistItem, connect_
 # from datetime import datetime
 
 
+#Tables: User, Park, Activity, State, ParkState, Bucketlist, BucketlistItem (7)
+
+
 #User
 def create_user(username, fname, lname, email, password):
     """Create and return a new user."""
@@ -123,6 +126,49 @@ def get_activity_name(activity_name):
 
     return Activity.query.filter(Activity.activity_name == activity_name).first()
 
+#State 
+def create_state(state_code, state_name, park_id):
+    """Create and return a new bucketlist."""
+
+    state = State(state_code=state_code, 
+                state_name=state_name, 
+                park_id=park_id)
+    
+    db.session.add(state)
+    db.session.commit()
+
+    return state
+
+def get_states():
+    """Return all states."""
+
+    return State.query.all()
+
+def get_state_by_id(state_id):
+    """Return a state by primary key."""
+
+    return State.query.get(state_id)
+
+def get_state_by_state_name(state_name):
+    """Return a state by the state name."""
+
+    return State.query.filter(State.state_name == state_name).first()
+
+
+
+#ParkState
+def create_parkstate(states_park_is_in, state_id, park_id):
+    """Create and return a new park/state relationship."""
+
+    parkstate = ParkState(states_park_is_in=states_park_is_in, 
+                state_id=state_id, 
+                park_id=park_id)
+    
+    db.session.add(state)
+    db.session.commit()
+
+    return parkstate
+
 
 #Bucketlist
 def create_bucketlist(user, park, bucketlistitem):
@@ -168,17 +214,6 @@ def create_bucketlist_item(bucketlist_id, item_id, activity_id):
     db.session.commit()
 
     return item
-
-    # item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    # bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
-    # activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
-    # order = db.Column(db.Integer, nullable=True) #favorite to least favorite / have order by date, time 
-    # #date of event = db.Column(db.dateTime) #ascending order by date in the bucketlist 
-    # #orderby as a field ()date option 
-    # bucketlists = db.relationship('Bucketlist')
-    # activities = db.relationship('Activity')
-
-
 
 
 

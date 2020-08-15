@@ -18,24 +18,25 @@ model.db.create_all()
 
 
 # loads park/activity data from json file 
-with open('data/parkinfo.json') as f: #can't have an underscore in the file name
+with open('data/parkinfo.json') as f: 
     park_data = json.loads(f.read())
 
 
-
-
 #Create parks
-# def create_park(park_name, state_code, designation, siteURL):
 
 data_value = park_data['data']
 data_dict = data_value[0]
 
 all_parks = []
-for key, value in data_dict.items(): #getting values(keys = id, name, parks) from the data dictionary 
+
+
+for key, value in data_dict.items(): 
     parks_list = data_dict['parks']
-    for info in parks_list: #info is a dict, values = states, fullName, url, parkcode, designation, name
-        for k, v in info.items(): #accesses keys and values in dictionary 
-            # print(k, v)
+    for park in parks_list: 
+        print('PARK:', park, '\n')
+        # for k, v in park.items():#park is a dict, values = states, fullName, url, parkcode, designation, name
+            # print('KEY:', k, 'VALUE:', v, '\n')
+        if park['designation'] == 'National Park':
             park_name, state_code, designation, siteURL = (park['name'],
                                             park['states'], 
                                             park['designation'], 
@@ -47,12 +48,34 @@ for key, value in data_dict.items(): #getting values(keys = id, name, parks) fro
                                     siteURL)
 
             all_parks.append(db_park)
+        else: 
+            continue
 
     
 # Create activities
 # def create_activity(activity_name, park, bucketlistitem):
 
+# all_activities = []
+# # data = park_data.get('data', 0)
+# data_value = park_data['data']
+# data_dict = data_value[0]
 
+# for key, value in data_dict.items():
+#     activity = 
+
+
+# movies_in_db = []
+# for movie in movie_data:
+#     title, overview, poster_path = (movie['title'],
+#                                     movie['overview'],
+#                                     movie['poster_path'])
+#     release_date = datetime.strptime(movie['release_date'], '%Y-%m-%d')
+
+#     db_movie = crud.create_movie(title,
+#                                  overview,
+#                                  release_date,
+#                                  poster_path)
+#     movies_in_db.append(db_movie)
 
 # Create bucketlist
 # def create_bucketlist(user, park, bucketlistitem):

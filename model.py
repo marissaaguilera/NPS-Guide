@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-
+#Tables: User, Park, Activity, State, ParkState, Bucketlist, BucketlistItem (7)
 
 class User(db.Model):
     """A user."""
@@ -38,6 +38,7 @@ class Park(db.Model):
 
     activities = db.relationship('Activity')
     bucketlists = db.relationship('Bucketlist')
+    parkstate = db.relationship('ParkState')
 
     def __repr__(self):
         return f'<Park park_id={self.park_id} park_name={self.park_name} state_code={self.state_code}>'
@@ -58,6 +59,38 @@ class Activity(db.Model):
 
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
+
+class State(db.Model):
+    """A state."""
+
+    __tablename__ = 'states'
+
+    state_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    state_code = db.Column(db.String)
+    state_name = db.Column(db.String)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+
+    park = db.relationship('Park')
+    parkstate = db.relationship('ParkState')
+  
+    def __repr__(self):
+        return f'<State state_id={self.state_id} state_name={self.state_name}>'
+
+class ParkState(db.Model):
+    """A park and state relationship."""
+
+    __tablename__ = 'parkstate'
+
+    parkstate_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    state_id = db.Column(db.Integer, db.ForeignKey('state.state_id'), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+    state_park_is_in = db.Column(db.String)
+
+    park = db.relationship('Park')
+    state = db.relationship('State')
+  
+    def __repr__(self):
+        return f'<State state_id={self.state_id} state_name={self.state_name}>'
 
 
 class Bucketlist(db.Model):
@@ -98,6 +131,10 @@ class BucketlistItem(db.Model):
         return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id} activity_id={self.activity_id}>'
 
 
+#TO DO: 
+
+#add state table 
+#add parkstate table
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///npsdb', echo=True):
@@ -115,6 +152,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///npsdb', echo=True):
 
 #python3 -i model.py
 #psql npsdb (this gets me into my database)
+#dt users then SELECT * FROM users * LIMIT 50 
 
 
 if __name__ == '__main__':
