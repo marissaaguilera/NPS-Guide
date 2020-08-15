@@ -131,11 +131,6 @@ class BucketlistItem(db.Model):
         return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id} activity_id={self.activity_id}>'
 
 
-#TO DO: 
-
-#add state table 
-#add parkstate table
-
 
 def connect_to_db(flask_app, db_uri='postgresql:///npsdb', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
@@ -147,14 +142,15 @@ def connect_to_db(flask_app, db_uri='postgresql:///npsdb', echo=True):
 
     print('Connected to the db!')
 
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)
+
+
 #My database is called "npsdb"
 #createdb npsdb, python3 -i model.py, db.create_all(), quit(), psql npsdb 
 
 #python3 -i model.py
 #psql npsdb (this gets me into my database)
 #dt users then SELECT * FROM users * LIMIT 50 
-
-
-if __name__ == '__main__':
-    from server import app
-    connect_to_db(app)
