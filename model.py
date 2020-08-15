@@ -60,6 +60,7 @@ class Activity(db.Model):
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
 
+
 class State(db.Model):
     """A state."""
 
@@ -67,7 +68,6 @@ class State(db.Model):
 
     state_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_code = db.Column(db.String)
-    state_name = db.Column(db.String)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
 
     park = db.relationship('Park')
@@ -75,6 +75,7 @@ class State(db.Model):
   
     def __repr__(self):
         return f'<State state_id={self.state_id} state_name={self.state_name}>'
+
 
 class ParkState(db.Model):
     """A park and state relationship."""
