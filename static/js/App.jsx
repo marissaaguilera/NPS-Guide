@@ -1,4 +1,14 @@
-import React from 'react'
+"use strict";
+
+
+
+
+
+
+
+
+
+import React, { StrictMode } from 'react'
 
 export default function App() {
     return (
