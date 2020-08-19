@@ -8,7 +8,6 @@ const Redirect = ReactRouterDOM.Redirect;
 
 function Homepage() {
     return <div>Welcome to my site</div>
-
 }
 
 

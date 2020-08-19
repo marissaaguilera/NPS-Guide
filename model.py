@@ -1,11 +1,12 @@
 """Models for national park service bucketlists."""
 
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
 
-#Tables: User, Park, Activity, State, ParkState, Bucketlist, BucketlistItem (7)
+#Tables: User, Park, Activity, ParkActivity, State, ParkState, Bucketlist, BucketlistItem (8)
 
 class User(db.Model):
     """A user."""
@@ -25,6 +26,7 @@ class User(db.Model):
         return f'<User user_id={self.user_id} email={self.email}>'
 
 
+
 class Park(db.Model):
     """A park."""
 
@@ -32,33 +34,19 @@ class Park(db.Model):
 
     park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     park_name = db.Column(db.String, nullable=False)
-    state_code = db.Column(db.String)
-    designation = db.Column(db.String)  #designation (national park, national monument, national rec area)
+    designation = db.Column(db.String)  #designation (ntl park, ntl monument, ntl rec area)
     siteURL = db.Column(db.String)
 
-    activities = db.relationship('Activity')
     bucketlists = db.relationship('Bucketlist')
+    state = db.relationship('State', secondary="parkstates")
+    activities = db.relationship('Activity', secondary="parkactivities")
     parkstate = db.relationship('ParkState')
+    #ask if this line is needed. 
+
 
     def __repr__(self):
-        return f'<Park park_id={self.park_id} park_name={self.park_name} state_code={self.state_code}>'
+        return f'<Park park_id={self.park_id} park_name={self.park_name}>'
 
-
-class Activity(db.Model):
-    """An activity."""
-
-    __tablename__ = 'activities'
-
-    activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    activity_name = db.Column(db.String)
-    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
-
-    # park = db.relationship('Park', backref='activities')
-    park = db.relationship('Park')
-    bucketlistitem = db.relationship('BucketlistItem')
-
-    def __repr__(self):
-        return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
 
 
 class State(db.Model):
@@ -68,30 +56,71 @@ class State(db.Model):
 
     state_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_code = db.Column(db.String)
-    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
 
-    park = db.relationship('Park')
+    park = db.relationship('Park', secondary="parkstates")
     parkstate = db.relationship('ParkState')
   
     def __repr__(self):
-        return f'<State state_id={self.state_id} state_name={self.state_name}>'
+        return f'<State state_id={self.state_id} state_code={self.state_code}>'
+
+#error; column has to be unique or else db won't know what to use, 
+# foreign key should always be primary key of that table. 
+
+
+
+class Activity(db.Model):
+    """An activity."""
+
+    __tablename__ = 'activities'
+
+    activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    activity_name = db.Column(db.String)
+
+    bucketlistitem = db.relationship('BucketlistItem')
+    park = db.relationship('Park', secondary="parkactivities")
+    parkactivity = db.relationship('ParkActivity')
+
+
+    def __repr__(self):
+        return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
+
+
+
+class ParkActivity(db.Model):
+    """A park and activity relationship."""
+
+    __tablename__ = 'parkactivities'
+    
+
+    park_activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+
+    park = db.relationship('Park')
+    activity = db.relationship('Activity')
+
+  
+    def __repr__(self):
+        return f'<Park Activity activity_id={self.activity_id} park_id={self.park_id}>'
+
 
 
 class ParkState(db.Model):
     """A park and state relationship."""
 
-    __tablename__ = 'parkstate'
+    __tablename__ = 'parkstates'
+    #park_state place underscore in between 
 
-    parkstate_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    state_id = db.Column(db.Integer, db.ForeignKey('state.state_id'), nullable=False)
+    parkstate_id = db.Column(db.Integer, autoincrement=True, primary_key=True) #maybe don't need this 
+    state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'), nullable=False)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
-    state_park_is_in = db.Column(db.String)
 
     park = db.relationship('Park')
     state = db.relationship('State')
+
   
     def __repr__(self):
-        return f'<State state_id={self.state_id} state_name={self.state_name}>'
+        return f'<Park State state_id={self.state_id} park_id={self.park_id} state_code={self.state_code}>'
 
 
 class Bucketlist(db.Model):
@@ -102,7 +131,8 @@ class Bucketlist(db.Model):
 
     bucketlist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False) #could have an orderby clause 
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+    #bucketlist title? 
     
     user = db.relationship('User')
     park = db.relationship('Park')
@@ -118,13 +148,11 @@ class BucketlistItem(db.Model):
 
     __tablename__ = 'bucketlistitems'
 
-
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
-    order = db.Column(db.Integer, nullable=True) #favorite to least favorite / have order by date, time 
-    #date of event = db.Column(db.dateTime) #ascending order by date in the bucketlist 
-    #orderby as a field ()date option 
+    order = db.Column(db.DateTime, nullable=True)
+    
     bucketlists = db.relationship('Bucketlist')
     activities = db.relationship('Activity')
 
@@ -148,10 +176,8 @@ if __name__ == '__main__':
     from server import app
     connect_to_db(app)
 
-
+#DB NOTES:
 #My database is called "npsdb"
-#createdb npsdb, python3 -i model.py, db.create_all(), quit(), psql npsdb 
-
-#python3 -i model.py
-#psql npsdb (this gets me into my database)
+#dropdb npsdb, createdb npsdb, python3 -i model.py, db.create_all(), 
+# quit(), python3 seed_database.py, psql npsdb (this gets me into my database),
 #dt users then SELECT * FROM users * LIMIT 50 

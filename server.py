@@ -14,101 +14,92 @@ app.jinja_env.undefined = StrictUndefined
 
 # API_KEY = os.environ['NPS_KEY']
 
+@app.route("/")
+def root():
+    return render_template("root.html")
 
-@app.route('/')
-def homepage():
-    """View homepage."""
+# @app.route('/')
+# def homepage():
+#     """View homepage."""
 
-    return render_template('homepage.html')
+#     return render_template('homepage.html')
 
 
 #can i have the route the same as homepage since it is on there?
-@app.route('/', methods=['POST'])
-def user_login():
-    """Login a user."""
+# @app.route('/login', methods=['POST'])
+# def user_login():
+#     """Login a user."""
 
-    username = request.form.get('username')
-    password = request.form.get('password')
+#     username = request.form.get('username')
+#     password = request.form.get('password')
 
-    user = crud.get_user_by_username(username)
+#     user = crud.get_user_by_username(username)
 
-    if user is None:
-        flash('Username Error: Account does not exist')
-        return redirect('/')
+#     if user is None:
+#         flash('Username Error: Account does not exist')
+#         return redirect('/')
     
-    elif user.password != password:
-        flash('Password Error: Incorrect password')
-        return redirect('/')
+#     elif user.password != password:
+#         flash('Password Error: Incorrect password')
+#         return redirect('/')
     
-    elif user.password == password:
-        session['user'] = username
-        session['user_id'] = user.user_id #or user_id 
-        print('user logged in', session['user_id'])
-        return redirect('/explore')
+#     elif user.password == password:
+#         session['user'] = username
+#         session['user_id'] = user.user_id #or user_id 
+#         print('user logged in', session['user_id'])
+#         return redirect('/explore')
 
 
 
-@app.route('/', methods=['POST'])
-def register_user():
-    """Create a new user."""
+# @app.route('/register', methods=['POST'])
+# def register_user():
+#     """Create a new user."""
 
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    email = request.form.get('email')
-    username = request.form.get('username')
-    password = request.form.get('password')
+#     first_name = request.form.get('first_name')
+#     last_name = request.form.get('last_name')
+#     email = request.form.get('email')
+#     username = request.form.get('username')
+#     password = request.form.get('password')
 
-    user = crud.get_user_by_email(email)
-    if user:
-        flash('Email already associated with an account. Try again.')
-    else:
-        crud.create_user(first_name, last_name, email, username, password)
-        flash('Account successfully created. Please log in.')
-
-
-
-@app.route('/')
-def user_logout():
-    """Log out a user."""
-
-    if 'user' in session:
-        session['user']
-    session.pop('user', None) 
-
-    return redirect('/')
+#     user = crud.get_user_by_email(email)
+#     if user:
+#         flash('Email already associated with an account. Try again.')
+#     else:
+#         crud.create_user(first_name, last_name, email, username, password)
+#         flash('Account successfully created. Please log in.')
 
 
 
+# @app.route('/logout')
+# def user_logout():
+#     """Log out a user."""
 
-@app.route('/explore')
-def choose_park():
-    """Search for parks on National Park Service API."""
+#     if 'user' in session:
+#         session['user']
+#     session.pop('user', None) 
 
-#payload 
-#api key
-#res=request.get () should return req object
+#     return redirect('/')
 
-    #url wrong? 
-    #am i doing this api in the right place? 
-    #do i need a secrets.sh file if im creating tables with my api data 
-    #do this again with the activities function or just once? 
-    #does the data populate into a file or i have to create the file?
 
-    url = 'https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=QtofanIIdwMJ4Q5FfVkKQPFGB1hjC0SOH3vdOb2e'
-    payload = {'api_key' : 'NPS_KEY'}
 
-    states = request.args.get('states', '')
-    designation = request.args.get('designation', '')
-    fullName = request.args.get('fullName', '')
 
-    response = requests.get(url, params=payload)
+# @app.route('/explore')
+# def choose_park():
+#     """Search for parks on National Park Service API."""
 
-    data = response.json()
-    parks = data#what to put here 
 
-    return render_template('choose_park.html', 
-                            pformat=pformat,
-                            )
+#     states = request.args.get('states', '')
+#     designation = request.args.get('designation', '')
+#     fullName = request.args.get('fullName', '')
+
+#     response = requests.get(url, params=payload)
+
+#     data = response.json()
+#     parks = data#what to put here 
+
+#     return render_template('choose_park.html', 
+#                             pformat=pformat,
+#                             )
 
 
 
@@ -116,16 +107,14 @@ def choose_park():
 
 
 
-@app.route('/activities')
-def activities():
-    """Shows all activities for that park."""
-
-    url = 'https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=QtofanIIdwMJ4Q5FfVkKQPFGB1hjC0SOH3vdOb2e'
-    payload = {'api_key' : 'NPS_KEY'}
+# @app.route('/activities')
+# def activities():
+#     """Shows all activities for that park."""
 
 
-@app.route('/bucketlist')
-def bucketlist():
+
+# @app.route('/bucketlist')
+# def bucketlist():
     """Shows the user's bucketlist with their saved activities."""
 
 

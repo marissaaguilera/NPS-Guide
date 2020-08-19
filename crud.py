@@ -1,11 +1,11 @@
 """CRUD (create, read, update, delete) operations."""
 
 #importing classes from model.py
-from model import db, User, Park, Activity, Bucketlist, BucketlistItem, connect_to_db
-# from datetime import datetime
+from model import db, User, Park, Activity, ParkActivity, State, ParkState, Bucketlist, BucketlistItem, connect_to_db
+from datetime import datetime
 
 
-#Tables: User, Park, Activity, State, ParkState, Bucketlist, BucketlistItem (7)
+#Tables: User, Park, Activity, ParkActivity, State, ParkState, Bucketlist, BucketlistItem (8)
 
 
 #User
@@ -33,7 +33,7 @@ def get_users():
 def get_user_by_id(user_id):
     """Return a user by primary_key."""
 
-    return User.query.get(user_id)
+    return User.query.get(user_id).first()
 
 
 def get_user_by_email(email):
@@ -48,12 +48,14 @@ def get_user_by_username(username):
     return User.query.filter(User.username == username).first()
 
 
+
+
+
 #Park
-def create_park(park_name, state_code, designation, siteURL):
+def create_park(park_name, designation, siteURL):
     """Create and return a new park."""
 
-    park = Park(park_name=park_name, 
-                state_code=state_code, 
+    park = Park(park_name=park_name,  
                 designation=designation, 
                 siteURL=siteURL)
     
@@ -66,15 +68,14 @@ def create_park(park_name, state_code, designation, siteURL):
 def get_parks():
     """Return all parks."""
 
-    # Park.query.all()
-    # return Park.query.all()
-    return Park.query.filter(Park.designation == 'national park').all() #test this after i get data!
+    return Park.query.all()
+    # return Park.query.filter_by(Park.designation == 'National Park').all() #test this after i get data!
 
 
 def get_park_by_id(park_id):
     """Return a park by primary key."""
 
-    return Park.query.get(park_id)
+    return Park.query.get(park_id).first()
 
 
 def get_park_by_park_name(park_name):
@@ -83,25 +84,15 @@ def get_park_by_park_name(park_name):
     return Park.query.filter(Park.park_name == park_name).first()
 
 
-def get_parks_by_state(state_code):
-    """Return parks by the state."""
-
-    return Park.query.filter(Park.state_code == state_code).all()
 
 
-def get_park_by_park_designation(designation):
-    """Return a park by the park designation (ntl park, ntl monument, ntl rec area)."""
-
-    return Park.query.filter(Park.designation == designation).first()
 
 
 #Activity
-def create_activity(activity_name, park, bucketlistitem):
+def create_activity(activity_name):
     """Create and return a new activity."""
 
-    activity = Activity(activity_name=activity_name, 
-                        park=park, 
-                        bucketlistitem=bucketlistitem)
+    activity = Activity(activity_name=activity_name)
     
     db.session.add(activity)
     db.session.commit()
@@ -126,13 +117,39 @@ def get_activity_name(activity_name):
 
     return Activity.query.filter(Activity.activity_name == activity_name).first()
 
+
+
+
+
+
+#ParkActivity 
+def create_park_activity(activity_id, park_id):
+    """Create and return a new park/activity relationship."""
+
+    park_activity = ParkActivity(activity_id=activity_id, 
+                                park_id=park_id)
+    
+    db.session.add(park_activity)
+    db.session.commit()
+
+    return park_activity
+
+def get_activities_by_park():
+    """Return a park by the activitiy id."""
+
+    return db.session.query(Activity, Park).join(Park).all()
+#need to have db.session.query when using join 
+
+
+
+
+
+
 #State 
-def create_state(state_code, state_name, park_id):
+def create_state(state_code):
     """Create and return a new bucketlist."""
 
-    state = State(state_code=state_code, 
-                state_name=state_name, 
-                park_id=park_id)
+    state = State(state_code=state_code)
     
     db.session.add(state)
     db.session.commit()
@@ -149,34 +166,47 @@ def get_state_by_id(state_id):
 
     return State.query.get(state_id)
 
-def get_state_by_state_name(state_name):
-    """Return a state by the state name."""
+def get_state_by_state_code(state_code):
+    """Return a state by the state code."""
 
-    return State.query.filter(State.state_name == state_name).first()
+    return State.query.filter(State.state_code == state_code).first()
+
+
+
 
 
 
 #ParkState
-def create_parkstate(states_park_is_in, state_id, park_id):
+def create_park_state(state_id, park_id):
     """Create and return a new park/state relationship."""
 
-    parkstate = ParkState(states_park_is_in=states_park_is_in, 
-                state_id=state_id, 
+    park_state = ParkState(state_id=state_id, 
                 park_id=park_id)
     
-    db.session.add(state)
+    db.session.add(park_state)
     db.session.commit()
 
-    return parkstate
+    return park_state
+
+def get_states_by_park():
+    """Return a park by the state_id."""
+
+    return db.session.query(Park, State).join(State).all()
+#need to have db.session.query when using join 
+
+
+
+
 
 
 #Bucketlist
-def create_bucketlist(user, park, bucketlistitem):
+def create_bucketlist(user_id, park_id):
     """Create and return a new bucketlist."""
 
-    bucketlist = Bucketlist(user=user, 
-                            park=park, 
-                            bucketlistitem=bucketlistitem)
+    # user_id = get_user_by_id(user_id)
+    # park_id = get_park_by_id(park_id)
+    bucketlist = Bucketlist(user_id=user_id, 
+                            park_id=park_id)
 
     return bucketlist
 
@@ -190,25 +220,28 @@ def get_bucketlist_by_id(bucketlist_id):
 
     return Bucketlist.query.get(bucketlist_id)
 
-def get_bucketlist_by_user(user):
-    """Retrun all bucketlists by a user."""
+def get_bucketlist_by_user(user_id):
+    """Retrun all bucketlists by a user id."""
+    # user_id = get_user_by_id(user_id)
+    return Bucketlist.query.filter(Bucketlist.user_id == user_id).all()
 
-    return Bucketlist.query.filter(Bucketlist.user == user).all()
+
+def get_bucketlist_by_park(park_id):
+    """Retrun a users bucketlist by a park id."""
+    # park_id = get_park_by_id(park_id)
+    return Bucketlist.query.filter(Bucketlist.park_id == park_id).all()
 
 
-def get_bucketlist_by_park(park):
-    """Retrun a users bucketlist by a park."""
 
-    return Bucketlist.query.filter(Bucketlist.park == park).all()
 
 
 #BucketlistItem
-def create_bucketlist_item(bucketlist_id, item_id, activity_id):
+def create_bucketlist_item(bucketlist_id, activity_id, order):
     """Create and return a bucketlist item."""
 
     item = BucketlistItem(bucketlist_id=bucketlist_id, 
-                        item_id=item_id, 
-                        activity_id=activity_id)
+                        activity_id=activity_id, 
+                        order=order)
 
     db.session.add(item)
     db.session.commit()
@@ -217,9 +250,14 @@ def create_bucketlist_item(bucketlist_id, item_id, activity_id):
 
 
 
-
-#.all, .first, .filter, .get, .filterby
-
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
+
+
+#MVP 
+#user login, 
+#new user registration
+#choose park by search bar (user will type park)
+#shows activities available at that park 
+#add activities to bucketlist 
