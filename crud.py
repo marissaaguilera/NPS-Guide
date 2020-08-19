@@ -112,7 +112,7 @@ def get_activity_by_id(activity_id):
     return Activity.query.get(activity_id)
 
 
-def get_activity_name(activity_name):
+def get_activity_by_activity_name(activity_name):
     """Return an activity by the name."""
 
     return Activity.query.filter(Activity.activity_name == activity_name).first()
@@ -140,6 +140,14 @@ def get_activities_by_park():
     return db.session.query(Activity, Park).join(Park).all()
 #need to have db.session.query when using join 
 
+# def add_activities_by_park(park, activities_list):
+#     """Linking park to a specific activity."""
+
+#     for name in activities_list: 
+#         activity = get_activity_by_activity_name(name)
+#         parkactivity = create_park_activity(activity.activity_id, park.park_id)
+
+#         #this will give me state object from db 
 
 
 
@@ -194,7 +202,14 @@ def get_states_by_park():
     return db.session.query(Park, State).join(State).all()
 #need to have db.session.query when using join 
 
+def add_states_by_park(park, park_state_codes):
+    """Linking park to a specific state code."""
 
+    for code in park_state_codes: #this list is coming from split [CA, OR, WA]
+        state = get_state_by_state_code(code)
+        parkstate = create_park_state(state.state_id, park.park_id)
+
+        #this will give me state object from db 
 
 
 
@@ -207,6 +222,9 @@ def create_bucketlist(user_id, park_id):
     # park_id = get_park_by_id(park_id)
     bucketlist = Bucketlist(user_id=user_id, 
                             park_id=park_id)
+    
+    db.session.add(bucketlist)
+    db.session.commit()
 
     return bucketlist
 
@@ -239,14 +257,14 @@ def get_bucketlist_by_park(park_id):
 def create_bucketlist_item(bucketlist_id, activity_id, order):
     """Create and return a bucketlist item."""
 
-    item = BucketlistItem(bucketlist_id=bucketlist_id, 
+    bucketlistitem = BucketlistItem(bucketlist_id=bucketlist_id, 
                         activity_id=activity_id, 
                         order=order)
 
-    db.session.add(item)
+    db.session.add(bucketlistitem)
     db.session.commit()
 
-    return item
+    return bucketlistitem
 
 
 

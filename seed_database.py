@@ -10,15 +10,13 @@ import crud, model, server
 from faker import Faker #fake users 
 fake = Faker()
 
-
 #Tables: User, Park, Activity, ParkActivity, State, ParkState, Bucketlist, BucketlistItem (8)
 
 os.system('dropdb npsdb')
 os.system('createdb npsdb')
-
 model.connect_to_db(server.app)
 model.db.create_all()
-#run seed only after this, my drop and create already happened 
+#run python3 seed_database
 
 with open('data/parkinfo.json') as f: 
     park_data = json.loads(f.read())
@@ -26,7 +24,7 @@ with open('data/parkinfo.json') as f:
 
 
 
-#Create users, 100 users
+#Create users
 all_users = []
 for user in range(100):
     extension = ['@gmail.com', '@yahoo.com', '@hotmail.com']
@@ -45,8 +43,26 @@ for user in range(100):
 
 
 
+#Create States
+states = [ "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT",
+            "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID",
+            "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", 
+            "MI","MN","MO", "MS", "MT","NC","ND","NE","NH",
+            "NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI",
+            "SC","SD","TN","TX","UT","VA","VI","VT","WA", "WI", 
+            "WV", "WY"]
 
-#Create Parks, 19 parks 
+for state in states:
+    crud.create_state(state)
+
+
+
+
+
+
+
+
+#Create Parks
 data_value = park_data['data']
 data_dict = data_value[0] 
 
@@ -63,18 +79,17 @@ for park in parks_list:
         db_park = crud.create_park(park_name, 
                                 designation, 
                                 siteURL)
-
+        split = park['states'].split(',')
+        crud.add_states_by_park(db_park, split)
+        # crud.add_activities_by_park(db_park, db_activity)
         all_parks.append(db_park)
     else: 
         continue
 
 
-
-
-
-# Create Activities, 40 activities
+# Create Activities
 data_value = park_data['data']
-data_dict = data_value[0] #data dictionary
+data_dict = data_value[0] 
 
 all_activities = []
 for activity in data_value:
@@ -85,64 +100,34 @@ for activity in data_value:
 
 
 
-
-
-#Create States
-
-state_code, park_id 
-data_value = park_data['data']
-data_dict = data_value[0]
-
-all_states = [] 
-parks_list = data_dict['parks']
-
-for park in parks_list: 
-        state_code = (park['states'])
-
-        # state = crud.get_state_by_state_code(state_code)
-        
-        # if state_code in all_states:
-        #     pass
-        # else:
-        all_states.append(state_code)
-set(all_states)
-state = crud.create_state(state_code)
-
-
-        #checking if i get the state i want, duplicate states
-
-
-
-
-
-# Create Bucketlists, empty until user creates 
+# Create Bucketlists
 user_id = user.user_id
 park_id = db_park.park_id
 bucketlist = crud.create_bucketlist(user_id, park_id)
 
 
 
-#BucketlistItems
-# def seed_bucketlistitem(bucketlist, activity):
-# """Create bucketlistitem."""
+#Create BucketlistItem
+bucketlist_id = bucketlist.bucketlist_id
+activity_id = db_activity.activity_id
 
-date_string = input('Enter a date (i.e. 8 September, 2020)')
-order = datetime.strptime(date_string, '%d %B, %Y')
+# date_string = input('Enter a date (i.e. 8 September, 2020)')
+# order = datetime.strptime(date_string, '%d %B, %Y')
+order = datetime.now()
 
-# bucketlist_id, activity_id, order
 bucektlistitem = crud.create_bucketlist_item(bucketlist_id, 
                                 activity_id, 
                                 order)
 
 
-#NOTES/QUESTIONS
-
-#can i just create a list of all 50 states and 
-# seed the db that way then make the relationship later?
-
-#do i need state table, bucketlist table 
-
 #ISSUES
-#with state table
+#with bucketlist table
 #with bucketlistitem table 
 
+
+
+#query for park.states 
+#see what i have on objects 
+#run crud py and call functions 
+#place in functions 
+#routes and seeded 

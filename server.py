@@ -12,11 +12,18 @@ app = Flask(__name__)
 app.secret_key = "lans"
 app.jinja_env.undefined = StrictUndefined
 
-# API_KEY = os.environ['NPS_KEY']
 
 @app.route("/")
 def root():
     return render_template("root.html")
+
+
+
+
+
+
+
+
 
 # @app.route('/')
 # def homepage():
