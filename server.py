@@ -13,48 +13,85 @@ app.secret_key = "lans"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route("/")
-def root():
-    return render_template("root.html")
+@app.route('/')
+def homepage():
+    """View homepage."""
+
+    return render_template("homepage.html")
+
+@app.route('/create-user')
+def register():
+    """Create a new user."""
+
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user: 
+        flash('Cannot create an account with that email. Try again.')
+    else: 
+        crud.create_user(fname, lname, email, password)
+        flash('Account created. Please login.')
+    return redirect('/')
 
 
+@app.route('/login')
+def login():
+    """User login."""
 
+    #username and password 
+    username = request.form.get('username')
+    password = request.form.get('password')
 
+    #check if they are already a user 
+    # if they are a user send them to the explore page 
+    # if they are not a user flash a message that to sign up
 
+    #password invalid 
+    #username invalid 
 
+    user = crud.get_user_by_email(email)
 
+    if user is None: 
+        flash('Account does not exist.')
+        return redirect('/')
 
+    elif user.email != password: 
+        flash('Incorrect Password')
+        return redirect('/')
 
-# @app.route('/')
-# def homepage():
-#     """View homepage."""
-
-#     return render_template('homepage.html')
-
-
-#can i have the route the same as homepage since it is on there?
-# @app.route('/login', methods=['POST'])
-# def user_login():
-#     """Login a user."""
-
-#     username = request.form.get('username')
-#     password = request.form.get('password')
-
-#     user = crud.get_user_by_username(username)
-
-#     if user is None:
-#         flash('Username Error: Account does not exist')
-#         return redirect('/')
+    elif user.email != email:
+        flash('Incorrect Username')
+        return redirect('/')
     
-#     elif user.password != password:
-#         flash('Password Error: Incorrect password')
-#         return redirect('/')
+    elif user.password == password:
+        session['user'] = email 
+        session['user_id'] = user.user_id
+        print('Successfully logged in!')
+        return redirect('/explore')
+
+
+
+
     
-#     elif user.password == password:
-#         session['user'] = username
-#         session['user_id'] = user.user_id #or user_id 
-#         print('user logged in', session['user_id'])
-#         return redirect('/explore')
+
+
+# @app.route('/login')
+# def login():
+#     """View a login page."""
+
+#     return render_template("root.html")
+
+
+
+
+#Notes: 
+#work on MVP and then return to this to see if i can implemenet react to my site 
+
+
 
 
 

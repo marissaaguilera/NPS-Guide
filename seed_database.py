@@ -26,18 +26,18 @@ with open('data/parkinfo.json') as f:
 
 #Create users
 all_users = []
-for user in range(100):
+for user in range(50):
     extension = ['@gmail.com', '@yahoo.com', '@hotmail.com']
 
+    # username = first[0] + last
+    # username = username.lower()
     first = fake.first_name()
     last = fake.last_name()
-    username = first[0] + last
-    username = username.lower()
     email =  f'{first}.{last}{choice(extension)}'
     email = email.lower()
     password = fake.word()
 
-    user = crud.create_user(username, first, last, email, password)
+    user = crud.create_user(first, last, email, password)
     all_users.append(user)
 
 
@@ -59,44 +59,42 @@ for state in states:
 
 
 
-
-
-
 #Create Parks
 data_value = park_data['data']
-data_dict = data_value[0] 
+data_dict = data_value
+#this only accesses 
 
-all_parks = []
-
-parks_list = data_dict['parks']
-for park in parks_list: 
-    
-    if park['designation'] == 'National Park':
-        park_name, designation, siteURL = (park['fullName'],
-                                        park['designation'], 
-                                        park['url'])
-
-        db_park = crud.create_park(park_name, 
-                                designation, 
-                                siteURL)
-        split = park['states'].split(',')
-        crud.add_states_by_park(db_park, split)
-        # crud.add_activities_by_park(db_park, db_activity)
-        all_parks.append(db_park)
-    else: 
-        continue
-
-
-# Create Activities
-data_value = park_data['data']
-data_dict = data_value[0] 
-
+all_parks = set()
 all_activities = []
-for activity in data_value:
-    activity = activity['name']
 
-    db_activity = crud.create_activity(activity)
+for value in data_value: 
+    parks_list = value['parks']
+
+    db_activity = crud.create_activity(value['name'])
     all_activities.append(db_activity)
+
+    
+
+    for park in parks_list: 
+        
+        if park['designation'] == 'National Park':
+            park_name, designation, siteURL = (park['fullName'],
+                                            park['designation'], 
+                                            park['url'])
+
+            db_park = crud.create_park(park_name, 
+                                    designation, 
+                                    siteURL)
+            
+            crud.create_park_activity(db_activity.activity_id, db_park.park_id)
+
+            if db_park not in all_parks:
+                split = park['states'].split(',')
+                crud.add_states_by_park(db_park, split)
+                all_parks.add(db_park)
+        else: 
+            continue
+        #avoid having duplicate parks
 
 
 
@@ -123,11 +121,3 @@ bucektlistitem = crud.create_bucketlist_item(bucketlist_id,
 #ISSUES
 #with bucketlist table
 #with bucketlistitem table 
-
-
-
-#query for park.states 
-#see what i have on objects 
-#run crud py and call functions 
-#place in functions 
-#routes and seeded 

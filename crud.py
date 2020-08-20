@@ -9,11 +9,10 @@ from datetime import datetime
 
 
 #User
-def create_user(username, fname, lname, email, password):
+def create_user(fname, lname, email, password):
     """Create and return a new user."""
 
-    user = User(username=username, 
-                fname=fname,
+    user = User(fname=fname,
                 lname=lname, 
                 email=email, 
                 password=password)
@@ -22,30 +21,28 @@ def create_user(username, fname, lname, email, password):
     db.session.commit()
 
     return user
+      # This is what it returns: <User user_id=71 email=michelle.valdez@gmail.com>
 
 
 def get_users():
     """Return all users."""
 
     return User.query.all()
+#returns me userd id and email 
 
 
 def get_user_by_id(user_id):
     """Return a user by primary_key."""
 
-    return User.query.get(user_id).first()
+    return User.query.get(user_id)
+#returns me userd id and email 
 
 
 def get_user_by_email(email):
     """Return a user by their email."""
 
     return User.query.filter(User.email == email).first()
-
-
-def get_user_by_username(username):
-    """Return a user by their username."""
-
-    return User.query.filter(User.username == username).first()
+#returns me userd id and email 
 
 
 
@@ -54,34 +51,37 @@ def get_user_by_username(username):
 #Park
 def create_park(park_name, designation, siteURL):
     """Create and return a new park."""
+    park = get_park_by_park_name(park_name)
 
-    park = Park(park_name=park_name,  
-                designation=designation, 
-                siteURL=siteURL)
+    if not park:
+        park = Park(park_name=park_name,  
+                    designation=designation, 
+                    siteURL=siteURL)
     
-    db.session.add(park)
-    db.session.commit()
+        db.session.add(park)
+        db.session.commit()
 
     return park
-
+#Returns this: <Park park_id=20 park_name=Zion National Park>
 
 def get_parks():
     """Return all parks."""
 
     return Park.query.all()
-    # return Park.query.filter_by(Park.designation == 'National Park').all() #test this after i get data!
-
+#returns all parks and park ids 
 
 def get_park_by_id(park_id):
     """Return a park by primary key."""
 
-    return Park.query.get(park_id).first()
+    return Park.query.get(park_id)
+#returns park and park id 
 
 
 def get_park_by_park_name(park_name):
     """Return a park by the park name."""
 
     return Park.query.filter(Park.park_name == park_name).first()
+#returns park and park id 
 
 
 
@@ -98,24 +98,26 @@ def create_activity(activity_name):
     db.session.commit()
 
     return activity
-
+#Returns this: <Activity activity_id=41 activity_name=Hiking>
 
 def get_activities():
     """Return all activities."""
 
     return Activity.query.all()
-
+#returns all activities
 
 def get_activity_by_id(activity_id):
     """Return activity by primary key."""
 
     return Activity.query.get(activity_id)
+#returns activity and activity id 
 
 
 def get_activity_by_activity_name(activity_name):
     """Return an activity by the name."""
 
     return Activity.query.filter(Activity.activity_name == activity_name).first()
+#returns activity and activity id 
 
 
 
@@ -133,23 +135,15 @@ def create_park_activity(activity_id, park_id):
     db.session.commit()
 
     return park_activity
+#returns this: <Park Activity activity_id=41 park_id=6>
 
-def get_activities_by_park():
+
+def get_activities_by_park(): #doesnt work 
     """Return a park by the activitiy id."""
 
-    return db.session.query(Activity, Park).join(Park).all()
-#need to have db.session.query when using join 
+    # return Activity.query.filter((Activity.activity_id == park_id) | (Activity.activity_id == park_id)).all()    
 
-# def add_activities_by_park(park, activities_list):
-#     """Linking park to a specific activity."""
-
-#     for name in activities_list: 
-#         activity = get_activity_by_activity_name(name)
-#         parkactivity = create_park_activity(activity.activity_id, park.park_id)
-
-#         #this will give me state object from db 
-
-
+    return db.session.query(Activity, Park).join(Activity).all()
 
 
 
@@ -163,21 +157,25 @@ def create_state(state_code):
     db.session.commit()
 
     return state
+#returns this: <State state_id=56 state_code=CA>
 
 def get_states():
     """Return all states."""
 
     return State.query.all()
+#returns all states
 
 def get_state_by_id(state_id):
     """Return a state by primary key."""
 
     return State.query.get(state_id)
+#returns state and state id
 
 def get_state_by_state_code(state_code):
     """Return a state by the state code."""
 
     return State.query.filter(State.state_code == state_code).first()
+#returns state and state id
 
 
 
@@ -196,10 +194,12 @@ def create_park_state(state_id, park_id):
 
     return park_state
 
-def get_states_by_park():
+def get_states_by_park(park_id):
     """Return a park by the state_id."""
 
-    return db.session.query(Park, State).join(State).all()
+    return ParkState.query.filter(ParkState.park_id == park_id).all()
+
+    # return db.session.query(Park, State).join(State).all()
 #need to have db.session.query when using join 
 
 def add_states_by_park(park, park_state_codes):
@@ -273,9 +273,11 @@ if __name__ == '__main__':
     connect_to_db(app)
 
 
-#MVP 
-#user login, 
-#new user registration
-#choose park by search bar (user will type park)
-#shows activities available at that park 
-#add activities to bucketlist 
+#doesnt work
+#get_activities_by_park
+#create_park_state
+#get_states_by_park
+#add_states_by_park
+#create_bucketlist
+#get_bucketlist
+#all of bucketlist and bucketlist item 
