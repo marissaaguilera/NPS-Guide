@@ -1,0 +1,25 @@
+{% extends 'base.html'%} 
+{% block title %}National Park Service Guide{% endblock %}
+
+{% block body %}
+    <div id="register">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <p>
+                First Name <input type="text" name="fname" required>
+            </p>
+            <p>
+                Last Name <input type="text" name="lname" required>
+            </p>
+            <p>
+                Email <input type="text" name="email" required>
+            </p>
+            <p>
+                Password <input type="text" name="password" required>
+            </p>
+            <p>
+                <input type="submit">
+            </p>
+        </form>
+    </div>
+{% endblock %}

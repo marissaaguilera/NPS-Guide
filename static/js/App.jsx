@@ -13,7 +13,9 @@ const useHistory = ReactRouterDOM.useHistory;
 
 
 function Homepage() {
-    return <div>Welcome to my site</div>
+    return (
+        <div>Welcome to your NPS Guide!</div>
+    )
 }
 
 

@@ -175,8 +175,3 @@ if __name__ == '__main__':
     from server import app
     connect_to_db(app)
 
-#DB NOTES:
-#My database is called "npsdb"
-#dropdb npsdb, createdb npsdb, python3 -i model.py, db.create_all(), 
-# quit(), python3 seed_database.py, psql npsdb (this gets me into my database),
-#dt users then SELECT * FROM users * LIMIT 50 

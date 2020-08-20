@@ -44,7 +44,11 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 #returns me userd id and email 
 
+def get_user_by_fname(fname):
+    """Return a user by their email."""
 
+    return User.query.filter(User.fname == fname).first()
+#returns me userd id and email 
 
 
 
