@@ -8,9 +8,12 @@ import os
 import sys
 import requests
 import json
+from jinja2 import StrictUndefined
 
+"""Server for nps app."""
 app = Flask(__name__)
 app.secret_key = "lans"
+app.jinja_env.undefined = StrictUndefined
 
 
 ########################## HOMEPAGE ###################################
@@ -19,22 +22,17 @@ app.secret_key = "lans"
 def homepage():
     """Shows the homepage."""
 
-    return render_template('root.html')
+    return render_template('homepage.html')
 
-
+#this shows on my site 
 ########################## LOGIN ###################################
-# @app.route('/login')
-# def show_login():
-#     """Show login page."""
+@app.route('/login', methods=['GET'])
+def login():
+    """Show login form."""
 
-#     return render_template('login.html')
+    return render_template('login.html')
 
-#do i need this route? 
-
-#hit routes with fetch request and return a json 
-#not using flash messages return 
-
-@app.route('/api/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     """User login."""
 
@@ -43,42 +41,37 @@ def login():
 
     user = crud.get_user_by_email(email)
 
-    if user is None: 
 
-        return 
-        #return a json dictionary 
-        #define as status and return status as a key 
-        # 
+    if not user: 
+        flash('Account does not exist. Please try again.')
+        return redirect('/login')
 
     elif user.email != password: 
-
+        flash('Incorrect Password. Please try again.')
+        return redirect('/login')
     
     elif user.password == password:
         session['user'] = email 
         session['user_id'] = user.user_id
         print('Successfully logged in!')
-        return
+        return redirect('/api/search-park')
+        # return render_template('choose_park.html')
+
 
 ########################## CREATE USER ###################################
 
-@app.route('/register', methods=['POST'])
-def register():
-    """Create a new user."""
 
-    fname = request.form.get('fname')
-    lname = request.form.get('lname')
-    email = request.form.get('email')
-    password = request.form.get('password')
+@app.route('/register', methods=['GET', 'POST'])
+def create_user():
+    """Get info from registration."""
+    
+    if request.method == 'POST':
+        crud.create_user(request.form['fname'], request.form['lname'],
+                         request.form['email'], request.form['password'])
 
-    user = crud.get_user_by_email(email)
+    return render_template("registration.html")
 
-    if user: 
-        flash('Cannot create an account with that email. Try again.')
-        return redirect('/register')
-    else: 
-        crud.create_user(fname, lname, email, password)
-        flash('Account created. Please login.')
-    return redirect('/login')
+#this shows on my site 
 
 ########################## LOGOUT ###################################
 @app.route('/logout', methods=['GET'])
@@ -86,47 +79,35 @@ def logout():
     """User logout."""
 
     if 'user' in session:
-        session['user']
-    session.pop('user', None)
+        del session['user']
+
+        #or
+    # session.pop('user', None)
 
     return redirect('/')
 
-########################## GET USER ###################################
-
-# @app.route('/get_user')
-# def get_user():
-#     """Get information on logged in user."""
-
-#     user_fname = crud.get_user_by_fname(session['fname'])
-#     # print(user_fname.fname)
-#     return user_fname.fname
 
 ########################## SEARCH PARK ###################################
 
-# @app.route('/explore')
-# def search_park():
+@app.route('/api/search-park')
+def search_park():
     """Search for parks on National Park Service API."""
 
-# choose park (search by typing in the park and suggestions show up)
-    # fullName = request.args.get('fullName')
-    # states = request.args.get('states') 
-    # response = requests.get(url, params=payload)
+    park = get_park_by_park_name(park_name)
 
-    # data = response.json()
-    # parks = data#what to put here 
-
-    # return render_template('choose_park.html', 
-    #                         pformat=pformat)
+    return render_template('choose_park.html')
+#this park shows 
                             
 ########################## VIEW/SAVE ACTIVTIES ###################################
 
 
-# @app.route('/activities')
-# def activities():
+@app.route('/activities')
+def activities():
     """Shows all activities for that park."""
 #activities available at park and activities can be saved to a bucketlist
+pass
 
-
+########################## BUCKETLIST ###################################
 
 # @app.route('/bucketlist')
 # def bucketlist():
@@ -148,3 +129,57 @@ if __name__ == '__main__':
         #- search parks
         #- view activities by park 
         #- add activities to bucketlist 
+
+
+
+
+
+
+
+
+
+
+########################## REACT ###################################
+#react LOGIN
+# @app.route('/api/login', methods=['POST'])
+# def login():
+#     """User login."""
+
+#     data = request.get_json(force=True)
+#     #get_json converts the JSON object into python data for us and 
+#     #returns an object or none if ssilent = true
+#     email = data['email']
+#     password = data['password']
+
+#     user = crud.get_user_by_email(email)
+
+#     if user: 
+#         full_name = user.fname + user.lname
+#         session['user'] = email 
+#         session['user_id'] = user.user_id
+#         #full_name = f'{user.fname} {user.lname}'
+
+#         if (user.email == email) and (user.password == password):
+#             return jsonify([user.user_id, full_name, user.email])
+
+#     else: 
+#         return jsonify({'Account not found. Please register.'})
+
+
+#react REGISTRATION
+# @app.route('/register', methods=['POST'])
+# def register():
+#     """Create a new user."""
+#     data = request.get_json(force=True)
+#     fname = data['fname']
+#     lname = data['lname']
+#     email = data['email']
+#     password = data['password']
+
+#     user = crud.create_user(fname, lname, email, password)
+
+#     # user = crud.get_user_by_email(email)
+
+#     if user: 
+#         session.clear()
+#         return jsonify({'Account created. Please login.'})

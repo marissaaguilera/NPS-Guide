@@ -1,26 +1,20 @@
-<!-- {% extends 'base.html'%} 
-{% block title %}National Park Service Guide{% endblock %}
+{% extends 'base.html' %}
 
-{% block body %}
+{% block title %}Login Page{% endblock %}
 
-    <div id="img">
+{% block content %}
 
-    </div>
-
-
-    <div id="login">
-        <h2>Login</h2>
-        <form action="/login" method="GET">
-            <p>
-                Email <input type="text" name="email" required>
-            </p>
-            <p>
-                Password <input type="text" name="password" required>
-            </p>
-            <p>
+<html>
+    <body>
+        <div id="login">
+            <h2>Login</h2>
+            <form action="/login" method="GET">
+                <input type="text" placeholder="Email" name="email" required>
+                <input type="text" placeholder="Password"name="password" required>
                 <input type="submit">
-            </p>
-        </form>
-    </div>
+            </form>
+        </div>
+    </body>
+</html>
 
-{% endblock %} -->
+{% endblock %}

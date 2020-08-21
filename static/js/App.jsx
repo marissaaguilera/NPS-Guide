@@ -1,3 +1,7 @@
+// import {Register} from "./RegisterComponent.jsx"
+
+
+
 const Router = ReactRouterDOM.BrowserRouter;
 const Route = ReactRouterDOM.Route;
 const Link = ReactRouterDOM.Link;
@@ -9,6 +13,9 @@ const Redirect = ReactRouterDOM.Redirect;
 
 
 //Hooks to user useState and useEffect
+
+//in the parenthesis we have empty quotes for a string 
+//useEffect runs something for me everytime the component renders
 
 function Homepage() {
     return ( 
@@ -35,23 +42,46 @@ function Login() {
 //not connected to my route unless i send it to my login route 
 // need fetch request everytime that i want to send info to my server 
 
+//usestate assigns items to the value and connected function, create the state
+//useeffect want to change something, effecting the state with a change 
+
+//react redux is like an umbrella, 
+//component does and action, goes from one place to another
+
 function Register() {
+    
+    const [first_name, set_first_name] = React.useState('')
+    const [last_name, set_last_name] = React.useState('')
+    const [email, set_email] = React.useState('')
+    const [password, set_password] = React.useState('')
+
+
+    console.log(first_name)
+    console.log(last_name)
+    console.log(email)
+    console.log(password)
+
     return (
         <div id="register">
             First Name:  
-            <input type="text" name="fname" required></input><br />
+            <input onChange={event => set_first_name(event.target.value)} type="text" name="first_name" required></input><br />
             Last Name: 
-            <input type="text" name="lname" required></input><br />
+            <input onChange={event => set_last_name(event.target.value)} type="text" name="last_name" required></input><br />
             Email: 
-            <input type="text" name="email" required></input><br />
+            <input onChange={event => set_email(event.target.value)} type="text" name="email" required></input><br />
             Password:  
-            <input type="text" name="password" required></input><br />
+            <input onChange={event => set_password(event.target.value)} type="text" name="password" required></input><br />
+
             <button type="submit">Register</button>
         </div>
 
     );
 }
+//submit onclick 
+//send to the backend 
 
+
+//when input value changes set first name to first name, onchange is liek onclick 
 
 // function Logout() {
 //     return (
@@ -64,10 +94,13 @@ function Register() {
 function SearchPark() {
     return (
         <div>
-            
+            Search
+            <input type="text"></input>
+            <button>Search</button>
         </div>
-    )
+    );
 }
+//render this in the choose parks page
 
 // function Activities() {
 //     return (
@@ -104,7 +137,10 @@ function App() {
                             <Link to="/login">Login</Link>
                         </li>
                         <li>
-                            <Link to="/register">New User</Link>
+                            <Link to="/register">Register</Link>
+                        </li>
+                        <li>
+                            <Link to="/search-park">Search Park</Link>
                         </li>
                     </ul>
                 </nav>
@@ -128,7 +164,8 @@ function App() {
 //NOTES: 
 //order matters in the switch, homepage goes last 
 //pass props in switch on line 79 for example 
-// 
+// #hit routes with fetch request and return a json 
+
 
 
 // function SeacrhPark() {
