@@ -69,6 +69,27 @@ function SearchPark() {
     )
 }
 
+// function Activities() {
+//     return (
+//         <div>
+            
+//         </div>
+//     )
+// }
+// function Bucketlist() {
+//     return (
+//         <div>
+            
+//         </div>
+//     )
+// }
+// function BucketlistItem() {
+//     return (
+//         <div>
+            
+//         </div>
+//     )
+// }
 
 function App() {
     return (
