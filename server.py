@@ -1,26 +1,26 @@
 """Server for NPS Guide."""
 
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, jsonify,
+                    flash, session, redirect)
 from model import connect_to_db
 import crud
 import os
 import sys
 import requests
-from jinja2 import StrictUndefined 
+import json
 
 app = Flask(__name__)
 app.secret_key = "lans"
-app.jinja_env.undefined = StrictUndefined
 
 
 ########################## HOMEPAGE ###################################
 
 @app.route('/')
 def homepage():
-    """View homepage."""
+    """Shows the homepage."""
 
-    return render_template('homepage.html')
-#     return render_template("root.html") for react
+    return render_template('root.html')
+
 
 ########################## LOGIN ###################################
 # @app.route('/login')
@@ -31,8 +31,10 @@ def homepage():
 
 #do i need this route? 
 
+#hit routes with fetch request and return a json 
+#not using flash messages return 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     """User login."""
 
@@ -42,18 +44,20 @@ def login():
     user = crud.get_user_by_email(email)
 
     if user is None: 
-        flash('Account does not exist.')
-        return redirect('/')
+
+        return 
+        #return a json dictionary 
+        #define as status and return status as a key 
+        # 
 
     elif user.email != password: 
-        flash('Incorrect Password')
-        return redirect('/')
+
     
     elif user.password == password:
         session['user'] = email 
         session['user_id'] = user.user_id
         print('Successfully logged in!')
-        return redirect('/explore')
+        return
 
 ########################## CREATE USER ###################################
 
@@ -77,7 +81,7 @@ def register():
     return redirect('/login')
 
 ########################## LOGOUT ###################################
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 def logout():
     """User logout."""
 
@@ -89,18 +93,18 @@ def logout():
 
 ########################## GET USER ###################################
 
-@app.route('/get_user')
-def get_user():
-    """Get information on logged in user."""
+# @app.route('/get_user')
+# def get_user():
+#     """Get information on logged in user."""
 
-    user_fname = crud.get_user_by_fname(session['fname'])
-    # print(user_fname.fname)
-    return user_fname.fname
+#     user_fname = crud.get_user_by_fname(session['fname'])
+#     # print(user_fname.fname)
+#     return user_fname.fname
 
 ########################## SEARCH PARK ###################################
 
-@app.route('/explore')
-def search_park():
+# @app.route('/explore')
+# def search_park():
     """Search for parks on National Park Service API."""
 
 # choose park (search by typing in the park and suggestions show up)
@@ -117,8 +121,8 @@ def search_park():
 ########################## VIEW/SAVE ACTIVTIES ###################################
 
 
-@app.route('/activities')
-def activities():
+# @app.route('/activities')
+# def activities():
     """Shows all activities for that park."""
 #activities available at park and activities can be saved to a bucketlist
 
