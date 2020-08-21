@@ -6,15 +6,23 @@
 
 <html>
     <body>
-        <div id="login">
+        <div id="login-div">
             <h2>Login</h2>
-            <form action="/login" method="GET">
-                <input type="text" placeholder="Email" name="email" required>
-                <input type="text" placeholder="Password"name="password" required>
-                <input type="submit">
+            <form class="form-signin" method="POST">
+                <label for="email"><b>Email Address</b></label>
+                <input type="text" placeholder="Email" name="email" required autofocus>
+                <label for="password"><b>Password</b></label>
+                <input type="text" placeholder="Password"name="password" required autofocus>
+                <button type="submit">Sign In</button>
             </form>
         </div>
     </body>
 </html>
-
 {% endblock %}
+
+
+<!-- NOTES
+maybe add more divs inbetween to separate? -->
+<!-- add a class to div? -->
+
+<!-- autofocus gives emphasis on that section or focus when the page loads -->

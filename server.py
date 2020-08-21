@@ -27,7 +27,7 @@ def homepage():
 #this shows on my site 
 ########################## LOGIN ###################################
 @app.route('/login', methods=['GET'])
-def login():
+def show_login():
     """Show login form."""
 
     return render_template('login.html')
@@ -80,10 +80,10 @@ def logout():
 
     if 'user' in session:
         del session['user']
+        flash('Logged Out.')
 
         #or
     # session.pop('user', None)
-
     return redirect('/')
 
 
@@ -123,12 +123,12 @@ if __name__ == '__main__':
 
     ##PLAN: 
     #MVP FIRST
-        #- user login
-        #- user registration
-        #- user logout 
-        #- search parks
-        #- view activities by park 
-        #- add activities to bucketlist 
+        #- user login (implement on html, js file)
+        #- user registration (implement on html, js file)
+        #- user logout (implement on html, js file)
+        #- search parks (all)
+        #- view activities by park (all)
+        #- add activities to bucketlist (all)
 
 
 
@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
 
 
-########################## REACT ###################################
+########################## MOVING TO REACT ###################################
 #react LOGIN
 # @app.route('/api/login', methods=['POST'])
 # def login():
