@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Parks Page{% endblock %}
+
+
+{% block content %}
+<h1>{{park.park_name}} Details Page</h1>
+<a href={{park.siteURL}}>Visit Park Page</a>
+
+
+
+
+<ul>
+    {% for activity in park.activities %}
+    <li>{{ activity.activity_name }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
+
+<!-- this returns me my park details and site url  -->
+
+<!-- create a form , checkbox for each activitiy for the user to add an 
+activityi to their bucketlist  -->
+
+<!-- build out activities and activityi and activitiy id 
+build out a route to display the bucketlist form 
+and a route to handle submission of that form 
+allows you to ccreate a bucektlist 
+
+then route to view bucketlist  -->
+
+
+<!-- javascript for adding activity to a bucketlist 
+    and maybe the search bar stuff next week -->

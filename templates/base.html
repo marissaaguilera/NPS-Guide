@@ -9,13 +9,15 @@
 
         <!-- Load our stylesheet -->
         <link rel="stylesheet" href="/static/css/styles.css">
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
         
-        <script src="http://code.jquery.com/jquery.js"></script>
     </head>
     <body>
 
-        <h1>NPS Guide</h1>
-        {% block content %}
+       
 
 
             <!-- Navbar collapsed -->
@@ -59,8 +61,8 @@
                 </ul>
                 </div>
             </nav>
-
-        {% endblock %}
+            <h1>NPS Guide</h1>
+        {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
         <footer>Discover America's Story: The National Parks</footer>
     </body>
 </html>

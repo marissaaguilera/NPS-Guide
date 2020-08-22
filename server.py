@@ -16,7 +16,7 @@ app.secret_key = "lans"
 app.jinja_env.undefined = StrictUndefined
 
 
-########################## HOMEPAGE ###################################
+########################## USER ROUTES ###################################
 
 @app.route('/')
 def homepage():
@@ -24,13 +24,15 @@ def homepage():
 
     return render_template('homepage.html')
 
-#this shows on my site 
-########################## LOGIN ###################################
+
+
 @app.route('/login', methods=['GET'])
 def show_login():
     """Show login form."""
 
     return render_template('login.html')
+
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -54,26 +56,38 @@ def login():
         session['user'] = email 
         session['user_id'] = user.user_id
         print('Successfully logged in!')
-        return redirect('/api/search-park')
-        # return render_template('choose_park.html')
+        return redirect('/parks') 
 
 
-########################## CREATE USER ###################################
 
-
-@app.route('/register', methods=['GET', 'POST'])
-def create_user():
-    """Get info from registration."""
-    
-    if request.method == 'POST':
-        crud.create_user(request.form['fname'], request.form['lname'],
-                         request.form['email'], request.form['password'])
-
+@app.route('/register', methods=['GET'])
+def show_registeration():
+    """Shows registration form."""
+   
     return render_template("registration.html")
 
-#this shows on my site 
 
-########################## LOGOUT ###################################
+
+@app.route('/register', methods=['POST'])
+def create_user():
+    """Get info from registration."""
+
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user: #checking if that email is in use already 
+        flash('Cannot create an account with that email. Please try again.')
+    else:
+        crud.create_user(fname, lname, email, password)
+        flash('Account created.')
+        return redirect('/parks') #they are logged in and now can go to the parks page. 
+
+
+
 @app.route('/logout', methods=['GET'])
 def logout():
     """User logout."""
@@ -87,27 +101,119 @@ def logout():
     return redirect('/')
 
 
-########################## SEARCH PARK ###################################
+#FIX ME########
+# @app.route('users/profile/<fname>')
+# def show_user_profile(fname):
+#     """Show users profile."""
 
-@app.route('/api/search-park')
-def search_park():
-    """Search for parks on National Park Service API."""
+#     user = crud.get_user_by_email(email)
+#     user_bucketlist = crud.get_bucketlist_by_user(user_id)
 
-    park = get_park_by_park_name(park_name)
+#     return render_template('user_profile.html', user=user, user_bucketlist=user_bucketlist)
 
-    return render_template('choose_park.html')
-#this park shows 
-                            
-########################## VIEW/SAVE ACTIVTIES ###################################
+# pass
 
 
-@app.route('/activities')
-def activities():
-    """Shows all activities for that park."""
-#activities available at park and activities can be saved to a bucketlist
-pass
+#FIX ME#########
+# @app.route('/users/<user_id>')
+# def show_user(user_id):
+#     """Show the details on a particular user."""
 
-########################## BUCKETLIST ###################################
+#     user = crud.get_user_by_id(user_id)
+
+#     return render_template('')
+
+#     pass
+#add an all users html page 
+
+
+########################## PARK & ACTIVITY ROUTES ###################################
+
+@app.route('/parks/<park_id>')
+def show_park(park_id):
+    """Show the details on a particular park."""
+
+    park = crud.get_park_by_id(park_id)
+
+    return render_template('park_details.html', park=park)
+
+
+
+@app.route('/parks', methods=['GET'])
+def get_parks():
+    """Retrieve parks."""
+
+    parks = crud.get_parks()
+
+    return render_template('parks.html', parks=parks)
+    #the for loop in my html page recognizes parks form here 
+
+
+    # return jsonify(parks) #want my parks to turn into a string 
+    #json doesnt know how to turn my 
+
+#not json serializable 
+# json doesnt recognize 
+
+@app.route('/activities/<activity_id>')
+def show_activity(activity_id):
+    """Show the details on a particular activity."""
+
+    activity = crud.get_activity_by_id(activity_id)
+
+    return render_template('activity_details.html', activity=activity)
+#make sure to pass in arguments 
+
+
+@app.route('/activities', methods=['GET'])
+def get_activities():
+    """Retrieve activities."""
+
+    activities = crud.get_activities()
+
+    return render_template('activities.html', activities=activities)
+
+
+
+# @app.route('/api/parks/<park_id>/activities', methods=['GET'])
+# def get_activities_of_park(park_id):
+#     """Show activities by park."""
+#     parks = crud.get_parks()
+#     park_name = request.args.get('fullName')
+#     activity_name = request.args.get('name')
+
+    
+
+
+    #.get is looking for the key as an argument 
+
+    # for park in parks: 
+        #if user input in parks 
+        #return activities of that park 
+    result = crud.get_activities_by_park(request.json)
+
+    return jsonify(result)
+#use api in route when im returning json 
+# have park id
+#access park.activities
+#search that autocompletes use this with javascript 
+
+    #do with javascript 
+
+    # park = crud.get_park_by_park_name(park_name)
+    # print(jsonify(park))
+
+    # return jsonify(park)
+
+    # user input here 
+
+    # return render_template('choose_park.html')
+
+    #after user submits their park show the activities
+    #send request to json file or crud function 
+
+
+########################## BUCKETLIST ROUTES ###################################
 
 # @app.route('/bucketlist')
 # def bucketlist():
@@ -121,14 +227,25 @@ if __name__ == '__main__':
 
 
 
-    ##PLAN: 
-    #MVP FIRST
-        #- user login (implement on html, js file)
-        #- user registration (implement on html, js file)
-        #- user logout (implement on html, js file)
-        #- search parks (all)
-        #- view activities by park (all)
-        #- add activities to bucketlist (all)
+##PLAN: 
+#MVP FIRST
+    #- user login (implement on html, js file)
+    #- user registration (implement on html, js file)
+    #- user logout (implement on html, js file)
+    #- search parks (all)
+    #- view activities by park (all)
+    #- add activities to bucketlist (all)
+
+
+#Post is used to send data 
+#Get is used to request data 
+
+
+
+
+
+
+
 
 
 

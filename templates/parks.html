@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Activities Page{% endblock %}
+{% block title %}Parks Page{% endblock %}
 
 
 {% block content %}
-<h1>Activity's Page</h1>
+<h1>Park's Page</h1>
 <ul>
-    {% for activity in activities %}
-    <li>{{ activity.activity_name }}</a></li>
+    {% for park in parks %}
+    <li><a href='parks/{{park.park_id}}'>{{ park.park_name }}</a></li>
     {% endfor %}
 </ul>
 

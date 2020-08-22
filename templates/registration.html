@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration Page{% endblock %}
+
+{% block content %}
+
+<html>
+    <title>
+    </title>
+    <body>
+        <div id="registration-div">
+            <h2>Register</h2>
+            <form action="/register" method="POST">
+                <label for="fname">First Name</label>
+                <input type="text" placeholder="First Name" name="fname" required autofocus>
+                <label for="lname">Last Name</label>
+                <input type="text" placeholder="Last Name" name="lname" required autofocus>
+                <label for="email">Email</label>
+                <input type="text" placeholder="Email" name="email" required auttofocus>
+                <label for="password">Password</label>
+                <input type="text" placeholder="Password" name="password" required autofocus>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </body>
+</html>
+
+{% endblock %}
+
+<!-- NOTES: 
+add more classes or divs? -->

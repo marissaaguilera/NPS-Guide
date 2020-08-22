@@ -142,7 +142,7 @@ def create_park_activity(activity_id, park_id):
 #returns this: <Park Activity activity_id=41 park_id=6>
 
 
-def get_activities_by_park(): #doesnt work 
+def get_activities_by_park():
     """Return a park by the activitiy id."""
 
     # return Activity.query.filter((Activity.activity_id == park_id) | (Activity.activity_id == park_id)).all()    
@@ -245,6 +245,10 @@ def get_bucketlist_by_id(bucketlist_id):
 def get_bucketlist_by_user(user_id):
     """Retrun all bucketlists by a user id."""
     # user_id = get_user_by_id(user_id)
+
+    # user_id = user.user_id
+    # user_bucketlists = 
+
     return Bucketlist.query.filter(Bucketlist.user_id == user_id).all()
 
 
