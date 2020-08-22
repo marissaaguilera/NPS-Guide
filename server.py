@@ -140,20 +140,14 @@ def show_park(park_id):
 
 
 @app.route('/parks', methods=['GET'])
-def get_parks():
+def all_parks():
     """Retrieve parks."""
 
     parks = crud.get_parks()
 
     return render_template('parks.html', parks=parks)
-    #the for loop in my html page recognizes parks form here 
 
 
-    # return jsonify(parks) #want my parks to turn into a string 
-    #json doesnt know how to turn my 
-
-#not json serializable 
-# json doesnt recognize 
 
 @app.route('/activities/<activity_id>')
 def show_activity(activity_id):
@@ -162,7 +156,7 @@ def show_activity(activity_id):
     activity = crud.get_activity_by_id(activity_id)
 
     return render_template('activity_details.html', activity=activity)
-#make sure to pass in arguments 
+
 
 
 @app.route('/activities', methods=['GET'])
@@ -174,51 +168,47 @@ def get_activities():
     return render_template('activities.html', activities=activities)
 
 
-
-# @app.route('/api/parks/<park_id>/activities', methods=['GET'])
-# def get_activities_of_park(park_id):
-#     """Show activities by park."""
-#     parks = crud.get_parks()
-#     park_name = request.args.get('fullName')
-#     activity_name = request.args.get('name')
-
-    
-
-
-    #.get is looking for the key as an argument 
-
-    # for park in parks: 
-        #if user input in parks 
-        #return activities of that park 
-    result = crud.get_activities_by_park(request.json)
-
-    return jsonify(result)
-#use api in route when im returning json 
-# have park id
-#access park.activities
-#search that autocompletes use this with javascript 
-
-    #do with javascript 
-
-    # park = crud.get_park_by_park_name(park_name)
-    # print(jsonify(park))
-
-    # return jsonify(park)
-
-    # user input here 
-
-    # return render_template('choose_park.html')
-
-    #after user submits their park show the activities
-    #send request to json file or crud function 
-
-
 ########################## BUCKETLIST ROUTES ###################################
 
-# @app.route('/bucketlist')
-# def bucketlist():
-    # """Shows the user's bucketlist with their saved activities."""
-# bucketlist (this is a list that users can add activities to, list is per park)
+# @app.route('')
+# def create_bucketlist():
+#     """Allows a user to create a bucketlist."""
+#     pass
+
+
+# @app.route('/bucketlist/<bucketlist_id>')
+# def bucketlist_form(bucketlist_id):
+#     """Show bucketlist form."""
+
+#     bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
+
+#     return render_template('bucketlist.html', bucketlist=bucketlist)
+
+
+
+
+# @app.route()
+# def create_bucketlist():
+#     """Handle creating a bucketlist."""
+#     pass
+
+
+
+# build out activities and activityi and activitiy id 
+
+
+# build out a route to display the bucketlist form 
+# and a route to handle submission of that form 
+# allows you to ccreate a bucektlist 
+
+#create a form , checkbox for each activitiy for the user to add an 
+# activityi to their bucketlist
+
+# then route to view bucketlist
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -239,13 +229,6 @@ if __name__ == '__main__':
 
 #Post is used to send data 
 #Get is used to request data 
-
-
-
-
-
-
-
 
 
 
