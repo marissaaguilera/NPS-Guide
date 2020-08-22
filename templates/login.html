@@ -4,20 +4,18 @@
 
 {% block content %}
 
-<html>
-    <body>
-        <div id="login-div">
-            <h2>Login</h2>
-            <form action="/login" class="form-signin" method="POST">
-                <label for="email"><b>Email Address</b></label>
-                <input type="text" placeholder="Email" name="email" required autofocus>
-                <label for="password"><b>Password</b></label>
-                <input type="text" placeholder="Password"name="password" required autofocus>
-                <button type="submit" id="login-btn">Sign In</button>
-            </form>
-        </div>
-    </body>
-</html>
+
+<div id="login-div">
+    <h2>Login</h2>
+    <form action="/login" class="form-signin" method="POST">
+        <label for="email">Email Address</label>
+        <input type="text" placeholder="Email" name="email" required autofocus>
+        <br/><label for="password">Password</label>
+        <input type="text" placeholder="Password"name="password" required autofocus>
+        <br/><button type="submit" id="login-btn">Login</button>
+    </form>
+</div>
+
 {% endblock %}
 
 

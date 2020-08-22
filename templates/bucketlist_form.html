@@ -8,20 +8,17 @@
 <h1>{{park.park_name}} Details Page</h1>
 
 
-<html>
-    <body>
-        <div id="login-div">
-            <h2>Login</h2>
-            <form class="form-signin" method="POST">
-                <label for="email"><b>Email Address</b></label>
-                <input type="text" placeholder="Email" name="email" required autofocus>
-                <label for="password"><b>Password</b></label>
-                <input type="text" placeholder="Password"name="password" required autofocus>
-                <button type="submit" id="login-btn">Sign In</button>
-            </form>
-        </div>
-    </body>
-</html>
+
+<div id="bucketlist-div">
+    <h2>{{user.name}}'s Bucketlist</h2>
+    <form class="form-signin" method="POST">
+        <label for="email"><b>Email Address</b></label>
+        <input type="text" placeholder="Email" name="email" required autofocus>
+        <label for="password"><b>Password</b></label>
+        <input type="text" placeholder="Password"name="password" required autofocus>
+    </form>
+</div>
+
 
 
 

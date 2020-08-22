@@ -171,18 +171,23 @@ def get_activities():
 ########################## BUCKETLIST ROUTES ###################################
 
 # @app.route('')
-# def create_bucketlist():
-#     """Allows a user to create a bucketlist."""
-#     pass
+# def all_bucketlists():
+#     """All of a user's bucketlists."""
 
+#     bucketlist = crud.get_bucketlist_by_user(user_id)
 
-# @app.route('/bucketlist/<bucketlist_id>')
-# def bucketlist_form(bucketlist_id):
-#     """Show bucketlist form."""
+@app.route('/bucketlist')
+def show_bucketlist_form():
+    """Show bucketlist form."""
 
-#     bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
+@app.route('/bucketlist/<bucketlist_id>/<user_id>')
+def show_user_bucketlist(bucketlist_id, user_id):
+    """Show bucketlist form for a particular user."""
 
-#     return render_template('bucketlist.html', bucketlist=bucketlist)
+    bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
+    user = crud.get_user_by_id(user_id)
+
+    return render_template('bucketlist.html', bucketlist=bucketlist, user=user)
 
 
 
