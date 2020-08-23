@@ -4,12 +4,22 @@
 
 
 {% block content %}
-<h1>Park's Page</h1>
-<ul>
-    {% for park in parks %}
-    <li><a href='parks/{{park.park_id}}'>{{ park.park_name }}</a></li>
-    {% endfor %}
-</ul>
+<head>
+    <meta charset="utf-8">
+
+</head>
+<div id="all-parks">
+    <h1>Park's Page</h1>
+    <ul>
+        {% for park in parks %}
+        <li><a href='parks/{{park.park_id}}'>{{ park.park_name }}</a></li>
+        {% if park.park_id == 50%}
+        {{park.park_name =='Haleakalā National Park' }}
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+</div>
 
 <!-- <a href=> -->
 

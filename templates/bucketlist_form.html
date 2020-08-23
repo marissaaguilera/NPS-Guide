@@ -1,25 +1,41 @@
 
 {% extends 'base.html' %}
 
-{% block title %}{{User.fname}}'s Bucletlist Page{% endblock %}
+{% block title %} Bucketlist Page{% endblock %}
 
 
 {% block content %}
-<h1>{{park.park_name}} Details Page</h1>
+<h1>Details Page</h1>
 
 
 
-<div id="bucketlist-div">
-    <h2>{{user.name}}'s Bucketlist</h2>
+<!-- <div id="bucketlist-div">
+    <h2>Bucketlist</h2>
     <form class="form-signin" method="POST">
         <label for="email"><b>Email Address</b></label>
         <input type="text" placeholder="Email" name="email" required autofocus>
         <label for="password"><b>Password</b></label>
         <input type="text" placeholder="Password"name="password" required autofocus>
     </form>
+</div> -->
+
+<div id="bucketlist-div">
+    <h2>Bucketlist</h2>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Activity</th>
+                <th scope="col">Date to Complete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hiking</td>
+                <td><input type="text" placeholder="MM/DD/YYYY" name="date" required autofocus></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-
 
 
 {% endblock %}

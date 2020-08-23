@@ -132,8 +132,16 @@ def logout():
 @app.route('/parks/<park_id>')
 def show_park(park_id):
     """Show the details on a particular park."""
-
     park = crud.get_park_by_id(park_id)
+
+    # special_char = '&257;'
+
+    # if special_char in park.park_name:
+    #     print(park.park_name)
+
+        # {% if '&#257;' in park.park_name%}
+        # {{'&#257;'=='ā' }}
+        # {% endif %}
 
     return render_template('park_details.html', park=park)
 
@@ -170,15 +178,22 @@ def get_activities():
 
 ########################## BUCKETLIST ROUTES ###################################
 
-# @app.route('')
-# def all_bucketlists():
-#     """All of a user's bucketlists."""
+@app.route('/create-bucketlist', methods=['POST'])
+def new_bucketlist(user_id, park_id, bucketlist_id, activity_id, order):
+    """Creates a new bucketlist for a user."""
 
-#     bucketlist = crud.get_bucketlist_by_user(user_id)
+    new_bucketlist = crud.create_bucketlist(user_id, park_id)
+    new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
+
+    #trip name? 
 
 @app.route('/bucketlist')
 def show_bucketlist_form():
     """Show bucketlist form."""
+
+    bucketlist = crud.get_bucketlists()
+
+    return render_template('bucketlist_form.html', bucketlist=bucketlist)
 
 @app.route('/bucketlist/<bucketlist_id>/<user_id>')
 def show_user_bucketlist(bucketlist_id, user_id):
@@ -188,8 +203,6 @@ def show_user_bucketlist(bucketlist_id, user_id):
     user = crud.get_user_by_id(user_id)
 
     return render_template('bucketlist.html', bucketlist=bucketlist, user=user)
-
-
 
 
 # @app.route()
