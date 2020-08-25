@@ -38,6 +38,16 @@ def show_login():
 def login():
     """User login."""
 
+    # if request.method == 'POST':
+    #   session.pop('user_id', None)
+
+    #     email = request.form['email']
+    #     password = request.form['password']
+
+    #     user = crud.get_user_by_email(email)
+
+    # return render_template('login.html')
+
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -185,47 +195,43 @@ def new_bucketlist(user_id, park_id, bucketlist_id, activity_id, order):
     new_bucketlist = crud.create_bucketlist(user_id, park_id)
     new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
 
+    user_bucketlist = create_user_bucketlist(new_bucketlist, new_bucketlist_item, user.user_id)
+
+    return redirect('/bucketlist')
     #trip name? 
 
-@app.route('/bucketlist')
-def show_bucketlist_form():
-    """Show bucketlist form."""
 
-    bucketlist = crud.get_bucketlists()
 
-    return render_template('bucketlist_form.html', bucketlist=bucketlist)
 
-@app.route('/bucketlist/<bucketlist_id>/<user_id>')
-def show_user_bucketlist(bucketlist_id, user_id):
-    """Show bucketlist form for a particular user."""
+@app.route('/user/<user_id>/bucketlists')
+def show_all_users_bucketlists(user_id):
+    """Show all bucketlists for a particular user."""
 
-    bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
+    # bucketlists = crud.get_bucketlist_by_id(bucketlist_id)
     user = crud.get_user_by_id(user_id)
 
-    return render_template('bucketlist.html', bucketlist=bucketlist, user=user)
+    return render_template('bucketlist_form.html', user=user)
 
 
-# @app.route()
-# def create_bucketlist():
-#     """Handle creating a bucketlist."""
-#     pass
+@app.route('')
+def show_users_specific_bucketlist(bucketlist_id):
+    """Shows a user a specific bucketlist."""
 
+    bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
 
+    return render_template('', bucketlist=bucketlis)
 
-# build out activities and activityi and activitiy id 
-
-
-# build out a route to display the bucketlist form 
-# and a route to handle submission of that form 
-# allows you to ccreate a bucektlist 
-
-#create a form , checkbox for each activitiy for the user to add an 
-# activityi to their bucketlist
-
-# then route to view bucketlist
+    #create a bucketlist details page here 
 
 
 
+#2nd route shows me a specific bucketlist of a user - bucketlist _ id, bucketlsi details html 
+#save activities to bucketlist, let a user select activities and add them to db and then when they view 
+#their bucketlist they can choose the date or order  of the activities
+#jquery and javascript for filling 
+#dropdown of user bucketlist, when adding to a bucketlist allow the user to choose which one 
+
+#profile page route that shows a list of bucketlists 
 
 
 

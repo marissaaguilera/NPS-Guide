@@ -97,11 +97,14 @@ class ParkActivity(db.Model):
 
     park = db.relationship('Park')
     activity = db.relationship('Activity')
+    bucketlistitems = db.relationship('BucketlistItem')
 
   
     def __repr__(self):
         return f'<Park Activity activity_id={self.activity_id} park_id={self.park_id}>'
 
+
+#remember the one to many and many to many relationships 
 
 
 class ParkState(db.Model):
@@ -130,12 +133,11 @@ class Bucketlist(db.Model):
 
     bucketlist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
     #bucketlist title? 
     
     user = db.relationship('User')
-    park = db.relationship('Park')
-    bucketlistitem = db.relationship('BucketlistItem')
+    bucketlistitems = db.relationship('BucketlistItem')
+    #bucketlistitem.park_activity.activity.activity_name 
 
 
     def __repr__(self):
@@ -149,11 +151,11 @@ class BucketlistItem(db.Model):
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
-    activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
+    park_activity_id = db.Column(db.Integer, db.ForeignKey('parkactivities.park_activity_id'), nullable=False)
     order = db.Column(db.DateTime, nullable=True)
     
     bucketlists = db.relationship('Bucketlist')
-    activities = db.relationship('Activity')
+    parkactivity = db.relationship('ParkActivity')
 
     def __repr__(self):
         return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id} activity_id={self.activity_id}>'
