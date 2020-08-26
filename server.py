@@ -57,6 +57,12 @@ def login():
     return render_template('login.html')
 
 
+#do i need a route here or 
+def is_logged_in():
+    """Checking if there is a user logged in."""
+
+    return 'user_id' in session
+
 
 #route to check if the user is logged in 
 
