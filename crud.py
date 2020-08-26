@@ -219,13 +219,12 @@ def add_states_by_park(park, park_state_codes):
 
 
 #Bucketlist
-def create_bucketlist(user_id, park_id):
+def create_bucketlist(user_id):
     """Create and return a new bucketlist."""
 
     # user_id = get_user_by_id(user_id)
     # park_id = get_park_by_id(park_id)
-    bucketlist = Bucketlist(user_id=user_id, 
-                            park_id=park_id)
+    bucketlist = Bucketlist(user_id=user_id)
     
     db.session.add(bucketlist)
     db.session.commit()
@@ -252,22 +251,22 @@ def get_bucketlist_by_user(user_id):
     return Bucketlist.query.filter(Bucketlist.user_id == user_id).all()
 
 
-def get_bucketlist_by_park(park_id):
-    """Retrun a users bucketlist by a park id."""
-    # park_id = get_park_by_id(park_id)
-    return Bucketlist.query.filter(Bucketlist.park_id == park_id).all()
+# def get_bucketlist_by_park(park_id):
+#     """Retrun a users bucketlist by a park id."""
+#     # park_id = get_park_by_id(park_id)
+#     return Bucketlist.query.filter(Bucketlist.park_id == park_id).all()
 
 
 
 
 
 #BucketlistItem
-def create_bucketlist_item(bucketlist_id, activity_id, order):
+def create_bucketlist_item(bucketlist_id, park_activity_id, order):
     """Create and return a bucketlist item."""
 
-    bucketlistitem = BucketlistItem(bucketlist_id=bucketlist_id, 
-                        activity_id=activity_id, 
-                        order=order)
+    bucketlistitem = BucketlistItem(park_activity_id=park_activity_id, 
+                                    bucketlist_id=bucketlist_id,
+                                    order=order)
 
     db.session.add(bucketlistitem)
     db.session.commit()

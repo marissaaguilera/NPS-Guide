@@ -26,75 +26,66 @@ def homepage():
 
 
 
-@app.route('/login', methods=['GET'])
-def show_login():
-    """Show login form."""
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login."""
+
+    if request.method == 'POST':
+        session.pop('user_id', None)
+
+        email = request.form['email']
+        password = request.form['password']
+
+        user = crud.get_user_by_email(email)
+
+        if not user:
+            flash('Account does not exist. Please try again.')
+            return redirect('/login')
+
+        elif user.password != password: 
+            print('Incorrect Password. Please try again.')
+            return redirect('/login')
+
+        elif user:
+            session['user'] = email
+            session['user_id'] = user.user_id
+            print('Successfully logged in!')
+            return redirect('/parks')
+#flash does not work but when i use print it prints in the terminal
+#logic works 
 
     return render_template('login.html')
 
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    """User login."""
-
-    # if request.method == 'POST':
-    #   session.pop('user_id', None)
-
-    #     email = request.form['email']
-    #     password = request.form['password']
-
-    #     user = crud.get_user_by_email(email)
-
-    # return render_template('login.html')
-
-    email = request.form.get('email')
-    password = request.form.get('password')
-
-    user = crud.get_user_by_email(email)
-
-
-    if not user: 
-        flash('Account does not exist. Please try again.')
-        return redirect('/login')
-
-    elif user.email != password: 
-        flash('Incorrect Password. Please try again.')
-        return redirect('/login')
-    
-    elif user.password == password:
-        session['user'] = email 
-        session['user_id'] = user.user_id
-        print('Successfully logged in!')
-        return redirect('/parks') 
+#route to check if the user is logged in 
 
 
 
-@app.route('/register', methods=['GET'])
-def show_registeration():
-    """Shows registration form."""
-   
-    return render_template("registration.html")
 
-
-
-@app.route('/register', methods=['POST'])
-def create_user():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     """Get info from registration."""
 
-    fname = request.form.get('fname')
-    lname = request.form.get('lname')
-    email = request.form.get('email')
-    password = request.form.get('password')
+    if request.method == 'POST':
 
-    user = crud.get_user_by_email(email)
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        email = request.form.get('email')
+        password = request.form.get('password')
 
-    if user: #checking if that email is in use already 
-        flash('Cannot create an account with that email. Please try again.')
+        user = crud.get_user_by_email(email)
+
+        if user: #checking if that email is in use already 
+            flash('Cannot create an account with that email. Please try again.')
+        else:
+            crud.create_user(fname, lname, email, password)
+            flash('Account created.') #not working 
+            return redirect('/parks') #they are logged in and now can go to the parks page. 
     else:
-        crud.create_user(fname, lname, email, password)
-        flash('Account created.')
-        return redirect('/parks') #they are logged in and now can go to the parks page. 
+
+        return render_template("registration.html")
+
 
 
 
@@ -104,37 +95,11 @@ def logout():
 
     if 'user' in session:
         del session['user']
-        flash('Logged Out.')
+        flash('Logged Out.') #check if this works 
 
         #or
     # session.pop('user', None)
     return redirect('/')
-
-
-#FIX ME########
-# @app.route('users/profile/<fname>')
-# def show_user_profile(fname):
-#     """Show users profile."""
-
-#     user = crud.get_user_by_email(email)
-#     user_bucketlist = crud.get_bucketlist_by_user(user_id)
-
-#     return render_template('user_profile.html', user=user, user_bucketlist=user_bucketlist)
-
-# pass
-
-
-#FIX ME#########
-# @app.route('/users/<user_id>')
-# def show_user(user_id):
-#     """Show the details on a particular user."""
-
-#     user = crud.get_user_by_id(user_id)
-
-#     return render_template('')
-
-#     pass
-#add an all users html page 
 
 
 ########################## PARK & ACTIVITY ROUTES ###################################
@@ -152,6 +117,7 @@ def show_park(park_id):
         # {% if '&#257;' in park.park_name%}
         # {{'&#257;'=='ā' }}
         # {% endif %}
+    # haleakala is stored in database with the weird character 
 
     return render_template('park_details.html', park=park)
 
@@ -197,35 +163,32 @@ def new_bucketlist(user_id, park_id, bucketlist_id, activity_id, order):
 
     user_bucketlist = create_user_bucketlist(new_bucketlist, new_bucketlist_item, user.user_id)
 
-    return redirect('/bucketlist')
+    return redirect('/bucketlist', user_bucketlist=user_bucketlist)
     #trip name? 
 
 
 
-
 @app.route('/user/<user_id>/bucketlists')
-def show_all_users_bucketlists(user_id):
-    """Show all bucketlists for a particular user."""
+def all_users_bucketlists(user_id):
+    """Show all the bucketlists for a particular user."""
 
-    # bucketlists = crud.get_bucketlist_by_id(bucketlist_id)
     user = crud.get_user_by_id(user_id)
 
     return render_template('bucketlist_form.html', user=user)
 
 
-@app.route('')
-def show_users_specific_bucketlist(bucketlist_id):
-    """Shows a user a specific bucketlist."""
+
+@app.route('/bucketlists/<bucketlist_id>')
+def get_specific_bucketlist(bucketlist_id):
+    """Shows a user the details for a specific bucketlist."""
 
     bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
 
-    return render_template('', bucketlist=bucketlis)
-
-    #create a bucketlist details page here 
+    return render_template('bucketlist_details.html', bucketlist=bucketlist)
 
 
 
-#2nd route shows me a specific bucketlist of a user - bucketlist _ id, bucketlsi details html 
+
 #save activities to bucketlist, let a user select activities and add them to db and then when they view 
 #their bucketlist they can choose the date or order  of the activities
 #jquery and javascript for filling 

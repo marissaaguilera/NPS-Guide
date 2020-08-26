@@ -100,8 +100,8 @@ for value in data_value:
 
 # Create Bucketlists
 user_id = user.user_id
-park_id = db_park.park_id
-bucketlist = crud.create_bucketlist(user_id, park_id)
+# park_id = db_park.park_id
+bucketlist = crud.create_bucketlist(user_id)
 
 
 
@@ -114,7 +114,7 @@ activity_id = db_activity.activity_id
 order = datetime.now()
 
 bucektlistitem = crud.create_bucketlist_item(bucketlist_id, 
-                                activity_id, 
+                                3, 
                                 order)
 
 

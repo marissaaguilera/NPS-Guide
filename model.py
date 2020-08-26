@@ -36,12 +36,11 @@ class Park(db.Model):
     designation = db.Column(db.String)  #designation (ntl park, ntl monument, ntl rec area)
     siteURL = db.Column(db.String)
 
-    bucketlists = db.relationship('Bucketlist')
-    state = db.relationship('State', secondary="parkstates")
+    # bucketlists = db.relationship('Bucketlist')
+    states = db.relationship('State', secondary="parkstates")
     activities = db.relationship('Activity', secondary="parkactivities")
     parkstate = db.relationship('ParkState')
-    #ask if this line is needed. 
-
+    #check where the plurals 
 
     def __repr__(self):
         return f'<Park park_id={self.park_id} park_name={self.park_name}>'
@@ -56,8 +55,8 @@ class State(db.Model):
     state_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     state_code = db.Column(db.String)
 
-    park = db.relationship('Park', secondary="parkstates")
-    parkstate = db.relationship('ParkState')
+    parks = db.relationship('Park', secondary="parkstates")
+    parkstates = db.relationship('ParkState')
   
     def __repr__(self):
         return f'<State state_id={self.state_id} state_code={self.state_code}>'
@@ -75,10 +74,10 @@ class Activity(db.Model):
     activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     activity_name = db.Column(db.String)
 
-    bucketlistitem = db.relationship('BucketlistItem')
-    park = db.relationship('Park', secondary="parkactivities")
-    parkactivity = db.relationship('ParkActivity')
-
+    bucketlistitems = db.relationship('BucketlistItem', secondary="parkactivities")
+    parks = db.relationship('Park', secondary="parkactivities")
+    parkactivities = db.relationship('ParkActivity')
+#check other code to make sure the plural was added 
 
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
@@ -98,7 +97,10 @@ class ParkActivity(db.Model):
     park = db.relationship('Park')
     activity = db.relationship('Activity')
     bucketlistitems = db.relationship('BucketlistItem')
+    #park to park activity is one to many 
+    #activity to park activity is one to many 
 
+    #related to one single activity to one single park 
   
     def __repr__(self):
         return f'<Park Activity activity_id={self.activity_id} park_id={self.park_id}>'
@@ -153,12 +155,17 @@ class BucketlistItem(db.Model):
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
     park_activity_id = db.Column(db.Integer, db.ForeignKey('parkactivities.park_activity_id'), nullable=False)
     order = db.Column(db.DateTime, nullable=True)
+    #one bucketlist item is associated with one 
+    #related to a single activity and a single park through park activity 
     
     bucketlists = db.relationship('Bucketlist')
     parkactivity = db.relationship('ParkActivity')
+    park = db.relationship('Park', secondary="parkactivities")
+    activity = db.relationship('Activity', secondary="parkactivities")
+
 
     def __repr__(self):
-        return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id} activity_id={self.activity_id}>'
+        return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id}>'
 
 
 

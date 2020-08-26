@@ -21,7 +21,7 @@ def setUp(self):
 def test_login(self):
     """Test login page."""
 
-    result = self.cluent.post("/login", 
+    result = self.client.post("/login", 
                             data={}, 
                             follow_redirects=True)
     self.assertIn(b"You are a valued user", result.data)
