@@ -15,16 +15,24 @@ State Location: {{state.state_code}}<br />
 
 
 <div id="act-checkboxes">
-    <h2>Activities Available:</h2>
+    <h3>Activities Available:</h3>
     <form>
         {% for activity in park.activities %}
         <input type="checkbox" name="activities">
         <label>{{ activity.activity_name }}</label><br />
         {% endfor %}
-        <button type="submit" id="add-act-btn">Add To Bucketlist</button>
     </form>
 </div>
+<div id="list-dropdown">
+    <form>
+        <h3>Choose a bucketlist</h3>
+        <select name="list">
+            <option value="create-new">New Bucketlist</option>
+        </select>
 
+        <br /><button type="submit" id="add-act-btn">Add To Bucketlist</button>
+    </form>
+</div>
 
 {% endblock %}
 

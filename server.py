@@ -61,17 +61,18 @@ def login():
 def is_logged_in():
     """Checking if there is a user logged in."""
 
-    return 'user_id' in session
+    if 'user_id' in session: 
+        return True 
+    else: 
+        return False 
 
-
-#route to check if the user is logged in 
-
+    # return 'user_id' in session
 
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """Get info from registration."""
+    """User registration."""
 
     if request.method == 'POST':
 
@@ -82,12 +83,12 @@ def register():
 
         user = crud.get_user_by_email(email)
 
-        if user: #checking if that email is in use already 
+        if user: 
             flash('Cannot create an account with that email. Please try again.')
         else:
             crud.create_user(fname, lname, email, password)
             flash('Account created.') #not working 
-            return redirect('/parks') #they are logged in and now can go to the parks page. 
+            return redirect('/parks') 
     else:
 
         return render_template("registration.html")
@@ -171,6 +172,7 @@ def new_bucketlist(user_id, park_id, bucketlist_id, activity_id, order):
 
     return redirect('/bucketlist', user_bucketlist=user_bucketlist)
     #trip name? 
+    #FIX ME
 
 
 
