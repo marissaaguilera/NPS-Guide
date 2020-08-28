@@ -57,16 +57,20 @@ def login():
     return render_template('login.html')
 
 
-#do i need a route here or 
 def is_logged_in():
     """Checking if there is a user logged in."""
 
-    if 'user_id' in session: 
-        return True 
-    else: 
-        return False 
+    return 'user_id' in session
 
-    # return 'user_id' in session
+
+
+def logged_in_user(user_id):
+    """Get information on the user that is logged in."""
+
+    user = crud.get_user_by_id(user_id)
+    
+    # User.query.get(session['user_id'])
+    return user
 
 
 
@@ -161,21 +165,6 @@ def get_activities():
 
 ########################## BUCKETLIST ROUTES ###################################
 
-@app.route('/create-bucketlist', methods=['POST'])
-def new_bucketlist(user_id, park_id, bucketlist_id, activity_id, order):
-    """Creates a new bucketlist for a user."""
-
-    new_bucketlist = crud.create_bucketlist(user_id, park_id)
-    new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
-
-    user_bucketlist = create_user_bucketlist(new_bucketlist, new_bucketlist_item, user.user_id)
-
-    return redirect('/bucketlist', user_bucketlist=user_bucketlist)
-    #trip name? 
-    #FIX ME
-
-
-
 @app.route('/user/<user_id>/bucketlists')
 def all_users_bucketlists(user_id):
     """Show all the bucketlists for a particular user."""
@@ -196,13 +185,55 @@ def get_specific_bucketlist(bucketlist_id):
 
 
 
+@app.route('/create-bucketlist', methods=['POST', 'GET'])
+def new_bucketlist():
+    """Creates a new bucketlist for a user."""
 
-#save activities to bucketlist, let a user select activities and add them to db and then when they view 
-#their bucketlist they can choose the date or order  of the activities
-#jquery and javascript for filling 
-#dropdown of user bucketlist, when adding to a bucketlist allow the user to choose which one 
+    user_id = session['user_id']
 
-#profile page route that shows a list of bucketlists 
+#get user that is in session
+    user = crud.get_user_by_id(user_id)
+    # session['user'] = user
+    print('>>>>>>>>>>>>>', user)
+
+#get park that is in hidden input 
+    target = request.form.get('park_id')
+    print('>>>>>>>>>>>>>', target)
+
+#activities that they selected from request and the park from request
+    activity = request.form.get('activities')
+    park = request.form.get('')
+
+    
+
+    # new_bucketlist = crud.create_bucketlist(user_id)
+    # new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
+
+    # user_bucketlist = new_bucketlist, new_bucketlist_item, user_id
+
+    return redirect('/user/<user_id>/bucketlist')
+
+
+#STEP ONE 
+#get user that is in session 
+#get park that is in the hidden input 
+#print those out 
+
+
+#STEP TWO 
+#activities that they selected from request and the park from request
+#print out checked boxes 
+
+#STEP THREE
+#how to get the checked boxes and what the park is from that form (hidden input) - park_id 
+#check to see if bucketlist exists for park and user and if not add these activities it
+ 
+ #when submits it will check if they have a bucketlist or not 
+
+
+#STEP FOUR 
+#last step is to send to database 
+
 
 
 

@@ -21,34 +21,32 @@ def create_user(fname, lname, email, password):
     db.session.commit()
 
     return user
-      # This is what it returns: <User user_id=71 email=michelle.valdez@gmail.com>
+      # Returns a user object: <User user_id=71 email=michelle.valdez@gmail.com>
 
 
 def get_users():
     """Return all users."""
 
     return User.query.all()
-#returns me userd id and email 
 
 
 def get_user_by_id(user_id):
     """Return a user by primary_key."""
 
     return User.query.get(user_id)
-#returns me userd id and email 
 
 
 def get_user_by_email(email):
     """Return a user by their email."""
 
     return User.query.filter(User.email == email).first()
-#returns me userd id and email 
+
 
 def get_user_by_fname(fname):
     """Return a user by their email."""
 
     return User.query.filter(User.fname == fname).first()
-#returns me userd id and email 
+
 
 
 
@@ -66,28 +64,25 @@ def create_park(park_name, designation, siteURL):
         db.session.commit()
 
     return park
-#Returns this: <Park park_id=20 park_name=Zion National Park>
+#Returns park object: <Park park_id=20 park_name=Zion National Park>
+
 
 def get_parks():
     """Return all parks."""
 
     return Park.query.all()
-#returns all parks and park ids 
+
 
 def get_park_by_id(park_id):
     """Return a park by primary key."""
 
     return Park.query.get(park_id)
-#returns park and park id 
 
 
 def get_park_by_park_name(park_name):
     """Return a park by the park name."""
 
     return Park.query.filter(Park.park_name == park_name).first()
-#returns park and park id 
-
-
 
 
 
@@ -102,28 +97,24 @@ def create_activity(activity_name):
     db.session.commit()
 
     return activity
-#Returns this: <Activity activity_id=41 activity_name=Hiking>
+#Returns activity object: <Activity activity_id=41 activity_name=Hiking>
 
 def get_activities():
     """Return all activities."""
 
     return Activity.query.all()
-#returns all activities
+
 
 def get_activity_by_id(activity_id):
     """Return activity by primary key."""
 
     return Activity.query.get(activity_id)
-#returns activity and activity id 
 
 
 def get_activity_by_activity_name(activity_name):
     """Return an activity by the name."""
 
     return Activity.query.filter(Activity.activity_name == activity_name).first()
-#returns activity and activity id 
-
-
 
 
 
@@ -139,7 +130,7 @@ def create_park_activity(activity_id, park_id):
     db.session.commit()
 
     return park_activity
-#returns this: <Park Activity activity_id=41 park_id=6>
+#Returns ParkActivity object: <Park Activity activity_id=41 park_id=6>
 
 
 def get_activities_by_park():
@@ -148,6 +139,7 @@ def get_activities_by_park():
     # return Activity.query.filter((Activity.activity_id == park_id) | (Activity.activity_id == park_id)).all()    
 
     return db.session.query(Activity, Park).join(Activity).all()
+#FIXME
 
 
 
@@ -161,27 +153,25 @@ def create_state(state_code):
     db.session.commit()
 
     return state
-#returns this: <State state_id=56 state_code=CA>
+#Returns state object: <State state_id=56 state_code=CA>
+
 
 def get_states():
     """Return all states."""
 
     return State.query.all()
-#returns all states
+
 
 def get_state_by_id(state_id):
     """Return a state by primary key."""
 
     return State.query.get(state_id)
-#returns state and state id
+
 
 def get_state_by_state_code(state_code):
     """Return a state by the state code."""
 
     return State.query.filter(State.state_code == state_code).first()
-#returns state and state id
-
-
 
 
 
@@ -198,13 +188,12 @@ def create_park_state(state_id, park_id):
 
     return park_state
 
+
 def get_states_by_park(park_id):
-    """Return a park by the state_id."""
+    """Return states by the park_id."""
 
     return ParkState.query.filter(ParkState.park_id == park_id).all()
 
-    # return db.session.query(Park, State).join(State).all()
-#need to have db.session.query when using join 
 
 def add_states_by_park(park, park_state_codes):
     """Linking park to a specific state code."""
@@ -222,31 +211,29 @@ def add_states_by_park(park, park_state_codes):
 def create_bucketlist(user_id):
     """Create and return a new bucketlist."""
 
-    # user_id = get_user_by_id(user_id)
-    # park_id = get_park_by_id(park_id)
     bucketlist = Bucketlist(user_id=user_id)
     
     db.session.add(bucketlist)
     db.session.commit()
 
     return bucketlist
+    #Returns a bucketlist object: <Bucketlist bucketlist_id=5 user_id=2>
+
 
 def get_bucketlists():
     """Return all bucketlists."""
 
     return Bucketlist.query.all()
 
+
 def get_bucketlist_by_id(bucketlist_id):
     """Return a bucketlist by the primary key."""
 
     return Bucketlist.query.get(bucketlist_id)
 
-def get_bucketlist_by_user(user_id):
-    """Retrun all bucketlists by a user id."""
-    # user_id = get_user_by_id(user_id)
 
-    # user_id = user.user_id
-    # user_bucketlists = 
+def get_bucketlist_by_user(user_id):
+    """Return all bucketlists by a user id."""
 
     return Bucketlist.query.filter(Bucketlist.user_id == user_id).all()
 
@@ -280,11 +267,9 @@ if __name__ == '__main__':
     connect_to_db(app)
 
 
+
+
+
 #doesnt work
 #get_activities_by_park
-#create_park_state
-#get_states_by_park
 #add_states_by_park
-#create_bucketlist
-#get_bucketlist
-#all of bucketlist and bucketlist item 

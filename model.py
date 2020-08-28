@@ -77,7 +77,6 @@ class Activity(db.Model):
     bucketlistitems = db.relationship('BucketlistItem', secondary="parkactivities")
     parks = db.relationship('Park', secondary="parkactivities")
     parkactivities = db.relationship('ParkActivity')
-#check other code to make sure the plural was added 
 
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} activity_name={self.activity_name}>'
@@ -100,7 +99,7 @@ class ParkActivity(db.Model):
     #park to park activity is one to many 
     #activity to park activity is one to many 
 
-    #related to one single activity to one single park 
+    #relating a one single activity to one single park 
   
     def __repr__(self):
         return f'<Park Activity activity_id={self.activity_id} park_id={self.park_id}>'
@@ -124,7 +123,7 @@ class ParkState(db.Model):
 
   
     def __repr__(self):
-        return f'<Park State state_id={self.state_id} park_id={self.park_id} state_code={self.state_code}>'
+        return f'<Park State state_id={self.state_id} park_id={self.park_id}>'
 
 
 class Bucketlist(db.Model):
@@ -143,7 +142,7 @@ class Bucketlist(db.Model):
 
 
     def __repr__(self):
-        return f'<Bucketlist bucketlist_id={self.bucketlist_id} user_id={self.user_id} park_id={self.park_id} order={self.order}>'
+        return f'<Bucketlist bucketlist_id={self.bucketlist_id} user_id={self.user_id}>'
 
 
 class BucketlistItem(db.Model):
