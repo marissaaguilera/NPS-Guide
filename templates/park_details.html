@@ -19,7 +19,7 @@ State Location: {{state.state_code}}<br />
     <form action="/create-bucketlist" method="POST">
         <input type="hidden" value={{park.park_id}} name="park_id">
         {% for activity in park.activities %}
-        <input type="checkbox" name="activities">
+        <input type="checkbox" value={{activity.activity_name}} name="activities">
         <label>{{ activity.activity_name }}</label><br />
         {% endfor %}
         <br /><button type="submit" id="add-act-btn">Add To Bucketlist</button>

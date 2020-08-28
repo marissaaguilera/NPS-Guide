@@ -208,10 +208,10 @@ def add_states_by_park(park, park_state_codes):
 
 
 #Bucketlist
-def create_bucketlist(user_id):
+def create_bucketlist(user_id, park_id):
     """Create and return a new bucketlist."""
 
-    bucketlist = Bucketlist(user_id=user_id)
+    bucketlist = Bucketlist(user_id=user_id, park_id=park_id)
     
     db.session.add(bucketlist)
     db.session.commit()
@@ -238,10 +238,10 @@ def get_bucketlist_by_user(user_id):
     return Bucketlist.query.filter(Bucketlist.user_id == user_id).all()
 
 
-# def get_bucketlist_by_park(park_id):
-#     """Retrun a users bucketlist by a park id."""
-#     # park_id = get_park_by_id(park_id)
-#     return Bucketlist.query.filter(Bucketlist.park_id == park_id).all()
+def get_bucketlist_by_park_and_user(park_id, user_id):
+    """Retrun a users bucketlist by a park id."""
+    # park_id = get_park_by_id(park_id)
+    return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).all()
 
 
 

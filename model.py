@@ -40,6 +40,8 @@ class Park(db.Model):
     states = db.relationship('State', secondary="parkstates")
     activities = db.relationship('Activity', secondary="parkactivities")
     parkstate = db.relationship('ParkState')
+    bucketlists = db.relationship('Bucketlist')
+
     #check where the plurals 
 
     def __repr__(self):
@@ -134,10 +136,14 @@ class Bucketlist(db.Model):
 
     bucketlist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
+
     #bucketlist title? 
     
     user = db.relationship('User')
     bucketlistitems = db.relationship('BucketlistItem')
+    park = db.relationship('Park')
+
     #bucketlistitem.park_activity.activity.activity_name 
 
 

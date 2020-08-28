@@ -13,10 +13,6 @@
     <ul>
         {% for park in parks %}
         <li><a href='parks/{{park.park_id}}'>{{ park.park_name }}</a></li>
-        {% if park.park_id == 50%}
-        {{park.park_name =='Haleakalā National Park' }}
-        {% endif %}
-
         {% endfor %}
     </ul>
 </div>

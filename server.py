@@ -120,16 +120,6 @@ def show_park(park_id):
     """Show the details on a particular park."""
     park = crud.get_park_by_id(park_id)
 
-    # special_char = '&257;'
-
-    # if special_char in park.park_name:
-    #     print(park.park_name)
-
-        # {% if '&#257;' in park.park_name%}
-        # {{'&#257;'=='ā' }}
-        # {% endif %}
-    # haleakala is stored in database with the weird character 
-
     return render_template('park_details.html', park=park)
 
 
@@ -190,6 +180,7 @@ def new_bucketlist():
     """Creates a new bucketlist for a user."""
 
     user_id = session['user_id']
+  
 
 #get user that is in session
     user = crud.get_user_by_id(user_id)
@@ -197,14 +188,29 @@ def new_bucketlist():
     print('>>>>>>>>>>>>>', user)
 
 #get park that is in hidden input 
-    target = request.form.get('park_id')
-    print('>>>>>>>>>>>>>', target)
+    park = request.form.get('park_id')
+    print('>>>>>>>>>>>>>', park)
 
 #activities that they selected from request and the park from request
-    activity = request.form.get('activities')
-    park = request.form.get('')
+    activity = request.form.getlist('activities')
+    print('>>>>>>>>>>>>', activity)
 
+
+
+    does_bucketlist_exist = crud.get_bucketlist_by_park_and_user(park, user)
+# run this to check if user has park id for bucketlist get_bucketlist_by_park(park_id, user_id)
+
+
+
+
+    #checking if user already has a list with that park id 
+    if does_bucketlist_exist:
+        print('>>>>>>>>> here') #add to bucketlist by park id
+    else:
+        print('>>>>>>>>no bucketlist found ') #create new bucketlist 
+# if not add these activities it a new bucketlist
     
+
 
     # new_bucketlist = crud.create_bucketlist(user_id)
     # new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
@@ -225,14 +231,14 @@ def new_bucketlist():
 #print out checked boxes 
 
 #STEP THREE
-#how to get the checked boxes and what the park is from that form (hidden input) - park_id 
-#check to see if bucketlist exists for park and user and if not add these activities it
+#check to see if bucketlist exists for park/user and if it does add to existing bucketlist
+# if not add these activities it a new bucketlist
  
  #when submits it will check if they have a bucketlist or not 
 
 
 #STEP FOUR 
-#last step is to send to database 
+#last step is to send to database to update existing or create a new list 
 
 
 
@@ -240,6 +246,14 @@ def new_bucketlist():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')
+
+
+
+
+
+
+
+
 
 
 

@@ -100,8 +100,8 @@ for value in data_value:
 
 # Create Bucketlists
 user_id = user.user_id
-# park_id = db_park.park_id
-bucketlist = crud.create_bucketlist(user_id)
+park_id = db_park.park_id
+bucketlist = crud.create_bucketlist(user_id, park_id)
 
 
 
