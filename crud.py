@@ -239,7 +239,7 @@ def get_bucketlist_by_user(user_id):
 
 
 def get_bucketlist_by_park_and_user(park_id, user_id):
-    """Retrun a users bucketlist by a park id."""
+    """Return a users bucketlist by a park id."""
     # park_id = get_park_by_id(park_id)
     return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).all()
 
@@ -265,11 +265,3 @@ def create_bucketlist_item(bucketlist_id, park_activity_id, order):
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
-
-
-
-
-
-#doesnt work
-#get_activities_by_park
-#add_states_by_park

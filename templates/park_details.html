@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Parks Page{% endblock %}
+{% block title %}Parks - NPS Guide{% endblock %}
 
 {% block content %}
 <h1>{{park.park_name}} Details Page</h1>
 
-
-<h2>Park Information:</h2>
-{% for state in park.states %}
-{{park.park_name}}<br />
-State Location: {{state.state_code}}<br />
-{% endfor %}
-<a href={{park.siteURL}}>Official Page</a>
-
+<div id="park-info">
+    <h2>Park Information:</h2>
+    {% for state in park.states %}
+    {{park.park_name}}<br />
+    State Location: {{state.state_code}}<br />
+    {% endfor %}
+    <a href={{park.siteURL}}>Official Page</a>
+</div>
 
 <div id="act-checkboxes">
     <h3>Activities Available:</h3>

@@ -30,6 +30,8 @@ def homepage():
 def login():
     """User login."""
 
+    login = None
+
     if request.method == 'POST':
         session.pop('user_id', None)
 
@@ -39,22 +41,23 @@ def login():
         user = crud.get_user_by_email(email)
 
         if not user:
-            flash('Account does not exist. Please try again.')
+            login = 'Account does not exist. Please try again.'
+            # flash('Account does not exist. Please try again.')
             return redirect('/login')
 
         elif user.password != password: 
-            print('Incorrect Password. Please try again.')
+            login = 'Incorrect Password. Please try again.'
             return redirect('/login')
 
         elif user:
             session['user'] = email
             session['user_id'] = user.user_id
-            print('Successfully logged in!')
+            login = 'Successfully logged in!'
             return redirect('/parks')
 #flash does not work but when i use print it prints in the terminal
 #logic works 
 
-    return render_template('login.html')
+    return render_template('login.html', login=login)
 
 
 def is_logged_in():
@@ -64,12 +67,12 @@ def is_logged_in():
 
 
 
-def logged_in_user(user_id):
+def logged_in_user():
     """Get information on the user that is logged in."""
 
-    user = crud.get_user_by_id(user_id)
+    # user = crud.get_user_by_id(user_id)
     
-    # User.query.get(session['user_id'])
+    user = User.query.get(session['user_id'])
     return user
 
 
@@ -95,7 +98,7 @@ def register():
             return redirect('/parks') 
     else:
 
-        return render_template("registration.html")
+        return render_template('registration.html')
 
 
 
@@ -161,7 +164,7 @@ def all_users_bucketlists(user_id):
 
     user = crud.get_user_by_id(user_id)
 
-    return render_template('bucketlist_form.html', user=user)
+    return render_template('user_profile.html', user=user)
 
 
 
@@ -179,41 +182,60 @@ def get_specific_bucketlist(bucketlist_id):
 def new_bucketlist():
     """Creates a new bucketlist for a user."""
 
-    user_id = session['user_id']
-  
-
 #get user that is in session
-    user = crud.get_user_by_id(user_id)
-    # session['user'] = user
-    print('>>>>>>>>>>>>>', user)
+    user_id = session['user_id'] 
+    print('>>>>>>>>>>>>>', user_id)
 
 #get park that is in hidden input 
-    park = request.form.get('park_id')
-    print('>>>>>>>>>>>>>', park)
+    park_id = request.form.get('park_id')
+    print('>>>>>>>>>>>>>', park_id)
 
 #activities that they selected from request and the park from request
-    activity = request.form.getlist('activities')
-    print('>>>>>>>>>>>>', activity)
-
-
-
-    does_bucketlist_exist = crud.get_bucketlist_by_park_and_user(park, user)
-# run this to check if user has park id for bucketlist get_bucketlist_by_park(park_id, user_id)
-
-
-
+    activity_list = request.form.getlist('activities')
+    print('>>>>>>>>>>>>', activity_list)
 
     #checking if user already has a list with that park id 
+    does_bucketlist_exist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
+
+
+
+#see that the list was in the database
+
+#get bucketlistid and activity id 
+
+#adding something to the bucketlist items table by making a new entry for bucketlistitem 
+#put into session 
+
+#do that for every activity they selected 
+#for loop 
+
+#look in seed database file 
+
+# bucketlistitems
+# bucketlist_id
+# activity_id
+# new_user = User("name", "email@kjsdk.com")
+# db.session.add(new_user)
+# db.session.commit()
+# new_item = BucketListItem()
+
+
     if does_bucketlist_exist:
+        for activity in activity_list:
+            new_bucketlist_item = BucketlistItem(bucketlist_id, activity_id, order)
+            # activity_id = crud.get_activity_by_id(activity_id)
+            # new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
+            print('>>>>>>>>>>', activity)
+
         print('>>>>>>>>> here') #add to bucketlist by park id
+        #create new bucketlist 
     else:
-        print('>>>>>>>>no bucketlist found ') #create new bucketlist 
-# if not add these activities it a new bucketlist
+        new_bucketlist = crud.create_bucketlist(user_id, park_id)
+        print('>>>>>>>>no bucketlist found ') 
+
     
 
 
-    # new_bucketlist = crud.create_bucketlist(user_id)
-    # new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
 
     # user_bucketlist = new_bucketlist, new_bucketlist_item, user_id
 
@@ -229,6 +251,7 @@ def new_bucketlist():
 #STEP TWO 
 #activities that they selected from request and the park from request
 #print out checked boxes 
+
 
 #STEP THREE
 #check to see if bucketlist exists for park/user and if it does add to existing bucketlist
@@ -246,25 +269,6 @@ def new_bucketlist():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')
-
-
-
-
-
-
-
-
-
-
-
-##PLAN: 
-#MVP FIRST
-    #- user login (implement on html, js file)
-    #- user registration (implement on html, js file)
-    #- user logout (implement on html, js file)
-    #- search parks (all)
-    #- view activities by park (all)
-    #- add activities to bucketlist (all)
 
 
 #Post is used to send data 

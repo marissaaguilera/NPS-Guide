@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Bootstrap -->
 
         <title>{% block title %}National Park Service Guide{% endblock %}</title>
 
-
+        <link href='http://fonts.googleapis.com/css?family=Raleway:100,700'rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
         <!-- Load our stylesheet -->
         <link rel="stylesheet" href="/static/css/styles.css">
 
-        <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-        
-    </head>
-    <body>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-       
+       <!-- Navbar  -->
 
-
+        <div id="navbar-div">
             <!-- Navbar collapsed -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light navbar-fixed-top justify-content-between"> 
+                <!-- add style in tag -->
+                <a class="navbar-brand" href="/" >
+                  <!-- Logo -->
+                  <!-- <img src="/static/imgs/logo3.png" width="60" height="60" class="d-inline-block align-top" alt="">NPS Guide</a> -->
+
+
                 <a class="navbar-brand" href="#">NPS Guide</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
+            <!-- Navbar nav-links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">  
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                    </li>  
+                    <div class="navbar-nav justify-content-between">
+                        {% if session.get('user') %}
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                            <a href="/" class="nav-link" href="#">Home</a>
+                            </li>&nbsp;
 
-                </ul>
+                            <li class="nav-item">
+                            <a href="/parks" class="nav-link" href="#">Explore Parks</a>
+                            </li>&nbsp;
+                            <!-- add styles to the a tags for colors  -->
 
+                            <li class="nav-item">
+                            <a href="create-bucketlist" class="nav-link" href="#">My Profile</a>
+                            </li>&nbsp;
 
+                            <li class="nav-item">
+                            <a href="/logout" class="nav-link" href="#">Logout</a>
+                            </li>&nbsp;
+                        </ul>
+                        {% else %}
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                            <a href="/" class="nav-link" href="#">Home</a>
+                            </li>&nbsp;
 
-            <!-- Navbar showing nav-links -->
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item">
-                    <a href="/" class="nav-link" href="#">Home</a>
-                    </li>
+                            <li class="nav-item">
+                            <a href="/register" class="nav-link" href="#">Register</a>
+                            </li>&nbsp;
 
-                    <li class="nav-item">
-                    <a href="/parks" class="nav-link" href="#">Explore Parks</a>
-                    </li>
-
-                    <li class="nav-item">
-                    <a href="/create-bucketlist" class="nav-link" href="#">My Bucketlists</a>
-                    </li> 
-
-                    <li class="nav-item">
-                    <a href="/login" class="nav-link" href="#">Login</a>
-                    </li>
-
-                    <li class="nav-item">
-                    <a href="/register" class="nav-link" href="#">Register</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="/logout" class="nav-link" href="#">Logout</a>
-                        </li>
-                </ul>
+                            <li class="nav-item">
+                            <a href="/login" class="nav-link" href="#">Log In</a>
+                            </li>&nbsp;
+                        </ul>
+                        {% endif %}
                 </div>
             </nav>
-            <h1>NPS Guide</h1>
+        </div>
+
+    </head>
+    <body>
         {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
         <footer>Discover America's Story: The National Parks</footer>
     </body>

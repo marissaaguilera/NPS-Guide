@@ -5,6 +5,8 @@ from server import app
 from model import connect_to_db #db, example_data
 from flask import session
 
+#ask for clarification on the db and example data 
+
 
 class FlaskTestsBasics(TestCase):
     """Flask tests."""
@@ -39,7 +41,10 @@ class FlaskTestsBasics(TestCase):
 #do i need a tear down here? 
 
 
-class FlaskTestDatabase(TestCase):
+
+
+
+class FlaskTestsDatabase(TestCase):
     """Flask tests that use the database."""
 
 
@@ -58,22 +63,34 @@ class FlaskTestDatabase(TestCase):
 
 
     def tearDown(self):
-    """Do at end of every test."""
+        """Do at end of every test."""
 
     db.session.remove()
     db.drop_all()
     db.engine.dispose()
 
 
-#   def test_some_flask_route(self):
-#       """Some non-database test..."""
+    def test_parks_list(self):
+        """Test parks page."""
 
-#       result = self.client.get("/my-route")
-#       self.assertEqual(result.status_code, 200)
-#       self.assertIn('<h1>Test</h1>', result.data)
+    result = self.client.get("/parks")
+    self.assertIn(b"Parks Working", result.data)
 
-def tearDown(self):
-    """Code to run after every test."""
+
+    def test_park_details(self):
+        """Test park details page."""
+
+    result = self.client.get("/parks/<park_id>")
+    self.assertIn(b"Park Details Working", result.data)
+
+
+
+
+
+
+
+
+
 
 
 

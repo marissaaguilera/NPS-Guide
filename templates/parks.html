@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Parks Page{% endblock %}
+{% block title %}Parks - NPS Guide{% endblock %}
 
 
 {% block content %}
@@ -9,7 +9,7 @@
 
 </head>
 <div id="all-parks">
-    <h1>Park's Page</h1>
+    <h1>Find your next favorite park</h1>
     <ul>
         {% for park in parks %}
         <li><a href='parks/{{park.park_id}}'>{{ park.park_name }}</a></li>

@@ -1,0 +1,44 @@
+/* Style sheet for NPS GUide. */
+
+
+
+/* Navbar Styling */
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+  }
+
+/* /#navbar-links {
+	margin: 10px;
+	width: 900px;
+    font-family: sans-serif;
+    list-style:none;
+}
+
+#navbar-links li {
+	display:block;
+	width:120px;
+	float:left;
+	margin-left:2px;
+	border:1px solid #000;
+}
+
+#navbar-links a {
+	display:block;
+	padding:3px;
+	text-decoration:none;
+	background-color:#fff;
+	color:#009;
+} */
+
+
+#navbar-item {
+	background-color: black;
+	color: white;
+}
+
+/* #navbar-links a:hover {
+	background-color:#009;
+	color:#fff;
+}  */
