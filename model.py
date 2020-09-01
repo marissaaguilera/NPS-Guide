@@ -76,7 +76,7 @@ class Activity(db.Model):
     activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     activity_name = db.Column(db.String)
 
-    bucketlistitems = db.relationship('BucketlistItem', secondary="parkactivities")
+    bucketlistitems = db.relationship('BucketlistItem')
     parks = db.relationship('Park', secondary="parkactivities")
     parkactivities = db.relationship('ParkActivity')
 
@@ -97,7 +97,7 @@ class ParkActivity(db.Model):
 
     park = db.relationship('Park')
     activity = db.relationship('Activity')
-    bucketlistitems = db.relationship('BucketlistItem')
+  
     #park to park activity is one to many 
     #activity to park activity is one to many 
 
@@ -138,7 +138,6 @@ class Bucketlist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'), nullable=False)
 
-    #bucketlist title? 
     
     user = db.relationship('User')
     bucketlistitems = db.relationship('BucketlistItem')
@@ -158,15 +157,14 @@ class BucketlistItem(db.Model):
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
-    park_activity_id = db.Column(db.Integer, db.ForeignKey('parkactivities.park_activity_id'), nullable=False)
+    activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
     order = db.Column(db.DateTime, nullable=True)
     #one bucketlist item is associated with one 
     #related to a single activity and a single park through park activity 
     
     bucketlists = db.relationship('Bucketlist')
-    parkactivity = db.relationship('ParkActivity')
-    park = db.relationship('Park', secondary="parkactivities")
-    activity = db.relationship('Activity', secondary="parkactivities")
+    park = db.relationship('Park', secondary="bucketlists")
+    activity = db.relationship('Activity')
 
 
     def __repr__(self):

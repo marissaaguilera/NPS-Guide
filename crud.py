@@ -241,19 +241,21 @@ def get_bucketlist_by_user(user_id):
 def get_bucketlist_by_park_and_user(park_id, user_id):
     """Return a users bucketlist by a park id."""
     # park_id = get_park_by_id(park_id)
-    return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).all()
+    return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).first()
 
 
 
 
 
 #BucketlistItem
-def create_bucketlist_item(bucketlist_id, park_activity_id, order):
+def create_bucketlist_item(bucketlist_id, activity_id, order):
     """Create and return a bucketlist item."""
 
-    bucketlistitem = BucketlistItem(park_activity_id=park_activity_id, 
-                                    bucketlist_id=bucketlist_id,
+    bucketlistitem = BucketlistItem(activity_id=activity_id, 
+                                    bucketlist_id=bucketlist_id, 
                                     order=order)
+
+                                   
 
     db.session.add(bucketlistitem)
     db.session.commit()

@@ -2,10 +2,15 @@
 
 $(document).ready(function(){
 
-    $('#add-act-btn').click(function(){
-        $('#bucketlist-div').append('')
-        
+    for (let park in parks) {
+        console.log({{ park.park_name }})
+
+    };
+
+
+
+    $('#search-bar').mdbAutocomplete({
+        data: park.park_name
     });
-    
 });
 

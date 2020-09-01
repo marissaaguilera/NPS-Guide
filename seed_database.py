@@ -114,10 +114,6 @@ activity_id = db_activity.activity_id
 order = datetime.now()
 
 bucektlistitem = crud.create_bucketlist_item(bucketlist_id, 
-                                3, 
+                                activity_id, 
                                 order)
 
-
-#ISSUES
-#with bucketlist table
-#with bucketlistitem table 

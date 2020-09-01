@@ -2,7 +2,8 @@
 
 from flask import (Flask, render_template, request, jsonify,
                     flash, session, redirect)
-from model import connect_to_db
+from model import BucketlistItem, connect_to_db
+from datetime import datetime
 import crud
 import os
 import sys
@@ -31,6 +32,7 @@ def login():
     """User login."""
 
     login = None
+  
 
     if request.method == 'POST':
         session.pop('user_id', None)
@@ -55,7 +57,7 @@ def login():
             login = 'Successfully logged in!'
             return redirect('/parks')
 #flash does not work but when i use print it prints in the terminal
-#logic works 
+
 
     return render_template('login.html', login=login)
 
@@ -91,7 +93,7 @@ def register():
         user = crud.get_user_by_email(email)
 
         if user: 
-            flash('Cannot create an account with that email. Please try again.')
+            flash('Cannot create an account with that email. Please try again.') #not working 
         else:
             crud.create_user(fname, lname, email, password)
             flash('Account created.') #not working 
@@ -109,10 +111,8 @@ def logout():
 
     if 'user' in session:
         del session['user']
-        flash('Logged Out.') #check if this works 
+        flash('Logged Out.')
 
-        #or
-    # session.pop('user', None)
     return redirect('/')
 
 
@@ -158,7 +158,7 @@ def get_activities():
 
 ########################## BUCKETLIST ROUTES ###################################
 
-@app.route('/user/<user_id>/bucketlists')
+@app.route('/profile/<user_id>')
 def all_users_bucketlists(user_id):
     """Show all the bucketlists for a particular user."""
 
@@ -182,64 +182,27 @@ def get_specific_bucketlist(bucketlist_id):
 def new_bucketlist():
     """Creates a new bucketlist for a user."""
 
-#get user that is in session
     user_id = session['user_id'] 
-    print('>>>>>>>>>>>>>', user_id)
+    print('>>>>>>>>>>>>>', user_id) #get user that is in session
 
-#get park that is in hidden input 
     park_id = request.form.get('park_id')
-    print('>>>>>>>>>>>>>', park_id)
+    print('>>>>>>>>>>>>>', park_id) #get park that is in hidden input 
 
-#activities that they selected from request and the park from request
     activity_list = request.form.getlist('activities')
     print('>>>>>>>>>>>>', activity_list)
 
-    #checking if user already has a list with that park id 
-    does_bucketlist_exist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
+    #checking if user already has a bucketist with that park id 
+    bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
 
-
-
-#see that the list was in the database
-
-#get bucketlistid and activity id 
-
-#adding something to the bucketlist items table by making a new entry for bucketlistitem 
-#put into session 
-
-#do that for every activity they selected 
-#for loop 
-
-#look in seed database file 
-
-# bucketlistitems
-# bucketlist_id
-# activity_id
-# new_user = User("name", "email@kjsdk.com")
-# db.session.add(new_user)
-# db.session.commit()
-# new_item = BucketListItem()
-
-
-    if does_bucketlist_exist:
-        for activity in activity_list:
-            new_bucketlist_item = BucketlistItem(bucketlist_id, activity_id, order)
-            # activity_id = crud.get_activity_by_id(activity_id)
-            # new_bucketlist_item = crud.create_bucketlist_item(bucketlist_id, activity_id, order)
-            print('>>>>>>>>>>', activity)
-
-        print('>>>>>>>>> here') #add to bucketlist by park id
-        #create new bucketlist 
-    else:
-        new_bucketlist = crud.create_bucketlist(user_id, park_id)
+    if not bucketlist: 
+        bucketlist = crud.create_bucketlist(user_id, park_id)
         print('>>>>>>>>no bucketlist found ') 
 
-    
+    for activity_id in activity_list:
+        new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
+    return redirect(f'/profile/{user_id}')
 
-
-    # user_bucketlist = new_bucketlist, new_bucketlist_item, user_id
-
-    return redirect('/user/<user_id>/bucketlist')
 
 
 #STEP ONE 

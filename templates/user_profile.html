@@ -5,22 +5,13 @@
 
 
 {% block content %}
-<h1>User's Profile Page</h1>
+<h1>{{user.fname}}'s Profile</h1>
 
-<h2>All Bucketlists</h2>
 
-<!-- <div id="bucketlist-div">
-    <h2>Bucketlist</h2>
-    <form class="form-signin" method="POST">
-        <label for="email"><b>Email Address</b></label>
-        <input type="text" placeholder="Email" name="email" required autofocus>
-        <label for="password"><b>Password</b></label>
-        <input type="text" placeholder="Password"name="password" required autofocus>
-    </form>
-</div> -->
+
 
 <div id="bucketlist-div">
-    <h2>Bucketlist</h2>
+    <h2>All Bucketlists</h2>
     <table>
         <thead>
             <tr>
@@ -30,7 +21,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>Hiking</td>
+                <td>hiking</td>
                 <td><input type="text" placeholder="MM/DD/YYYY" name="date" required autofocus></td>
             </tr>
         </tbody>
