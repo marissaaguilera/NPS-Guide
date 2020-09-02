@@ -24,7 +24,7 @@
     You currently have no bucketlists created. Check out the 'Explore Parks' page to get started.
     {% else %}
     <ul>
-    <li>{{bucketlist.park.park_name}}</li>
+    <li><a href="bucketlists/{{bucketlist.bucketlist_id}}">{{ bucketlist.park.park_name }}</a></li>
     </ul>
     {% endif %}
     {% endfor %}

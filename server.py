@@ -191,6 +191,15 @@ def get_specific_bucketlist(bucketlist_id):
 
     return render_template('bucketlist_details.html', bucketlist=bucketlist)
 
+@app.route('/profile/bucketlists/<bucketlist_id>')
+def select_bucketlist_from_profile(bucketlist_id):
+    """Shows a user the details for a specific bucketlist."""
+
+    bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
+
+    return render_template('bucketlist_details.html', bucketlist=bucketlist)
+
+
 
 
 @app.route('/adding-activities', methods=['POST', 'GET'])
