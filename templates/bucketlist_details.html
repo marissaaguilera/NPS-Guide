@@ -5,8 +5,21 @@
 
 
 {% block content %}
-<h1> Details Page</h1>
 
+<h1>Bucketlist Details Page</h1>
 
-
+<!-- need to print out the park name -->
+<div id="one-bucketlist">
+    <h2>{{bucketlist.park.park_name}}</h2>
+    <ul>
+        {% for activity in bucketlist.activities%}
+        <li>{{ activity.activity_name }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
+<!-- 
+make sure it doesn't duplicate 
+check that activities arent already associated with bucketlist  -->
+
+<!-- access the relationship to check if the activity was already there  -->

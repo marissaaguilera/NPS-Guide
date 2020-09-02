@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, jsonify,
                     flash, session, redirect)
-from model import BucketlistItem, connect_to_db
+from model import User, connect_to_db
 from datetime import datetime
 import crud
 import os
@@ -71,8 +71,6 @@ def is_logged_in():
 
 def logged_in_user():
     """Get information on the user that is logged in."""
-
-    # user = crud.get_user_by_id(user_id)
     
     user = User.query.get(session['user_id'])
     return user
@@ -137,6 +135,25 @@ def all_parks():
 
 
 
+@app.route('/search-parks', methods=['GET'])
+def search_parks(park_id):
+    """Using the search bar to go to a park park."""
+
+    park_id = request.form.get('park_id')
+    print('>>>>>>>>>>>>>HERE', park_id) 
+
+    # park_id = crud.get_park_by_id(park_id)
+
+    return redirect(f'/parks/{park_id}')
+
+
+#post request to server when i want to change something 
+#getting user (accessing user, show bucketlists)
+#using user object to show all users bucketlist 
+#loop over bucketlis - has park and park name 
+# loop over bucketlistitem 
+
+
 @app.route('/activities/<activity_id>')
 def show_activity(activity_id):
     """Show the details on a particular activity."""
@@ -159,10 +176,11 @@ def get_activities():
 ########################## BUCKETLIST ROUTES ###################################
 
 @app.route('/profile/<user_id>')
-def all_users_bucketlists(user_id):
-    """Show all the bucketlists for a particular user."""
+def user_profile(user_id):
+    """Shows a users profile with all their bucketlists."""
 
     user = crud.get_user_by_id(user_id)
+  
 
     return render_template('user_profile.html', user=user)
 
@@ -178,8 +196,8 @@ def get_specific_bucketlist(bucketlist_id):
 
 
 
-@app.route('/create-bucketlist', methods=['POST', 'GET'])
-def new_bucketlist():
+@app.route('/adding-activities', methods=['POST', 'GET'])
+def adding_to_a_bucketlist():
     """Creates a new bucketlist for a user."""
 
     user_id = session['user_id'] 
@@ -198,34 +216,15 @@ def new_bucketlist():
         bucketlist = crud.create_bucketlist(user_id, park_id)
         print('>>>>>>>>no bucketlist found ') 
 
+
     for activity_id in activity_list:
+        # int(activity_list[activity_id])
         new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
-    return redirect(f'/profile/{user_id}')
+    
+    return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
 
-
-
-#STEP ONE 
-#get user that is in session 
-#get park that is in the hidden input 
-#print those out 
-
-
-#STEP TWO 
-#activities that they selected from request and the park from request
-#print out checked boxes 
-
-
-#STEP THREE
-#check to see if bucketlist exists for park/user and if it does add to existing bucketlist
-# if not add these activities it a new bucketlist
- 
- #when submits it will check if they have a bucketlist or not 
-
-
-#STEP FOUR 
-#last step is to send to database to update existing or create a new list 
-
+#make sure that activities the user selected shows up on the user profile page 
 
 
 
@@ -236,57 +235,3 @@ if __name__ == '__main__':
 
 #Post is used to send data 
 #Get is used to request data 
-
-
-
-
-
-
-
-
-
-
-########################## MOVING TO REACT ###################################
-#react LOGIN
-# @app.route('/api/login', methods=['POST'])
-# def login():
-#     """User login."""
-
-#     data = request.get_json(force=True)
-#     #get_json converts the JSON object into python data for us and 
-#     #returns an object or none if ssilent = true
-#     email = data['email']
-#     password = data['password']
-
-#     user = crud.get_user_by_email(email)
-
-#     if user: 
-#         full_name = user.fname + user.lname
-#         session['user'] = email 
-#         session['user_id'] = user.user_id
-#         #full_name = f'{user.fname} {user.lname}'
-
-#         if (user.email == email) and (user.password == password):
-#             return jsonify([user.user_id, full_name, user.email])
-
-#     else: 
-#         return jsonify({'Account not found. Please register.'})
-
-
-#react REGISTRATION
-# @app.route('/register', methods=['POST'])
-# def register():
-#     """Create a new user."""
-#     data = request.get_json(force=True)
-#     fname = data['fname']
-#     lname = data['lname']
-#     email = data['email']
-#     password = data['password']
-
-#     user = crud.create_user(fname, lname, email, password)
-
-#     # user = crud.get_user_by_email(email)
-
-#     if user: 
-#         session.clear()
-#         return jsonify({'Account created. Please login.'})

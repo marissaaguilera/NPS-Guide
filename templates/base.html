@@ -27,7 +27,7 @@
                   <!-- <img src="/static/imgs/logo3.png" width="60" height="60" class="d-inline-block align-top" alt="">NPS Guide</a> -->
 
 
-                <a class="navbar-brand" href="#">NPS Guide</a>
+                <a class="navbar-brand" href="/">NPS Guide</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,10 +37,6 @@
                     <div class="navbar-nav justify-content-between">
                         {% if session.get('user') %}
                         <ul class="nav nav-pills">
-                            <li class="nav-item">
-                            <a href="/" class="nav-link" href="#">Home</a>
-                            </li>&nbsp;
-
                             <li class="nav-item">
                             <a href="/parks" class="nav-link" href="#">Explore Parks</a>
                             </li>&nbsp;
@@ -56,10 +52,6 @@
                         </ul>
                         {% else %}
                         <ul class="nav nav-pills">
-                            <li class="nav-item">
-                            <a href="/" class="nav-link" href="#">Home</a>
-                            </li>&nbsp;
-
                             <li class="nav-item">
                             <a href="/register" class="nav-link" href="#">Register</a>
                             </li>&nbsp;

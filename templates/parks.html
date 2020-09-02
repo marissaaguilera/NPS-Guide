@@ -24,13 +24,12 @@
             <h1>Find your next favorite park</h1>
             <input id="search-bar" type="text" name="choose-park" placeholder="Enter a park name" list="parks-list">
             <input type="submit" id="searchbtn" value="search">
-            <!-- <button type="submit" id="search-btn">Search</button> -->
         </div>
     </form>
     <datalist id="parks-list">
         {% for park in parks %}
-        <option>
-            <a href='parks/{{park.park_id}}'>{{ park.park_name }}</a><br />
+        <option value="parks/{{park.park_id}}">
+            <label>{{ park.park_name }}</label><br />
         </option>
         {% endfor %}
     </datalist>
@@ -39,28 +38,8 @@
     
 </div>
 
-<!-- Dropdown Menu -->
 
-<div id="drop-search-park">
-    <form action="">
-        <h1>Find your next favorite park</h1>
-        <select name="all-parks">
-            <option value="" disabled selected>Choose a park</option>
-            {% for park in parks %}
-            <option value="park">
-                <a href='parks/{{park.park_id}}'>{{ park.park_name }}</a><br />
-            </option>
-            {% endfor %}
-        </select>
-        <button type="submit" id="search-btn">Search</button>
-    </form>
 
-</div>
-
-<!-- <a href=> -->
 
 {% endblock %}
-
-<!-- list of parks and have this link to specific park page  -->
-<!-- check haleakala park name  -->
 

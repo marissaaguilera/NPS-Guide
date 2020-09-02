@@ -142,7 +142,8 @@ class Bucketlist(db.Model):
     user = db.relationship('User')
     bucketlistitems = db.relationship('BucketlistItem')
     park = db.relationship('Park')
-
+    activities = db.relationship('Activity', secondary='bucketlistitems')
+#one bucketlist will have activies thorugh bucketlititems table 
     #bucketlistitem.park_activity.activity.activity_name 
 
 
