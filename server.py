@@ -31,8 +31,6 @@ def homepage():
 def login():
     """User login."""
 
-    login = None
-  
 
     if request.method == 'POST':
         session.pop('user_id', None)
@@ -43,23 +41,20 @@ def login():
         user = crud.get_user_by_email(email)
 
         if not user:
-            login = 'Account does not exist. Please try again.'
-            # flash('Account does not exist. Please try again.')
+            flash('Account does not exist. Please try again.')
             return redirect('/login')
 
         elif user.password != password: 
-            login = 'Incorrect Password. Please try again.'
+            flash('Incorrect Password. Please try again.')
             return redirect('/login')
 
         elif user:
             session['user'] = email
             session['user_id'] = user.user_id
-            login = 'Successfully logged in!'
+            flash('Successfully logged in!')
             return redirect('/parks')
-#flash does not work but when i use print it prints in the terminal
 
-
-    return render_template('login.html', login=login)
+    return render_template('login.html')
 
 
 def is_logged_in():

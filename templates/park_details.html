@@ -7,10 +7,22 @@
 
 <div id="park-info">
     <h2>Park Information:</h2>
-    {% for state in park.states %}
     {{park.park_name}}<br />
-    State Location: {{state.state_code}}<br />
-    {% endfor %}
+    State Location: 
+
+    {% for state in park.states %}
+    
+    {% if state == park.states|last %}
+    {{state.state_code}}
+
+    {% elif park.states|length > 1 %}
+    {{state.state_code}},
+    
+    {% else %}
+    {{state.state_code}}
+
+    {% endif %}
+    {% endfor %}<br />
     <a href={{park.siteURL}}>Official Page</a>
 </div>
 
@@ -33,7 +45,7 @@
 
 
 
-
+<!-- and not last state then add comma -->
 
 <!-- javascript for adding activity to a bucketlist 
     and maybe the search bar stuff next week -->

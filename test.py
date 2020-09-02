@@ -2,10 +2,10 @@
 
 from unittest import TestCase
 from server import app  
-from model import connect_to_db #db, example_data
+from model import connect_to_db, db #, User #, example_data
 from flask import session
 
-#ask for clarification on the db and example data 
+
 
 
 class FlaskTestsBasics(TestCase):
@@ -26,62 +26,43 @@ class FlaskTestsBasics(TestCase):
 
         result = self.client.get("/")
         self.assertIn(b"Welcome", result.data)
+    
 
-#do i need a teardown here? 
+    # def tearDown(self):
+    #     """Do this at the end of every test."""
 
-#do i need a setup here? 
+    #     db.session.remove()
+    #     db.drop_all()
+    #     db.engine.dispose()
+
+
+
+    # def setUp(self):
+    #     """Code to run before every test."""
+
+    #     self.client = app.test_client()
+    #     app.config['TESTING'] = True
+
+
     def test_login(self):
         """Test login page."""
 
         result = self.client.post("/login", 
-                                data={"email":"tammy.walsh@hotmail.com", "password":"wait"}, 
+                                data={"email":"marissaeaguilera@gmail.com", "password":"hurry"}, 
                                 follow_redirects=True)
+
+        # print(User.query.first())
         self.assertIn(b"You are a valued user", result.data)
-
-#do i need a tear down here? 
-
+        #doesn't work 
 
 
+    # def tearDown(self):
+    #     """Do this at the end of every test."""
 
-
-class FlaskTestsDatabase(TestCase):
-    """Flask tests that use the database."""
-
-
-    def setUp(self):
-        """Code to run before every test."""
-
-        self.client = app.test_client()
-        app.config['TESTING'] = True
-
-        # Connect to test database
-        connect_to_db(app, "postgresql://npsdb")
-
-        # Create tables and add sample data
-        db.create_all()
-        example_data()
-
-
-    def tearDown(self):
-        """Do at end of every test."""
-
-    db.session.remove()
-    db.drop_all()
-    db.engine.dispose()
-
-
-    def test_parks_list(self):
-        """Test parks page."""
-
-    result = self.client.get("/parks")
-    self.assertIn(b"Parks Working", result.data)
-
-
-    def test_park_details(self):
-        """Test park details page."""
-
-    result = self.client.get("/parks/<park_id>")
-    self.assertIn(b"Park Details Working", result.data)
+    #     db.session.remove()
+    #     db.drop_all()
+    #     db.engine.dispose()
+    
 
 
 
@@ -89,11 +70,62 @@ class FlaskTestsDatabase(TestCase):
 
 
 
+# class FlaskTestsDatabase(TestCase):
+#     """Flask tests that use the database."""
+
+
+#     def setUp(self):
+#         """Code to run before every test."""
+
+#         self.client = app.test_client()
+#         app.config['TESTING'] = True
+
+#         # Connect to test database
+#         connect_to_db(app, "postgresql://npsdb")
+
+#         # Create tables and add sample data
+#         db.create_all()
+#         example_data()
+
+
+#     def tearDown(self):
+#         """Do at end of every test."""
+
+#     db.session.remove()
+#     db.drop_all()
+#     db.engine.dispose()
+
+
+#     def test_parks_list(self):
+#         """Test parks page."""
+
+#     result = self.client.get("/parks")
+#     self.assertIn(b"Parks Working", result.data)
+
+
+#     def test_park_details(self):
+#         """Test park details page."""
+
+#     result = self.client.get("/parks/<park_id>")
+#     self.assertIn(b"Park Details Working", result.data)
 
 
 
 
 
+
+
+
+#QUESTIONS
+#do i need example data for testing? 
+#test login doesnt work 
+#do i need to have a set up and tear down wrapping each function 
+
+
+#test parks routes 
+#activities available route 
+# test create bucketlist and verify thing were added 
+#run tests to see that things fail correctly 
 
 
 
