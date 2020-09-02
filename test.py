@@ -117,9 +117,10 @@ class FlaskTestsBasics(TestCase):
 
 
 #QUESTIONS
-#do i need example data for testing? 
+#do i need example data for testing?  yes need example data 
 #test login doesnt work 
-#do i need to have a set up and tear down wrapping each function 
+#do i need to have a set up and tear down wrapping each function - only need both once 
+
 
 
 #test parks routes 

@@ -109,9 +109,9 @@ bucketlist = crud.create_bucketlist(user_id, park_id)
 bucketlist_id = bucketlist.bucketlist_id
 activity_id = db_activity.activity_id
 
-# date_string = input('Enter a date (i.e. 8 September, 2020)')
-# order = datetime.strptime(date_string, '%d %B, %Y')
-order = datetime.now()
+date_string = input('Enter a date in MM/DD/YYYY format')
+order = datetime.strptime(date_string, '%d %B, %Y')
+# order = datetime.now()
 
 bucektlistitem = crud.create_bucketlist_item(bucketlist_id, 
                                 activity_id, 

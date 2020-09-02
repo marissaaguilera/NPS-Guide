@@ -130,16 +130,16 @@ def all_parks():
 
 
 
-@app.route('/search-parks', methods=['GET'])
-def search_parks(park_id):
-    """Using the search bar to go to a park park."""
+# @app.route('/search-parks', methods=['GET'])
+# def search_parks(park_id):
+#     """Using the search bar to go to a park park."""
 
-    park_id = request.form.get('park_id')
-    print('>>>>>>>>>>>>>HERE', park_id) 
+#     park_id = request.form.get('park_id')
+#     print('>>>>>>>>>>>>>HERE', park_id) 
 
-    # park_id = crud.get_park_by_id(park_id)
+#     # park_id = crud.get_park_by_id(park_id)
 
-    return redirect(f'/parks/{park_id}')
+#     return redirect(f'/parks/{park_id}')
 
 
 #post request to server when i want to change something 
@@ -175,9 +175,11 @@ def user_profile(user_id):
     """Shows a users profile with all their bucketlists."""
 
     user = crud.get_user_by_id(user_id)
+    bucketlists = crud.get_bucketlist_by_user(user_id)
+
   
 
-    return render_template('user_profile.html', user=user)
+    return render_template('user_profile.html', user=user, bucketlists=bucketlists)
 
 
 
@@ -196,13 +198,15 @@ def adding_to_a_bucketlist():
     """Creates a new bucketlist for a user."""
 
     user_id = session['user_id'] 
-    print('>>>>>>>>>>>>>', user_id) #get user that is in session
 
     park_id = request.form.get('park_id')
-    print('>>>>>>>>>>>>>', park_id) #get park that is in hidden input 
+    #get park that is in hidden input 
 
     activity_list = request.form.getlist('activities')
-    print('>>>>>>>>>>>>', activity_list)
+
+    saved_dates = request.form.get('activity_date')
+    print('>>>>>>>>>>>', saved_dates)
+
 
     #checking if user already has a bucketist with that park id 
     bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
@@ -211,7 +215,6 @@ def adding_to_a_bucketlist():
         bucketlist = crud.create_bucketlist(user_id, park_id)
         print('>>>>>>>>no bucketlist found ') 
 
-
     for activity_id in activity_list:
         # int(activity_list[activity_id])
         new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
@@ -219,7 +222,29 @@ def adding_to_a_bucketlist():
     
     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
 
-#make sure that activities the user selected shows up on the user profile page 
+
+
+
+# @app.route('/saving-order', methods=['GET', 'POST'])
+# def saving_order():
+#     """Saves the date that a user enters to complete activity."""
+
+#     user_id = session['user_id']
+#     print('>>>>>>>>>>>>',user_id)
+
+#     saved_dates = request.form.get('activity-date')
+#     print('>>>>>>>>>>>', saved_dates)
+
+#     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
+
+
+#maybe this route can be combining with one above? 
+
+# javascript search for javascript and jquery 
+# input and then pull it out
+#see what info is given on the backend 
+#convert to python date object to save to database 
+#
 
 
 
