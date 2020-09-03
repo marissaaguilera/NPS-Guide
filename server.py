@@ -191,9 +191,12 @@ def get_specific_bucketlist(bucketlist_id):
 
     return render_template('bucketlist_details.html', bucketlist=bucketlist)
 
+
+
+
 @app.route('/profile/bucketlists/<bucketlist_id>')
 def select_bucketlist_from_profile(bucketlist_id):
-    """Shows a user the details for a specific bucketlist."""
+    """A user can access a specific bucketlist from a link in their profile."""
 
     bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
 
@@ -245,6 +248,9 @@ def adding_to_a_bucketlist():
 #     print('>>>>>>>>>>>', saved_dates)
 
 #     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
+
+
+
 
 
 #maybe this route can be combining with one above? 
