@@ -2,12 +2,18 @@
 
 
 
+/* Body of Site */
+body {
+	background-color:#bac964;
+}
+
+
 /* Navbar Styling */
-ul {
+/* ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-  }
+  } */
 
 /* /#navbar-links {
 	margin: 10px;
@@ -33,10 +39,10 @@ ul {
 } */
 
 
-#navbar-item {
+/* #navbar-item {
 	background-color: black;
 	color: white;
-}
+} */
 
 /* #navbar-links a:hover {
 	background-color:#009; 
@@ -44,9 +50,3 @@ ul {
 }  */
 
 
-/* 
-#drop-search-park {
-	color: blue;
-	max-height:250px;/* you can change as you need it */
-	overflow:scroll;/* to get scroll */
- } */

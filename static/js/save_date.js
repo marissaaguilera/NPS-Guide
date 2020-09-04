@@ -7,10 +7,22 @@ $('.bucketlist-save-form').on('submit', (evt) =>{
     evt.preventDefault();
     const formValues = $(evt.target).serialize();
     $.post(`/saving-order`, formValues, (res) => {
-        alert(res);
+        alert(res.date);
+        console.log(res.status, res.date)
 
     });
 }); 
+
+//once i have current date column then update the specific bucketlist item
+//insert it on page and make sure it shows 
+
+
+
+
+
+
+//res.date accessing info on the response from server. 
+
     
     
     //serialize turns a form into a JS object that is ready to be handed off in AJAX

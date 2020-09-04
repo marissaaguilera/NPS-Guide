@@ -205,7 +205,7 @@ def select_bucketlist_from_profile(bucketlist_id):
     bucketlist = crud.get_bucketlist_by_id(bucketlist_id)
 
     return render_template('bucketlist_details.html', bucketlist=bucketlist)
-
+#FIX THIS LATER 
 
 
 
@@ -227,28 +227,10 @@ def adding_to_a_bucketlist():
         bucketlist = crud.create_bucketlist(user_id, park_id)
         # print('>>>>>>>>no bucketlist found ') 
     for activity_id in activity_list:
+#have a method to get an item by bucketlist id and activity id 
         new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
 
-#if activity id in bucketlist 
-
-
-
-    # else:
-
-    #     for activity_id in activity_list:
-    #         bucketlist_items = bucketlist.bucketlistitems
-    #         print('>>>>>>>>', bucketlist_items)
-    #         for item in bucketlist_items: 
-    #             print(item.activity_id)#printing 1
-    #             activity_id = int(activity_id)
-    #             print(activity_id)
-    #             if activity_id == item.activity_id:
-    #                 print("TRUE")
-        
-    #             else:
-    #         # int(activity_list[activity_id])            
-    #                 new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
 #get list of activities and compare my activity id in the bucketlistitems 
     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
@@ -264,14 +246,28 @@ def saving_order():
     user_id = session['user_id']
     print(request.form) #dictionary object 
 
-
-    saved_dates = request.form.get('activity-date')
-    print('>>>>>>>>>>>', saved_dates)
-
+    #update database 
     # updated_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
+    order_date = request.form.get('order-date')
+    item_id = request.form.get('item_id')
 
-    return 'Successful!'
+    item = crud.update_bucketlistitem_order(item_id, order_date)
+    # item.order_date.strptime('%m/%d/%Y')
+
+    #crud function for updating bucketlist order (bucketlistitemid)
+    #update its order value and add and commit that change 
+
+
+
+    # saved_dates = request.form.get('activity-date')
+    # print('>>>>>>>>>>>', saved_dates)
+
+    # saved_dates = {
+
+    # }
+    return jsonify({"status":"Successful", "date": item.order.strftime('%m/%d/%Y')})
+    # return 'Successful!'
     #get it to update the database 
     #update date 
 
@@ -301,3 +297,12 @@ if __name__ == '__main__':
 
 #Post is used to send data 
 #Get is used to request data 
+
+        # {% if bucketlist == None %}
+        # You currently have no bucketlists created. Check out the 'Explore Parks' page to get started.
+        # {% else %}
+
+                # {% endif %}
+
+
+#additional column for current date

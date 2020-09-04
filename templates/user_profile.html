@@ -21,13 +21,10 @@
         <br /><h3>All Bucketlists</h3>
 
         {% for bucketlist in bucketlists %}
-        {% if bucketlist == None %}
-        You currently have no bucketlists created. Check out the 'Explore Parks' page to get started.
-        {% else %}
+
         <ul>
-        <li><a href="bucketlists/{{bucketlist.bucketlist_id}}">{{ bucketlist.park.park_name }}</a></li>
+        <li><a href="/bucketlists/{{bucketlist.bucketlist_id}}">{{ bucketlist.park.park_name }}</a></li>
         </ul>
-        {% endif %}
         {% endfor %}
     </div>
 </body>  

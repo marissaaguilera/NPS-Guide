@@ -251,16 +251,27 @@ def get_bucketlist_by_park_and_user(park_id, user_id):
 def create_bucketlist_item(bucketlist_id, activity_id, order):
     """Create and return a bucketlist item."""
 
-    bucketlistitem = BucketlistItem(activity_id=activity_id, 
-                                    bucketlist_id=bucketlist_id, 
-                                    order=order)
 
-                                   
+    #won't tell me why im adding, maybe fix later 
+    bucketlistitem = get_bucketlist_item_by_activity_and_bucketlist(activity_id=activity_id, bucketlist_id=bucketlist_id)
 
-    db.session.add(bucketlistitem)
-    db.session.commit()
+    if bucketlistitem is None: 
 
+        bucketlistitem = BucketlistItem(activity_id=activity_id, 
+                                        bucketlist_id=bucketlist_id, 
+                                        order=order)
+        db.session.add(bucketlistitem)
+        db.session.commit()
+    
     return bucketlistitem
+
+
+
+def get_bucketlist_item_by_activity_and_bucketlist(activity_id, bucketlist_id):
+
+    return BucketlistItem.query.filter(BucketlistItem.activity_id == activity_id, BucketlistItem.bucketlist_id == bucketlist_id).first()
+
+
 
 def get_bucketlist_item_by_id(item_id):
     """Return a bucketlistitem by the primary key."""
@@ -268,13 +279,31 @@ def get_bucketlist_item_by_id(item_id):
     return BucketlistItem.query.get(item_id)
 
 
-def get_all_bucketlist_items(park_id):
-    """Returns all bucketlistitems by park."""
+
+
+def update_bucketlistitem_order(item_id, order):
+
+
+    item = get_bucketlist_item_by_id(item_id)
+
+    item.order = order
+    db.session.add(item)
+    db.session.commit()
+
+    return item
+
+
+
+
+
+
+# def get_all_bucketlist_items(park_id):
+#     """Returns all bucketlistitems by park."""
     
-    return BucketlistItem.query.filter(BucketlistItems.bucketlist.park.park_id)
+#     return BucketlistItem.query.filter(BucketlistItems.bucketlist.park.park_id)
 
 
-
+# 2020-09-17
 
 if __name__ == '__main__':
     from server import app
