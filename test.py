@@ -26,22 +26,6 @@ class FlaskTestsBasics(TestCase):
 
         result = self.client.get("/")
         self.assertIn(b"Welcome", result.data)
-    
-
-    # def tearDown(self):
-    #     """Do this at the end of every test."""
-
-    #     db.session.remove()
-    #     db.drop_all()
-    #     db.engine.dispose()
-
-
-
-    # def setUp(self):
-    #     """Code to run before every test."""
-
-    #     self.client = app.test_client()
-    #     app.config['TESTING'] = True
 
 
     def test_login(self):
@@ -51,20 +35,7 @@ class FlaskTestsBasics(TestCase):
                                 data={"email":"marissaeaguilera@gmail.com", "password":"hurry"}, 
                                 follow_redirects=True)
 
-        # print(User.query.first())
         self.assertIn(b"You are a valued user", result.data)
-        #doesn't work 
-
-
-    # def tearDown(self):
-    #     """Do this at the end of every test."""
-
-    #     db.session.remove()
-    #     db.drop_all()
-    #     db.engine.dispose()
-    
-
-
 
 
 
@@ -85,7 +56,7 @@ class FlaskTestsBasics(TestCase):
 
 #         # Create tables and add sample data
 #         db.create_all()
-#         example_data()
+#         example_data() #need to add this
 
 
 #     def tearDown(self):
@@ -100,14 +71,14 @@ class FlaskTestsBasics(TestCase):
 #         """Test parks page."""
 
 #     result = self.client.get("/parks")
-#     self.assertIn(b"Parks Working", result.data)
+#     self.assertIn(b"Parks Working", result.data) #change this
 
 
 #     def test_park_details(self):
 #         """Test park details page."""
 
 #     result = self.client.get("/parks/<park_id>")
-#     self.assertIn(b"Park Details Working", result.data)
+#     self.assertIn(b"Park Details Working", result.data) #change this
 
 
 

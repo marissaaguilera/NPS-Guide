@@ -169,7 +169,7 @@ class BucketlistItem(db.Model):
 
 
     def __repr__(self):
-        return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id}>'
+        return f'<Bucketlist Items item_id={self.item_id} bucketlist_id={self.bucketlist_id} activity_id={self.activity_id}>'
 
 
 

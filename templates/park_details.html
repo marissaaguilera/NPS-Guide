@@ -27,11 +27,13 @@
     <a href={{park.siteURL}}>Official Page</a>
 </div>
 
+
 <div id="act-checkboxes">
     <br /><h3>Activities Available:</h3>
     <p>Note: Check your preferred activities and add them to your bucketlist!</p>
     <form action="/adding-activities" method="POST">
         <input type="hidden" value={{park.park_id}} name="park_id">
+ 
         {% for activity in park.activities %}
         <input type="checkbox" value={{activity.activity_id}} name="activities">
         <label>{{ activity.activity_name }}</label><br />

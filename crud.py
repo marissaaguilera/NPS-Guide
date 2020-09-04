@@ -244,7 +244,7 @@ def get_bucketlist_by_park_and_user(park_id, user_id):
     return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).first()
 
 
-
+# def get_bucketlistitems_in_bucketlist():
 
 
 #BucketlistItem
@@ -261,6 +261,18 @@ def create_bucketlist_item(bucketlist_id, activity_id, order):
     db.session.commit()
 
     return bucketlistitem
+
+def get_bucketlist_item_by_id(item_id):
+    """Return a bucketlistitem by the primary key."""
+
+    return BucketlistItem.query.get(item_id)
+
+
+def get_all_bucketlist_items(park_id):
+    """Returns all bucketlistitems by park."""
+    
+    return BucketlistItem.query.filter(BucketlistItems.bucketlist.park.park_id)
+
 
 
 

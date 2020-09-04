@@ -8,16 +8,17 @@
 
 <h1>Bucketlist Details Page</h1>
 
-<!-- need to print out the park name -->
+
+
+
 
 <!-- 
     make sure it doesn't duplicate 
     check that activities arent already associated with bucketlist  -->
-    
-    <!-- access the relationship to check if the activity was already there  -->
+
     
 <div id="single-bucketlist-table">  
-    <table action="/adding-activities" method="POST">
+    <table>
         <thead>
             <h2>{{bucketlist.park.park_name}}</h2>
             <tr>
@@ -26,14 +27,18 @@
             </tr>
         </thead>
         <tbody>
-            {% for activity in bucketlist.activities %}
-            <tr>
-                <td>{{ activity.activity_name }}</td>
-                <td><input type="date" name="activity_date" min="2020-09-01" required autofocus></td>
+                {% for bucketlistitem in bucketlist.bucketlistitems %} 
+
+            <form class="bucketlist-save-form"> 
+                <tr>
+                    <td>{{ bucketlistitem.activity.activity_name}}</td>
+                    <td><input type="date" name="order-date" min="2020-09-01" required autofocus></td> 
+                    <td><button type="submit" id="save-order-btn">Save</button></td>
+                    <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input>
+                </tr>
+            </form>
                 {% endfor %}
-            </tr>
-    </tbody>
-</table>
-<br /><button type="submit" id="save-order-btn">Save</button>
+        </tbody>
+    </table>
 </div>
 {% endblock %}

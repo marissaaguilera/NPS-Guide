@@ -89,7 +89,9 @@ def register():
             flash('Cannot create an account with that email. Please try again.') #not working 
         else:
             crud.create_user(fname, lname, email, password)
-            flash('Account created.') #not working 
+            session['user'] = email
+            session['user_id'] = user
+            flash('Account created.') 
             return redirect('/parks') 
     else:
 
@@ -176,6 +178,8 @@ def user_profile(user_id):
 
     user = crud.get_user_by_id(user_id)
     bucketlists = crud.get_bucketlist_by_user(user_id)
+    # bucketlistitem = crud.get_bucketlist_item_by_id(bucketlistitem_id)
+
 
   
 
@@ -210,56 +214,83 @@ def adding_to_a_bucketlist():
     """Creates a new bucketlist for a user."""
 
     user_id = session['user_id'] 
-
     park_id = request.form.get('park_id')
-    #get park that is in hidden input 
-
     activity_list = request.form.getlist('activities')
 
-    saved_dates = request.form.get('activity_date')
-    print('>>>>>>>>>>>', saved_dates)
+    if activity_list == []:
+        flash('No activity was selected. Please try again.')
+        return redirect(f'parks/{park_id}')
 
-
-    #checking if user already has a bucketist with that park id 
     bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
 
     if not bucketlist: 
         bucketlist = crud.create_bucketlist(user_id, park_id)
-        print('>>>>>>>>no bucketlist found ') 
-
+        # print('>>>>>>>>no bucketlist found ') 
     for activity_id in activity_list:
-        # int(activity_list[activity_id])
         new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
 
-    
+
+#if activity id in bucketlist 
+
+
+
+    # else:
+
+    #     for activity_id in activity_list:
+    #         bucketlist_items = bucketlist.bucketlistitems
+    #         print('>>>>>>>>', bucketlist_items)
+    #         for item in bucketlist_items: 
+    #             print(item.activity_id)#printing 1
+    #             activity_id = int(activity_id)
+    #             print(activity_id)
+    #             if activity_id == item.activity_id:
+    #                 print("TRUE")
+        
+    #             else:
+    #         # int(activity_list[activity_id])            
+    #                 new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
+
+#get list of activities and compare my activity id in the bucketlistitems 
     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
 
 
 
 
-# @app.route('/saving-order', methods=['GET', 'POST'])
-# def saving_order():
-#     """Saves the date that a user enters to complete activity."""
-
-#     user_id = session['user_id']
-#     print('>>>>>>>>>>>>',user_id)
-
-#     saved_dates = request.form.get('activity-date')
-#     print('>>>>>>>>>>>', saved_dates)
-
-#     return redirect(f'bucketlists/{bucketlist.bucketlist_id}')
+@app.route('/saving-order', methods=['GET', 'POST'])
+def saving_order():
+    """Saves the date that a user enters to complete activity."""
 
 
+    user_id = session['user_id']
+    print(request.form) #dictionary object 
+
+
+    saved_dates = request.form.get('activity-date')
+    print('>>>>>>>>>>>', saved_dates)
+
+    # updated_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
+
+
+    return 'Successful!'
+    #get it to update the database 
+    #update date 
+
+    #if bucketlist
+
+
+#info is sent to server and i need to access info to update database 
 
 
 
-#maybe this route can be combining with one above? 
+# PSEUDOCODE FOR SAVING DATES
+# 1. Create a route for saving the dates or it can be with adding-activities route 
+# 2. Create a variable that requests the dates from the html form 
+# 3.  Use one of my crud functions to save the order 
+# 4. Return to bucketlist details page/ return to same page 
+#     1. Flash message ‘your dates have been saved’
 
-# javascript search for javascript and jquery 
-# input and then pull it out
-#see what info is given on the backend 
-#convert to python date object to save to database 
-#
+#submit request to js and callback fucntion 
+#route will need to return json string 
 
 
 
