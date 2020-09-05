@@ -6,18 +6,28 @@
 
 
 
-<div id="registration-div">
-    <h2>Register</h2>
+<div id="registration-div" class="col-3">
     <form action="/register" method="POST">
-        <label for="fname">First Name</label>
-        <input type="text" placeholder="First Name" name="fname" required autofocus>
-        <br/><label for="lname">Last Name</label>
-        <input type="text" placeholder="Last Name" name="lname" required autofocus>
-        <br/><label for="email">Email</label>
-        <input type="text" placeholder="Email" name="email" required auttofocus>
-        <br/><label for="password">Password</label>
-        <input type="password" placeholder="Password" name="password" required autofocus>
-        <br/><button type="submit">Register</button>
+        <div id="title-register">
+            <h2>Register</h2>
+        </div>
+        <div class="form-group">
+            <label for="fname" class="sr-only">First Name</label>
+            <input type="text" class="form-control input-lg" placeholder="First Name" name="fname" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="lname" class="sr-only">Last Name</label>
+            <input type="text" class="form-control input-lg" placeholder="Last Name" name="lname" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="email" class="sr-only">Email</label>
+            <input type="text" class="form-control input-lg" placeholder="Email" name="email" required auttofocus>
+        </div>
+        <div class="form-group">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" class="form-control input-lg" placeholder="Password" name="password" required autofocus>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block register-submit">Register</button>
     </form>
 </div>
 
