@@ -4,11 +4,10 @@
         
         <title>{% block title %}National Park Service Guide{% endblock %}</title>
         
-        <!-- Load my stylesheet -->
-        <link href="/static/css/styles.css" rel="stylesheet" >
-        
         <!-- Load bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- Load my stylesheet -->
+        <link href="/static/css/styles.css" rel="stylesheet" >
         
         <!-- Load font awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -27,57 +26,56 @@
 
        <!-- Navbar  -->
 
-        <div id="navbar-div">
-            <!-- Navbar collapsed -->
-            <nav id="navbar" class="navbar navbar-expand-lg navbar-light navbar-fixed-top justify-content-between"> 
-                <!-- add style in tag -->
-                <a class="navbar-brand" href="/" >
-                  <!-- Logo -->
-                  <img src="/static/imgs/circle-cropped2.png" width="60" height="60" class="d-inline-block align-middle" alt=""><b>NPS Guide</b></a>
 
+    <!-- Navbar collapsed -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light"> 
+        <!-- navbar-fixed-top justify-content-between -->
+        <!-- Logo -->
+        <a class="navbar-brand" href="/" >
+            <img src="/static/imgs/circle-cropped2.png" width="60" height="60" class="d-inline-block align-middle" alt=""><b>NPS Guide</b></a>
 
-                <!-- <a class="navbar-brand" href="/"><b>NPS Guide</b></a> -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
+        <!-- <a class="navbar-brand" href="/"><b>NPS Guide</b></a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Navbar nav-links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">  
-                    <div class="navbar-nav justify-content-between">
-                        {% if session.get('user') %}
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                            <a href="/parks" class="nav-link" href="#">Explore Parks</a>
-                            </li>&nbsp;
-                            <!-- add styles to the a tags for colors  -->
+    <!-- Navbar nav-links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">  
+            <div class="navbar-nav justify-content-between">
+                {% if session.get('user') %}
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                    <a href="/parks" class="nav-link" href="#">Explore Parks</a>
+                    </li>&nbsp;
+                    <!-- add styles to the a tags for colors  -->
 
-                            <li class="nav-item">
-                            <a href="/profile/{{session.get('user_id')}}" class="nav-link" href="#">My Profile</a>
-                            </li>&nbsp;
+                    <li class="nav-item">
+                    <a href="/profile/{{session.get('user_id')}}" class="nav-link" href="#">My Profile</a>
+                    </li>&nbsp;
 
-                            <li class="nav-item">
-                            <a href="/logout" class="nav-link" href="#">Logout</a>
-                            </li>&nbsp;
-                        </ul>
-                        {% else %}
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                            <a href="/register" class="nav-link" href="#">Register</a>
-                            </li>&nbsp;
+                    <li class="nav-item">
+                    <a href="/logout" class="nav-link" href="#">Logout</a>
+                    </li>&nbsp;
+                </ul>
+                {% else %}
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                    <a href="/register" class="nav-link" href="#">Register</a>
+                    </li>&nbsp;
 
-                            <li class="nav-item">
-                            <a href="/login" class="nav-link" href="#">Log In</a>
-                            </li>&nbsp;
-                        </ul>
-                        {% endif %}
-                </div>
-            </nav>
+                    <li class="nav-item">
+                    <a href="/login" class="nav-link" href="#">Log In</a>
+                    </li>&nbsp;
+                </ul>
+                {% endif %}
         </div>
+    </nav>
+
         {% block head %}
         {% endblock %}
 
     </head>
-    <body>
+    <body style="background-color:#f7fbe1;">
         {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
 
     <div class="container-fluid">
@@ -88,15 +86,15 @@
     {% block body %}
     {% endblock %}
     </div>
-        <footer>Discover America's Story: The National Parks</footer>
-
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/static/js/save_date.js"></script>
-
+    
+    <footer>Discover America's Story: The National Parks</footer>
     </body>
 </html>
 

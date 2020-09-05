@@ -251,7 +251,6 @@ def get_bucketlist_by_park_and_user(park_id, user_id):
 def create_bucketlist_item(bucketlist_id, activity_id, order):
     """Create and return a bucketlist item."""
 
-
     #won't tell me why im adding, maybe fix later 
     bucketlistitem = get_bucketlist_item_by_activity_and_bucketlist(activity_id=activity_id, bucketlist_id=bucketlist_id)
 
@@ -292,18 +291,6 @@ def update_bucketlistitem_order(item_id, order):
 
     return item
 
-
-
-
-
-
-# def get_all_bucketlist_items(park_id):
-#     """Returns all bucketlistitems by park."""
-    
-#     return BucketlistItem.query.filter(BucketlistItems.bucketlist.park.park_id)
-
-
-# 2020-09-17
 
 if __name__ == '__main__':
     from server import app

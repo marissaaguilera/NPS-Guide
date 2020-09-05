@@ -1,11 +1,25 @@
-/* Style sheet for NPS GUide. */
+/* Style sheet for NPS Guide. */
+
+
+
+/* General Layout */
+
+
+.navbar-brand {
+	font-size: 40px;
+	margin: 0px;
+}
+
+
+/* .bg-light {
+	background-color: #77c9d4;
+} */
+
 
 
 
 /* Body of Site */
-body {
-	background-color:#bac964;
-}
+
 
 
 /* Navbar Styling */
