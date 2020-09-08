@@ -23,22 +23,30 @@
             <h2>{{bucketlist.park.park_name}} Bucketlist</h2>
             <tr>
                 <th scope="col">Activity</th>
+                <th scope="col">Current Date</th> 
                 <th scope="col">Planned Date</th>
             </tr>
         </thead>
         <tbody>
                 {% for bucketlistitem in bucketlist.bucketlistitems %} 
 
-            <form class="bucketlist-save-form"> 
                 <tr>
                     <td>{{ bucketlistitem.activity.activity_name}}</td>
-                    <td><input type="date" name="order-date" min="2020-09-01" required autofocus></td> 
-                    <td><button type="submit" id="save-order-btn">Save</button></td>
-                    <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input>
+                    {% if bucketlistitem.order != None %} 
+                        <td id={{bucketlistitem.item_id}}>{{ bucketlistitem.order.strftime('%m/%d/%Y')}}</td>
+                    {% endif %}
+                    <!-- showing date above, choosing date below  -->
+                    
+                    <td><input id="date-{{bucketlistitem.item_id}}" type="date" name="order-date" min="2020-09-01" required autofocus></td> 
+                    <td><button type="submit" class="save-order-btn" value={{bucketlistitem.item_id}}>Save</button></td>
+                    <!-- <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input> -->
                 </tr>
-            </form>
+                
                 {% endfor %}
         </tbody>
     </table>
 </div>
+<!-- 
+<script src="/static/js/save_date.js"></script> -->
+
 {% endblock %}

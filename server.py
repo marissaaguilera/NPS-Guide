@@ -249,7 +249,10 @@ def saving_order():
 
 
 
-    return jsonify({"status":"Successful", "date": item.order.strftime('%m/%d/%Y')})
+    return jsonify({"status":"Successful", "date": item.order.strftime('%m/%d/%Y'), "item_id" : item.item_id})
+
+
+
 
 
 if __name__ == '__main__':
