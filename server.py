@@ -241,7 +241,6 @@ def saving_order():
 
 
     user_id = session['user_id']
-    # print(request.form) #dictionary object 
 
     order_date = request.form.get('order-date')
     item_id = request.form.get('item_id')
@@ -258,10 +257,13 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
 
-#Post is used to send data 
-#Get is used to request data 
 
 
 #additional column for current date
     #crud function for updating bucketlist order (bucketlistitemid)
     #update its order value and add and commit that change 
+
+
+
+#Post is used to send data 
+#Get is used to request data 

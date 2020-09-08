@@ -33,16 +33,15 @@ class Park(db.Model):
 
     park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     park_name = db.Column(db.String, nullable=False)
-    designation = db.Column(db.String)  #designation (ntl park, ntl monument, ntl rec area)
+    designation = db.Column(db.String) 
     siteURL = db.Column(db.String)
 
-    # bucketlists = db.relationship('Bucketlist')
     states = db.relationship('State', secondary="parkstates")
     activities = db.relationship('Activity', secondary="parkactivities")
     parkstate = db.relationship('ParkState')
     bucketlists = db.relationship('Bucketlist')
 
-    #check where the plurals 
+
 
     def __repr__(self):
         return f'<Park park_id={self.park_id} park_name={self.park_name}>'
@@ -62,9 +61,6 @@ class State(db.Model):
   
     def __repr__(self):
         return f'<State state_id={self.state_id} state_code={self.state_code}>'
-
-#error; column has to be unique or else db won't know what to use, 
-# foreign key should always be primary key of that table. 
 
 
 
@@ -98,23 +94,16 @@ class ParkActivity(db.Model):
     park = db.relationship('Park')
     activity = db.relationship('Activity')
   
-    #park to park activity is one to many 
-    #activity to park activity is one to many 
-
-    #relating a one single activity to one single park 
   
     def __repr__(self):
         return f'<Park Activity activity_id={self.activity_id} park_id={self.park_id}>'
 
-
-#remember the one to many and many to many relationships 
 
 
 class ParkState(db.Model):
     """A park and state relationship."""
 
     __tablename__ = 'parkstates'
-    #park_state place underscore in between 
 
     parkstate_id = db.Column(db.Integer, autoincrement=True, primary_key=True) #maybe don't need this 
     state_id = db.Column(db.Integer, db.ForeignKey('states.state_id'), nullable=False)
@@ -128,9 +117,9 @@ class ParkState(db.Model):
         return f'<Park State state_id={self.state_id} park_id={self.park_id}>'
 
 
+
 class Bucketlist(db.Model):
     """ A user's bucketlist."""
-    #bucketlist is per park / different lists 
 
     __tablename__ = 'bucketlists'
 
@@ -143,12 +132,11 @@ class Bucketlist(db.Model):
     bucketlistitems = db.relationship('BucketlistItem')
     park = db.relationship('Park')
     activities = db.relationship('Activity', secondary='bucketlistitems')
-#one bucketlist will have activies thorugh bucketlititems table 
-    #bucketlistitem.park_activity.activity.activity_name 
 
 
     def __repr__(self):
         return f'<Bucketlist bucketlist_id={self.bucketlist_id} user_id={self.user_id}>'
+
 
 
 class BucketlistItem(db.Model):
@@ -160,8 +148,8 @@ class BucketlistItem(db.Model):
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
     order = db.Column(db.DateTime, nullable=True)
-    #one bucketlist item is associated with one 
-    #related to a single activity and a single park through park activity 
+    # current_date = db.Column(db.DateTime, nullable=True)
+
     
     bucketlists = db.relationship('Bucketlist')
     park = db.relationship('Park', secondary="bucketlists")

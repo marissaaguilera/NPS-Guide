@@ -78,7 +78,7 @@
     <body>
         {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
 
-    <div class="container-fluid foo">
+    <div class="container-fluid foo" id="flash-messages">
         {% for message in get_flashed_messages() %}
         <div class="alert alert-container alert-info">{{ message }}</div>
         {% endfor %}
@@ -89,14 +89,14 @@
 
 
     <!-- Footer -->
-    <footer class="page-footer">
+    <!-- <footer class="page-footer"> -->
 
         <!-- Copyright -->
-        <div class="footer-phrase text-center py-3">Discover America's Story: The National Parks
+        <!-- <div class="footer-phrase text-center py-3">Discover America's Story: The National Parks -->
         <!-- <a href="https://mdbootstrap.com/"> MDBootstrap.com</a> -->
-        </div>
+        <!-- </div>
   
-    </footer>
+    </footer> -->
     
     </body>
 </html>
