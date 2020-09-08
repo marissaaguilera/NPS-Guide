@@ -4,21 +4,78 @@
 
 /* General Layout */
 
+body {
+	background-color:#f1f1e8;
+}
 
 .navbar-brand {
-	font-size: 40px;
+	font-size: 30px;
 	margin: 0px;
 }
 
-
-/* .bg-light {
-	background-color: #77c9d4;
-} */
-
+.bg-light {
+	background-color: red;
+  }
 
 
+  /* Login Page */
 
-/* Body of Site */
+  .login-submit {
+	background-color: #bfdcae;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	width: 300px;
+  }
+  
+  #login-title {
+	text-align: center;
+	color:#015249;
+  }
+  
+  #login-div {
+	margin-left: 38%;
+  }
+
+
+  /* Register Page  */
+
+  .register-submit {
+	background-color: #bfdcae;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	width: 300px;
+  }
+  /* margin-left: 10%; */
+  
+  #title-register {
+	text-align: center;
+	color:#015249;
+  }
+  
+  #registration-div {
+	margin-left: 38%;
+  }
+
+/* Set a grey background color and center the text of the "sign in" section */
+/* .form-group {
+	background-color: #f1f1f1;
+	text-align: center;
+  } */
+
+
+
+
+
 
 
 

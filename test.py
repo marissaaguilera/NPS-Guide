@@ -40,45 +40,77 @@ class FlaskTestsBasics(TestCase):
 
 
 
-
-# class FlaskTestsDatabase(TestCase):
-#     """Flask tests that use the database."""
-
-
-#     def setUp(self):
-#         """Code to run before every test."""
-
-#         self.client = app.test_client()
-#         app.config['TESTING'] = True
-
-#         # Connect to test database
-#         connect_to_db(app, "postgresql://npsdb")
-
-#         # Create tables and add sample data
-#         db.create_all()
-#         example_data() #need to add this
+class FlaskTestsDatabase(TestCase):
+    """Flask tests that use the database."""
 
 
-#     def tearDown(self):
-#         """Do at end of every test."""
+    def setUp(self):
+        """Code to run before every test."""
 
-#     db.session.remove()
-#     db.drop_all()
-#     db.engine.dispose()
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+        # Connect to test database
+        connect_to_db(app, "postgresql://npsdb")
+
+        # Create tables and add sample data
+        db.create_all()
+        example_data() #need to add this
 
 
-#     def test_parks_list(self):
-#         """Test parks page."""
+    def tearDown(self):
+        """Do at end of every test."""
 
-#     result = self.client.get("/parks")
-#     self.assertIn(b"Parks Working", result.data) #change this
+    db.session.remove()
+    db.drop_all()
+    db.engine.dispose()
 
 
-#     def test_park_details(self):
-#         """Test park details page."""
+    def test_parks_list(self):
+        """Test parks page."""
 
-#     result = self.client.get("/parks/<park_id>")
-#     self.assertIn(b"Park Details Working", result.data) #change this
+    result = self.client.get("/parks")
+    self.assertIn(b"Parks Working", result.data) #change this
+
+
+    def test_park_details(self):
+        """Test park details page."""
+
+    result = self.client.get("/parks/<park_id>")
+    self.assertIn(b"Park Details Working", result.data) #change this
+
+
+
+class FlaskTestsLoggedIn(TestCase):
+    """Flask tests with user logged in to session."""
+
+    def setUp(self):
+        """Stuff to do before every test."""
+
+        app.config['TESTING'] = True
+        app.config['SECRET_KEY'] = 'key'
+        self.client = app.test_client()
+
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess['user_id'] = 1
+
+    def test_parks_page(self):
+        """Test important page."""
+
+        result = self.client.get("/parks")
+        self.assertIn(b"You are a valued user", result.data)
+
+
+# flask test basic tests - test login not working 
+# flask test database - not working due to example data 
+# flask test logged in - not working 
+# flask test logged out
+# flask test log in log out 
+
+
+
+
 
 
 
@@ -102,6 +134,8 @@ class FlaskTestsBasics(TestCase):
 
 
 if __name__ == '__main__':
+    import unittest
+    
     unittest.main()
 
 

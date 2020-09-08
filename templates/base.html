@@ -6,21 +6,21 @@
         
         <!-- Load bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <!-- Load my stylesheet -->
-        <link href="/static/css/styles.css" rel="stylesheet" >
         
         <!-- Load font awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css">
         <link href='http://fonts.googleapis.com/css?family=Raleway:100,700'rel='stylesheet'>
         
+        <!-- Load my stylesheet -->
+        <link rel="stylesheet" href="/static/css/styles.css">
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="/static/js/save_date.js"></script>
 
-        <!-- Favicon links -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/imgs/favicon_package/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/imgs/favicon_package/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/imgs/favicon_package/favicon-16x16.png">
-        <link rel="manifest" href="/static/imgs/favicon_package/site.webmanifest">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -64,7 +64,7 @@
                     </li>&nbsp;
 
                     <li class="nav-item">
-                    <a href="/login" class="nav-link" href="#">Log In</a>
+                    <a href="/login" class="nav-link" href="#">Login</a>
                     </li>&nbsp;
                 </ul>
                 {% endif %}
@@ -75,10 +75,10 @@
         {% endblock %}
 
     </head>
-    <body style="background-color:#f7fbe1;">
+    <body>
         {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
 
-    <div class="container-fluid">
+    <div class="container-fluid foo">
         {% for message in get_flashed_messages() %}
         <div class="alert alert-container alert-info">{{ message }}</div>
         {% endfor %}
@@ -86,15 +86,18 @@
     {% block body %}
     {% endblock %}
     </div>
+
+
+    <!-- Footer -->
+    <footer class="page-footer">
+
+        <!-- Copyright -->
+        <div class="footer-phrase text-center py-3">Discover America's Story: The National Parks
+        <!-- <a href="https://mdbootstrap.com/"> MDBootstrap.com</a> -->
+        </div>
+  
+    </footer>
     
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="/static/js/save_date.js"></script>
-    
-    <footer>Discover America's Story: The National Parks</footer>
     </body>
 </html>
 
