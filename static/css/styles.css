@@ -6,7 +6,7 @@
 
 body {
 	background-color:#f1f1e8;
-	color: #206a5d;
+	color: #335d2d;
 }
 
 
@@ -19,6 +19,7 @@ ul {
 .alert-container {
 text-align: center;
 }
+
 
 
 
@@ -38,78 +39,119 @@ text-align: center;
 	color: white;
 }
 
+.nav-pills .nav-link, .nav-pills .show>.nav-link {
+	color: #f1f1e8;
+  }
 
-
-
-
-
-
-/* Navbar Styling */
-
-
-/* /#navbar-links {
-	margin: 10px;
-	width: 900px;
-	font-family: sans-serif;
-	list-style:none;
+.nav-item {
+	font-size: 20px;
+	text-align: right;
 }
 
-#navbar-links li {
-	display:block;
-	width:120px;
-	float:left;
-	margin-left:2px;
-	border:1px solid #000;
-}
 
-#navbar-links a {
-	display:block;
-	padding:3px;
-	text-decoration:none;
-	background-color:#fff;
-	color:#009;
+
+
+
+/* Login Page */
+
+.login-submit {
+  background-color: #bfdcae;  
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 300px;
+}  
+
+#login-title {
+  text-align: center;  
+  color:#015249;
+  margin-top: 100px
+}  
+
+#login-div {
+  margin-left: 38%;  
+}  
+
+
+
+
+
+/* Register Page  */
+
+.register-submit {
+  background-color: #bfdcae;  
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 300px;
+}  
+
+#title-register {
+  text-align: center;  
+  color:#015249;
+  margin-top: 100px
+}  
+
+#registration-div {
+  margin-left: 38%;  
+}  
+
+/* .icon {
+	position: absolute;
+	right: 8px;
+	top: 8px;
 } */
 
 
-/* #navbar-item {
-	background-color: black;
-	color: white;
-} */
 
-/* #navbar-links a:hover {
-	background-color:#009; 
-	color:#fff;
-}  */
+
 
 
   /* Homepage */
 
-  .hmpg-title {
-	  text-align: center;
-	  margin-top: 30px
-  }	
+.hmpg-title {
+	text-align: center;
+	margin-top: 30px
+}	
 
-  .hmpg-intro {
-	text-align: left;
-  }
 
-  .hmpg-img {
+.hmpg-img {
 	display: block;  
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	margin-top: 25px;
+	margin-top: 35px;
 	margin-bottom: 15px;
 	border: 3px solid #73AD21;
 	width: 806px;
-  }  
+}  
 
 #quote {
 	text-align: center;
 	font-size: 25px;
+	color: #73AD21;
+	margin-bottom: 40px;
 }	
 
-table {
+a {
+	color: #015249;
+}
+
+
+.hmpg-intro {
+	text-align: left;
+	margin-left: 20px;
+}
+
+/* table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
@@ -119,7 +161,7 @@ table {
 	border: 1px solid #dddddd;  
 	text-align: left;
 	padding: 8px;
-  }  
+  }   */
 
 
 
@@ -136,54 +178,6 @@ table {
 
 
 
-  /* Login Page */
-
-  .login-submit {
-	background-color: #bfdcae;  
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	width: 300px;
-  }  
-  
-  #login-title {
-	text-align: center;  
-	color:#015249;
-  }  
-  
-  #login-div {
-	margin-left: 38%;  
-  }  
-
-
-
-
-  /* Register Page  */
-
-  .register-submit {
-	background-color: #bfdcae;  
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	width: 300px;
-  }  
-
-  #title-register {
-	text-align: center;  
-	color:#015249;
-  }  
-  
-  #registration-div {
-	margin-left: 38%;  
-  }  
 
 
 
@@ -196,7 +190,9 @@ table {
 
 #parks-title {
 	text-align: center;
-	margin-top: 100px
+	color: white;
+	padding: 75px;
+	/* margin-top: 100px */
 }
 
 .parks-dropdown {
@@ -211,6 +207,27 @@ table {
 	width: 300px;
 }
 
+.park-img {
+	background-image: url("/static/imgs/death-valley.png");
+	background-color: #cccccc;
+	height: 500px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+
+
+
+
+/* Park Details Page  */
+
+#park-details-title {
+	text-align: center;
+	margin-top: 30px
+
+}	
 
 
 
@@ -219,6 +236,7 @@ table {
 
 #profile-title {
 	text-align: center;
+	margin-top: 30px
 }	
 
 

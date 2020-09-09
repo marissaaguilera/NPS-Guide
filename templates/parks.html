@@ -8,22 +8,24 @@
 
 </head>
 
-<div class="parks-dropdown">
-    <div id="parks-title">    
-        <h1>Find your next favorite park</h1>
-    </div>  
+<div class="park-img">
+    <div class="parks-dropdown">
+        <div id="parks-title">    
+            <h1>Find your next favorite park</h1>
+        </div>  
 
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Choose a Park
-    </a>
-  
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    {% for park in parks %}
-        <a class="dropdown-item" href="parks/{{park.park_id}}">{{ park.park_name }}</a>
-    {% endfor %}
+        
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Choose a park
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for park in parks %}
+            <a class="dropdown-item" href="parks/{{park.park_id}}">{{ park.park_name }}</a>
+        {% endfor %}
+        </div>
     </div>
-  </div>
-
+</div>
 {% endblock %}
 
 
