@@ -7,8 +7,10 @@
 {% block content %}
 
 <body>
-    <div id="user-info">
+    <div id="profile-title">
         <h1>{{user.fname}}'s Profile</h1>
+    </div>
+    <div id="user-info">
         <h3>Account Info</h3>
         <br />Name: {{user.fname}} {{user.lname}}
         <br />Email: {{user.email}}

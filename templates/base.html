@@ -11,29 +11,30 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css">
         <link href='http://fonts.googleapis.com/css?family=Raleway:100,700'rel='stylesheet'>
         
-        <!-- Load my stylesheet -->
-        <link rel="stylesheet" href="/static/css/styles.css">
         
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <!-- Load my stylesheet -->
+        <link rel="stylesheet" href="/static/css/styles.css">
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
 
-       <!-- Navbar  -->
 
+
+    <body>
 
     <!-- Navbar collapsed -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light"> 
-        <!-- navbar-fixed-top justify-content-between -->
+    <nav id="navbar" class="navbar navbar-expand-lg"> 
         <!-- Logo -->
-        <a class="navbar-brand" href="/" >
-            <img src="/static/imgs/circle-cropped2.png" width="60" height="60" class="d-inline-block align-middle" alt=""><b>NPS Guide</b></a>
+        <a class="navbar-brand" href="/">
+            <img src="/static/imgs/circle-cropped2.png" width="60" height="60" class="d-inline-block align-middle" alt="">&nbsp;NPS Guide</a>
 
-        <!-- <a class="navbar-brand" href="/"><b>NPS Guide</b></a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,11 +71,7 @@
         </div>
     </nav>
 
-        {% block head %}
-        {% endblock %}
 
-    </head>
-    <body>
         {% block content %}BLOCK CONTENT GOES HERE{% endblock %}
 
     <div class="container-fluid foo" id="flash-messages">
@@ -90,5 +87,15 @@
     <script src="/static/js/save_date.js"></script>
 
     </body>
+
+    <!-- Footer
+    <footer class="page-footer">
+
+        <div class="footer-phrase text-center py-3">
+            <label>Discover America's Story: The National Parks</label>   
+        </div>
+
+    </footer> -->
+
 </html>
 

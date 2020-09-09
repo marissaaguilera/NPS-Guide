@@ -102,42 +102,10 @@ class FlaskTestsLoggedIn(TestCase):
         self.assertIn(b"You are a valued user", result.data)
 
 
-# flask test basic tests - test login not working 
-# flask test database - not working due to example data 
-# flask test logged in - not working 
-# flask test logged out
-# flask test log in log out 
-
-
-
-
-
-
-
-
-
-
-
-
-#QUESTIONS
-#do i need example data for testing?  yes need example data 
-#test login doesnt work 
-#do i need to have a set up and tear down wrapping each function - only need both once 
-
-
-
-#test parks routes 
-#activities available route 
-# test create bucketlist and verify thing were added 
-#run tests to see that things fail correctly 
-
-
-
 if __name__ == '__main__':
     import unittest
     
     unittest.main()
-
 
 
 
@@ -146,3 +114,15 @@ if __name__ == '__main__':
 #setup, test2, teardown (test create user)
 #python3 -m -v unittest test.py
 
+
+# flask test basic tests - test login not working 
+# flask test database - not working due to example data 
+# flask test logged in - not working 
+# flask test logged out
+# flask test log in log out 
+
+
+#test parks routes 
+#activities available route 
+# test create bucketlist and verify thing were added 
+#run tests to see that things fail correctly 
