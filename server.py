@@ -51,7 +51,7 @@ def login():
         elif user:
             session['user'] = email
             session['user_id'] = user.user_id
-            flash('Successfully logged in!')
+            # flash('Successfully logged in!')
             return redirect('/parks')
 
     return render_template('login.html')
@@ -91,7 +91,7 @@ def register():
             crud.create_user(fname, lname, email, password)
             session['user'] = email
             session['user_id'] = user
-            flash('Account created.') 
+            # flash('Account created.') 
             return redirect('/parks') 
     else:
 

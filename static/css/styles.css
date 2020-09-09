@@ -22,6 +22,14 @@ ul {
 text-align: center;
 }
 
+#flash-messages {
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	width: 300px;
+}
 
 
 
@@ -235,11 +243,12 @@ text-align: center;
 
 #park-details-title {
 	text-align: center;
-	margin-top: 30px
+	margin-top: 30px;
+	margin-bottom: 50px;
 }	
 
 #park-info {
-	margin-left: 40px;
+	margin-left: 145px;
 }
 
 #act-title {
@@ -249,13 +258,37 @@ text-align: center;
 
 #act-checkboxes {
 	border: 5px solid #73AD21;
+	border-radius: 25px;
 	width: 500px;
 	margin: auto;
 	padding: 10px;
 }
 
 
+/* Bucketlist Details Page */
 
+#bucketlist-details-title {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 50px;
+}	
+
+/* #park-info {
+	margin-left: 145px;
+}
+
+#act-title {
+	margin-left: 40px;
+}
+
+
+#act-checkboxes {
+	border: 5px solid #73AD21;
+	border-radius: 25px;
+	width: 500px;
+	margin: auto;
+	padding: 10px;
+} */
 
 /* Profile Page */
 

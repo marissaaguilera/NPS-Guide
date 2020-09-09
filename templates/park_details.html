@@ -11,6 +11,7 @@
 
 <div id="park-info">
     <h3>Park Information:</h3>
+    Park Name:
     {{park.park_name}}<br />
     State Location: 
     
@@ -33,22 +34,19 @@
 
 
 
-<div id="act-title">
-    <br /><h3>Activities Available:</h3>
-    <p>Note: Check your preferred activities and add them to your bucketlist!</p>
-</div>
-
-
-
 
 
 
 <div class="container">
     <div class="row">
       <div class="col">
+        <div id="act-title">
+            <br /><h3>Activities Available:</h3>
+        </div>
         <div id="act-checkboxes">
             <form action="/adding-activities" method="POST">
                 <input type="hidden" value={{park.park_id}} name="park_id">
+                <h6>Select activities you would like added to your bucketlist</h6>
          
                 {% for activity in park.activities %}
                 <input type="checkbox" value={{activity.activity_id}} name="activities">

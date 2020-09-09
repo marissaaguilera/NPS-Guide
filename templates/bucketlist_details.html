@@ -6,12 +6,12 @@
 
 {% block content %}
 
-<h1>Bucketlist Details Page</h1>
 
 
 
-
-
+<div id="bucketlist-details-title">
+    <h1>{{bucketlist.park.park_name}} Bucketlist</h1>
+</div>
 <!-- 
     make sure it doesn't duplicate 
     check that activities arent already associated with bucketlist  -->
@@ -20,7 +20,6 @@
 <div id="single-bucketlist-table">  
     <table>
         <thead>
-            <h2>{{bucketlist.park.park_name}} Bucketlist</h2>
             <tr>
                 <th scope="col">Activity</th>
                 <th scope="col">Current Date</th> 
