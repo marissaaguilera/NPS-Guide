@@ -2,11 +2,13 @@
 
 
 
+
+
 /* General Layout */
 
 body {
-	background-color:#f1f1e8;
-	color: #335d2d;
+	background-color: #e8e4e1;
+	color: #290001;
 }
 
 
@@ -25,27 +27,32 @@ text-align: center;
 
 /* Navbar */
 
-.navbar-brand {
+.navbar-light .navbar-brand {
 	font-size: 30px;
+	font-family: "PT Serif";
 	margin: 0px;
 	color: white;
 }
 
 #navbar{
-	background-color: #206a5d;
+	background-color:#335d2d;
   }
 
-.navbar-toggler {
+.navbar-light .navbar-toggler {
 	color: white;
+	border-color: white;
 }
 
-.nav-pills .nav-link, .nav-pills .show>.nav-link {
+.navbar-light .navbar-nav .nav-link {
 	color: #f1f1e8;
   }
 
 .nav-item {
 	font-size: 20px;
-	text-align: right;
+}
+
+.navbar-nav {
+	padding-left: 70%;
 }
 
 
@@ -55,7 +62,7 @@ text-align: center;
 /* Login Page */
 
 .login-submit {
-  background-color: #bfdcae;  
+  background-color: #015249;  
   border: none;
   color: white;
   padding: 15px 32px;
@@ -83,7 +90,7 @@ text-align: center;
 /* Register Page  */
 
 .register-submit {
-  background-color: #bfdcae;  
+  background-color: #015249;  
   border: none;
   color: white;
   padding: 15px 32px;
@@ -123,7 +130,7 @@ text-align: center;
 }	
 
 
-.hmpg-img {
+#hmpg-img {
 	display: block;  
 	margin-left: auto;
 	margin-right: auto;
@@ -141,9 +148,6 @@ text-align: center;
 	margin-bottom: 40px;
 }	
 
-a {
-	color: #015249;
-}
 
 
 .hmpg-intro {
@@ -191,26 +195,33 @@ a {
 #parks-title {
 	text-align: center;
 	color: white;
-	padding: 75px;
-	/* margin-top: 100px */
+	/* padding: 25px; */
+	font-size: 60px;
 }
 
 .parks-dropdown {
 	text-align: center;
+	padding-top: 20%;
+    padding-bottom: 80%;
 }
 
 #dropdownMenuLink {
 	background-color: white;
 	color: #81b214;
 	display: inline-block;
-	font-size: 22px;
-	width: 300px;
+	font-size: 28px;
+	width: 400px;       
+}
+
+.dropdown-menu {
+    height: auto;
+    max-height: 200px;
+	overflow-x: hidden;
+	text-align: center;
 }
 
 .park-img {
 	background-image: url("/static/imgs/death-valley.png");
-	background-color: #cccccc;
-	height: 500px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -220,14 +231,28 @@ a {
 
 
 
-
 /* Park Details Page  */
 
 #park-details-title {
 	text-align: center;
 	margin-top: 30px
-
 }	
+
+#park-info {
+	margin-left: 40px;
+}
+
+#act-title {
+	margin-left: 40px;
+}
+
+
+#act-checkboxes {
+	border: 5px solid #73AD21;
+	width: 500px;
+	margin: auto;
+	padding: 10px;
+}
 
 
 

@@ -29,22 +29,24 @@
 
     <body>
 
-    <!-- Navbar collapsed -->
-    <nav id="navbar" class="navbar navbar-expand-lg"> 
+
+    <!-- MY Navbar collapsed -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light"> 
         <!-- Logo -->
         <a class="navbar-brand" href="/">
-            <img src="/static/imgs/circle-cropped2.png" width="60" height="60" class="d-inline-block align-middle" alt="">&nbsp;NPS Guide</a>
-        <div id="navbar-toggler-btn">
+            <img src="/static/imgs/circle-cropped2.png" width="55" height="55" class="d-inline-block align-middle" alt="">&nbsp;NPS Guide</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+              </button>
+
+      
 
     <!-- Navbar nav-links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">  
             <div class="navbar-nav justify-content-between">
                 {% if session.get('user') %}
-                <ul class="nav nav-pills ml-auto">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
                     <a href="/parks" class="nav-link" href="#">Explore Parks</a>
                     </li>&nbsp;
@@ -59,7 +61,7 @@
                     </li>&nbsp;
                 </ul>
                 {% else %}
-                <ul class="nav nav-pills ml-auto">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
                     <a href="/register" class="nav-link" href="#">Register</a>
                     </li>&nbsp;

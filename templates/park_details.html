@@ -3,9 +3,12 @@
 {% block title %}Parks - NPS Guide{% endblock %}
 
 {% block content %}
+
 <div id="park-details-title">
-    <h1>{{park.park_name}} Details Page</h1>
+    <h1>{{park.park_name}} Details</h1>
 </div>
+
+
 <div id="park-info">
     <h3>Park Information:</h3>
     {{park.park_name}}<br />
@@ -28,28 +31,46 @@
 </div>
 
 
-<div id="act-checkboxes">
+
+
+<div id="act-title">
     <br /><h3>Activities Available:</h3>
     <p>Note: Check your preferred activities and add them to your bucketlist!</p>
-    <form action="/adding-activities" method="POST">
-        <input type="hidden" value={{park.park_id}} name="park_id">
- 
-        {% for activity in park.activities %}
-        <input type="checkbox" value={{activity.activity_id}} name="activities">
-        <label>{{ activity.activity_name }}</label><br />
-        {% endfor %}
-        <br /><button type="submit" id="add-act-btn">Add To Bucketlist</button>
-    </form>
 </div>
 
 
+
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div id="act-checkboxes">
+            <form action="/adding-activities" method="POST">
+                <input type="hidden" value={{park.park_id}} name="park_id">
+         
+                {% for activity in park.activities %}
+                <input type="checkbox" value={{activity.activity_id}} name="activities">
+                <label>{{ activity.activity_name }}</label><br />
+                {% endfor %}
+                <br /><button type="submit" id="add-act-btn">Add To Bucketlist</button><br />
+            </form>
+        </div>
+        
+      </div>
+      <div class="col">
+        <div class="act-imgs">
+            <img src="/static/imgs/hiking-transparent.png">
+            <img src="/static/imgs/campfire-transparent.png">
+            <img src="/static/imgs/animal-transparent.png">
+            <img src="/static/imgs/rock-climbing-transparent.png">
+            <img src="/static/imgs/biking-transparent.png">
+            <img src="/static/imgs/kayak-transparent.png">
+        </div>
+      </div>
+    </div>
+  
+
 {% endblock %}
 
-<!-- this returns me my park details and site url  -->
-
-
-
-<!-- and not last state then add comma -->
-
-<!-- javascript for adding activity to a bucketlist 
-    and maybe the search bar stuff next week -->
