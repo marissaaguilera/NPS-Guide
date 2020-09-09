@@ -203,6 +203,18 @@ table {
 	text-align: center;
 }
 
+#dropdownMenuLink {
+	background-color: white;
+	color: #81b214;
+	display: inline-block;
+	font-size: 22px;
+	width: 300px;
+}
+
+
+
+
+
 /* Profile Page */
 
 #profile-title {
