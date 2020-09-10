@@ -2,7 +2,6 @@
 
 
 $('.save-order-btn').on('click', (evt) =>{
-    // alert('Hello');
     evt.preventDefault();
     const itemID = $(evt.target).val();
     const dateInput = $(`#date-${itemID}`).val();
@@ -11,7 +10,6 @@ $('.save-order-btn').on('click', (evt) =>{
 
     // const formValues = $(evt.target).serialize();
     $.post(`/saving-order`, formValues, (res) => {
-        // alert(res.date);
         console.log(res.status, res.date)
         $(`#${res.item_id}`).html(res.date);
     });
