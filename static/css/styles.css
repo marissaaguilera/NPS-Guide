@@ -150,6 +150,11 @@ text-align: center;
 	width: 806px;
 }  
 
+#hmpg-img-txt {
+	margin-left: 270px;
+	margin-bottom: 20px;
+}
+
 #quote {
 	text-align: center;
 	font-size: 25px;
@@ -179,6 +184,7 @@ text-align: center;
 	text-align: center;
 	color: white;
 	font-size: 60px;
+	padding-bottom: 3%;
 }
 
 .parks-dropdown {
@@ -346,7 +352,7 @@ td {
 }
 
 #all-bucketlists-title {
-	margin-left: 145px;
+	margin-left: 115px;
 }
 
  #all-bucketlists-links {
@@ -362,7 +368,7 @@ td {
 	width: 706px;
 }  
 
-#profile-txt {
+#profile-img-txt {
 	text-align: center;
 	color: #81b214;
 	font-size: 60px;
