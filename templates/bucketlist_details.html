@@ -14,9 +14,7 @@
 <div id="bucketlist-info">
     <h3>Bucketlist Information:</h3>
     <ul>
-        <li>This bucketlist only includes activities you have added from {{bucketlist.park.park_name}}</li>
-        <li>Today's date will automatically be set for each activity</li>
-        <li>To change that date, choose a date in the "Update Date" column</li>
+        <li>This bucketlist includes activities added from {{bucketlist.park.park_name}}</li>
     </ul>
 
 </div>
@@ -31,11 +29,12 @@
         </div>
         <div id="bucketlist-table">  
             <table>
+                <h5>Current date is either today's date or the pervious date set <br />Choose the calendar to update</h5> <br />
                 <thead>
                     <tr>
                         <th scope="col">Activity</th>
                         <th scope="col">Current Date</th> 
-                        <th scope="col">Update Date</th>
+                        <th scope="col">Change Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +47,7 @@
                             {% endif %}
                             
                             <td><input id="date-{{bucketlistitem.item_id}}" class="calendar" type="date" name="order-date" min="2020-09-01" required autofocus></td> 
-                            <td><button type="submit" class="save-order-btn" value={{bucketlistitem.item_id}}>Save</button></td>
+                            <td><button type="submit" class="save-order-btn" value={{bucketlistitem.item_id}}>Update</button></td>
                             <!-- <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input> -->
                         </tr>
                         

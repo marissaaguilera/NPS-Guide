@@ -10,28 +10,33 @@
     <div id="profile-title">
         <h1>{{user.fname}}'s Profile</h1>
     </div>
+
+    <div id="profile-img" class="rounded">
+        <img src="/static/imgs/pipiwai-trail-profile.jpg" >
+    </div>
+    <div id="profile-txt">    
+        Go explore Adventure Awaits 
+    </div>  
+
     <div id="user-info">
-        <h3>Account Info</h3>
-        <br />Name: {{user.fname}} {{user.lname}}
+        <h3>Account Information:</h3>
+        Name: {{user.fname}} {{user.lname}}
         <br />Email: {{user.email}}
     </div>
 
+    <div id="all-bucketlists-title">
+        <br /><h3>All Bucketlists:</h3>
+    </div>
 
 
 
-    <div id="all-bucketlists">
-        <br /><h3>All Bucketlists</h3>
-        <p>Each bucketlist will be associated with one park.</p>
 
+    <div id="all-bucketlists-links">
         {% for bucketlist in bucketlists %}
-
-        <ul>
-        <li><a href="/bucketlists/{{bucketlist.bucketlist_id}}">{{ bucketlist.park.park_name }}</a></li>
-        </ul>
+        <a href="/bucketlists/{{bucketlist.bucketlist_id}}">{{ bucketlist.park.park_name }}</a><br />
         {% endfor %}
     </div>
 </body>  
-    <!-- do i need to add jquery files and bootstrap files here or is it okay just in base? -->
     
 
 {% endblock %}

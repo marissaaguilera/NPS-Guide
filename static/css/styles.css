@@ -11,13 +11,6 @@ body {
 	color: #290001;
 }
 
-
-/* ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-} */
-
 .alert-container {
 text-align: center;
 }
@@ -135,13 +128,6 @@ text-align: center;
   margin-left: 38%;  
 }  
 
-/* .icon {
-	position: absolute;
-	right: 8px;
-	top: 8px;
-} */
-
-
 
 
 
@@ -192,7 +178,6 @@ text-align: center;
 #parks-title {
 	text-align: center;
 	color: white;
-	/* padding: 25px; */
 	font-size: 60px;
 }
 
@@ -215,6 +200,7 @@ text-align: center;
     max-height: 200px;
 	overflow-x: hidden;
 	text-align: center;
+	font-size: 17.5px;
 }
 
 .park-img {
@@ -351,6 +337,46 @@ td {
 
 #profile-title {
 	text-align: center;
-	margin-top: 30px
+	margin-top: 30px;
+	margin-bottom: 50px;
 }	
- 
+
+#user-info {
+	margin-left: 145px;
+}
+
+#all-bucketlists-title {
+	margin-left: 145px;
+}
+
+ #all-bucketlists-links {
+	margin-left: 145px;
+
+ } 
+
+ #profile-img {
+	display: block;  
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 35px;
+	margin-bottom: 15px;
+	border: 3px solid #73AD21;
+	width: 806px;
+}  
+
+#profile-txt {
+	text-align: center;
+	color: white;
+	font-size: 60px;
+}
+
+
+ /* .park-img {
+	background-image: url("/static/imgs/death-valley.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+} */
+ 	/* background-image: url("/static/imgs/pipiwai-trail-profile.jpg"); */
