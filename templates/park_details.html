@@ -46,7 +46,7 @@
         <div id="act-checkboxes">
             <form action="/adding-activities" method="POST">
                 <input type="hidden" value={{park.park_id}} name="park_id">
-                <h6>Select activities you would like added to your bucketlist</h6>
+                <h5>Select activity(s) to add to your bucketlist</h5> <br />
          
                 {% for activity in park.activities %}
                 <input type="checkbox" value={{activity.activity_id}} name="activities">

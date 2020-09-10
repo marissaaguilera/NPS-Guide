@@ -12,24 +12,39 @@ body {
 }
 
 
-ul {
+/* ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-}
+} */
 
 .alert-container {
 text-align: center;
 }
 
 #flash-messages {
-	padding: 15px 32px;
+	padding: 38px 32px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
 	width: 300px;
 }
+
+.page-footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	/* height: 4%; */
+	background-color: #335d2d;
+	color: #f1f1e8;
+	text-align: center;
+	font-size: 18px;
+	font-family: "PT Serif";
+  }
+
+
 
 
 
@@ -95,6 +110,7 @@ text-align: center;
 
 
 
+
 /* Register Page  */
 
 .register-submit {
@@ -137,7 +153,6 @@ text-align: center;
 	margin-top: 30px
 }	
 
-
 #hmpg-img {
 	display: block;  
 	margin-left: auto;
@@ -156,37 +171,11 @@ text-align: center;
 	margin-bottom: 40px;
 }	
 
-
-
 .hmpg-intro {
 	text-align: left;
 	margin-left: 20px;
 }
 
-/* table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-  }  
-  
-  td, th {
-	border: 1px solid #dddddd;  
-	text-align: left;
-	padding: 8px;
-  }   */
-
-
-
-
-
-
-/* Footer  */  
-  /* .page-footer {
-	position: absolute;  
-	bottom: 0;
-	width: 100%;
-	height: 2.5rem;
-  }   */
 
 
 
@@ -239,6 +228,9 @@ text-align: center;
 
 
 
+
+
+
 /* Park Details Page  */
 
 #park-details-title {
@@ -264,6 +256,31 @@ text-align: center;
 	padding: 10px;
 }
 
+h5 {
+	padding-top: 5px;
+	color:#87431d;
+	text-align: center;
+}
+
+#add-act-btn {
+	background-color: #73AD21;  
+	border: none;
+	border-radius: 20px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	width: 200px;
+}
+
+
+
+
+
+
+
 
 /* Bucketlist Details Page */
 
@@ -273,22 +290,62 @@ text-align: center;
 	margin-bottom: 50px;
 }	
 
-/* #park-info {
+#bucketlist-info {
 	margin-left: 145px;
 }
 
-#act-title {
+#bucketlist-title {
 	margin-left: 40px;
 }
 
-
-#act-checkboxes {
+#bucketlist-table {
 	border: 5px solid #73AD21;
 	border-radius: 25px;
-	width: 500px;
+	width: 530px;
 	margin: auto;
 	padding: 10px;
-} */
+	font-family: arial, sans-serif;
+}
+
+th {
+	font-size: 18px;
+	text-align: center;
+}
+
+td {
+	padding: 10px;
+	text-align: left;
+  }  
+
+.calendar {
+	border: 2px solid #73AD21;
+	border-radius: 10px;
+}
+
+.save-order-btn {
+	background-color: #73AD21;  
+	border: none;
+	border-radius: 20px;
+	color: white;
+	padding: 10px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	width: 80px;
+}
+
+#all-bucketlists {
+	text-align: center;
+	font-size: 25px;
+	color: #73AD21;
+	margin-top: 40px;
+}	
+
+
+
+
+
 
 /* Profile Page */
 
@@ -296,7 +353,4 @@ text-align: center;
 	text-align: center;
 	margin-top: 30px
 }	
-
-
-
-
+ 

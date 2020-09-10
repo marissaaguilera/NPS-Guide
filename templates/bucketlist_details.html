@@ -7,45 +7,69 @@
 {% block content %}
 
 
-
-
 <div id="bucketlist-details-title">
     <h1>{{bucketlist.park.park_name}} Bucketlist</h1>
 </div>
-<!-- 
-    make sure it doesn't duplicate 
-    check that activities arent already associated with bucketlist  -->
 
-    
-<div id="single-bucketlist-table">  
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Activity</th>
-                <th scope="col">Current Date</th> 
-                <th scope="col">Planned Date</th>
-            </tr>
-        </thead>
-        <tbody>
-                {% for bucketlistitem in bucketlist.bucketlistitems %} 
+<div id="bucketlist-info">
+    <h3>Bucketlist Information:</h3>
+    <ul>
+        <li>This bucketlist only includes activities you have added from {{bucketlist.park.park_name}}</li>
+        <li>Today's date will automatically be set for each activity</li>
+        <li>To change that date, choose a date in the "Update Date" column</li>
+    </ul>
 
-                <tr>
-                    <td>{{ bucketlistitem.activity.activity_name}}</td>
-                    {% if bucketlistitem.order != None %} 
-                        <td id={{bucketlistitem.item_id}}>{{ bucketlistitem.order.strftime('%m/%d/%Y')}}</td>
-                    {% endif %}
-                    <!-- showing date above, choosing date below  -->
-                    
-                    <td><input id="date-{{bucketlistitem.item_id}}" type="date" name="order-date" min="2020-09-01" required autofocus></td> 
-                    <td><button type="submit" class="save-order-btn" value={{bucketlistitem.item_id}}>Save</button></td>
-                    <!-- <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input> -->
-                </tr>
-                
-                {% endfor %}
-        </tbody>
-    </table>
 </div>
-<!-- 
-<script src="/static/js/save_date.js"></script> -->
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div id="bucketlist-title">
+            <br /><h3>Bucketlist:</h3>
+        </div>
+        <div id="bucketlist-table">  
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Activity</th>
+                        <th scope="col">Current Date</th> 
+                        <th scope="col">Update Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for bucketlistitem in bucketlist.bucketlistitems %} 
+        
+                        <tr>
+                            <td>{{ bucketlistitem.activity.activity_name}}</td>
+                            {% if bucketlistitem.order != None %} 
+                                <td id={{bucketlistitem.item_id}}>{{ bucketlistitem.order.strftime('%m/%d/%Y')}}</td>
+                            {% endif %}
+                            
+                            <td><input id="date-{{bucketlistitem.item_id}}" class="calendar" type="date" name="order-date" min="2020-09-01" required autofocus></td> 
+                            <td><button type="submit" class="save-order-btn" value={{bucketlistitem.item_id}}>Save</button></td>
+                            <!-- <input type="hidden" name="item_id" value={{bucketlistitem.item_id}}></input> -->
+                        </tr>
+                        
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+      </div>
+      <div class="col">
+        <div class="act-imgs">
+            <img src="/static/imgs/bucket-transparent.png">
+        </div>
+    </div>
+</div>
+
+
+<div id="all-bucketlists">
+    <p><img src="/static/imgs/pin.png" width="30" height="35" class="d-inline-block align-bottom"><a class="profile-link" href="/profile/{{session.get('user_id')}}">&nbsp;Click here to view all your bucketlists!</a></p>
+</div>
+
+<!-- <img src="/static/imgs/tent-transparent.png"> -->
 
 {% endblock %}

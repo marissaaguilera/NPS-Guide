@@ -132,25 +132,6 @@ def all_parks():
 
 
 
-# @app.route('/search-parks', methods=['GET'])
-# def search_parks(park_id):
-#     """Using the search bar to go to a park park."""
-
-#     park_id = request.form.get('park_id')
-#     print('>>>>>>>>>>>>>HERE', park_id) 
-
-#     # park_id = crud.get_park_by_id(park_id)
-
-#     return redirect(f'/parks/{park_id}')
-
-
-#post request to server when i want to change something 
-#getting user (accessing user, show bucketlists)
-#using user object to show all users bucketlist 
-#loop over bucketlis - has park and park name 
-# loop over bucketlistitem 
-
-
 @app.route('/activities/<activity_id>')
 def show_activity(activity_id):
     """Show the details on a particular activity."""
@@ -178,7 +159,6 @@ def user_profile(user_id):
 
     user = crud.get_user_by_id(user_id)
     bucketlists = crud.get_bucketlist_by_user(user_id)
-    # bucketlistitem = crud.get_bucketlist_item_by_id(bucketlistitem_id)
 
 
   
@@ -218,7 +198,7 @@ def adding_to_a_bucketlist():
     activity_list = request.form.getlist('activities')
 
     if activity_list == []:
-        flash('No activity was selected. Please try again.')
+        flash('Oops, no activity was selected. Please try again')
         return redirect(f'parks/{park_id}')
 
     bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
@@ -258,14 +238,6 @@ def saving_order():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')
-
-
-
-
-#additional column for current date
-    #crud function for updating bucketlist order (bucketlistitemid)
-    #update its order value and add and commit that change 
-
 
 
 #Post is used to send data 
