@@ -18,8 +18,13 @@ National Park Service API
 * CSS
 * Bootstrap
 
-Features 
-Prerequisites
+# Getting Started
+## Features 
+## Prerequisites
 
-Installation
-Author Acknowledgments
+## Installation
+## Author 
+[Marissa Aguilera](https://www.linkedin.com/in/marissa-aguilera/)
+
+
+## Acknowledgments
