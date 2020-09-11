@@ -11,29 +11,29 @@
     <h1>Your {{bucketlist.park.park_name}} Bucketlist</h1>
 </div>
 
-<div id="bucketlist-info">
-    <h3>Bucketlist Information:</h3>
-    <ul>
-        <li>This bucketlist includes activities added from {{bucketlist.park.park_name}}</li>
-    </ul>
-
-</div>
-
 
 
 <div class="container">
     <div class="row">
       <div class="col">
+        <div id="bucketlist-info">
+            <h3>Bucketlist Information:</h3>
+            <ul>
+                <li>This bucketlist includes activities added from {{bucketlist.park.park_name}}</li>
+            </ul>
+        
+        </div>
         <div id="bucketlist-title">
             <br /><h3>Bucketlist:</h3>
         </div>
         <div id="bucketlist-table">  
             <table>
-                <h5>Select date of activity and update each one</h5> <br />
+                <h5>Planned date defaults to todays date or changes when you update<br />
+                    Select date of activity and update each one</h5> <br />
                 <thead>
                     <tr>
                         <th scope="col">Activity</th>
-                        <th scope="col">Scheduled Date</th> 
+                        <th scope="col">Planned Date</th> 
                         <th scope="col">Change Date</th>
                     </tr>
                 </thead>

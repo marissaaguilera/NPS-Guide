@@ -16,7 +16,6 @@ os.system('dropdb npsdb')
 os.system('createdb npsdb')
 model.connect_to_db(server.app)
 model.db.create_all()
-#run python3 seed_database
 
 with open('data/parkinfo.json') as f: 
     park_data = json.loads(f.read())
@@ -24,13 +23,11 @@ with open('data/parkinfo.json') as f:
 
 
 
-#Create users
+#Create Users
 all_users = []
 for user in range(50):
     extension = ['@gmail.com', '@yahoo.com', '@hotmail.com']
 
-    # username = first[0] + last
-    # username = username.lower()
     first = fake.first_name()
     last = fake.last_name()
     email =  f'{first}.{last}{choice(extension)}'
@@ -58,11 +55,9 @@ for state in states:
 
 
 
-
 #Create Parks
 data_value = park_data['data']
 data_dict = data_value
-#this only accesses 
 
 all_parks = set()
 all_activities = []
@@ -94,7 +89,8 @@ for value in data_value:
                 all_parks.add(db_park)
         else: 
             continue
-        #avoid having duplicate parks
+
+
 
 
 
@@ -102,6 +98,8 @@ for value in data_value:
 user_id = user.user_id
 park_id = db_park.park_id
 bucketlist = crud.create_bucketlist(user_id, park_id)
+
+
 
 
 
@@ -115,4 +113,3 @@ order = datetime.now()
 bucektlistitem = crud.create_bucketlist_item(bucketlist_id, 
                                 activity_id, 
                                 order)
-

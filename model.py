@@ -148,7 +148,6 @@ class BucketlistItem(db.Model):
     bucketlist_id = db.Column(db.Integer, db.ForeignKey('bucketlists.bucketlist_id'), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
     order = db.Column(db.DateTime, nullable=True)
-    # current_date = db.Column(db.DateTime, nullable=True)
 
     
     bucketlists = db.relationship('Bucketlist')

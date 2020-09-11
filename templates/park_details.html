@@ -9,37 +9,33 @@
 </div>
 
 
-<div id="park-info">
-    <h3>Park Information:</h3>
-    Park Name:
-    {{park.park_name}}<br />
-    State Location: 
-    
-    {% for state in park.states %}
-    
-    {% if state == park.states|last %}
-    {{state.state_code}}
-    
-    {% elif park.states|length > 1 %}
-    {{state.state_code}},
-    
-    {% else %}
-    {{state.state_code}}
-    
-    {% endif %}
-    {% endfor %}<br />
-    <a href={{park.siteURL}}>Official Page</a>
-</div>
-
-
-
-
-
 
 
 <div class="container">
     <div class="row">
       <div class="col">
+        <div id="park-info">
+            <h3>Park Information:</h3>
+            Park Name:
+            {{park.park_name}}<br />
+            State Location: 
+            
+            {% for state in park.states %}
+            
+            {% if state == park.states|last %}
+            {{state.state_code}}
+            
+            {% elif park.states|length > 1 %}
+            {{state.state_code}},
+            
+            {% else %}
+            {{state.state_code}}
+            
+            {% endif %}
+            {% endfor %}<br />
+            <a href={{park.siteURL}}>Official Page</a>
+        </div>
+
         <div id="act-title">
             <br /><h3>Activities Available:</h3>
         </div>

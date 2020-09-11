@@ -234,12 +234,8 @@ text-align: center;
 	margin-bottom: 50px;
 }	
 
-#park-info {
-	margin-left: 145px;
-}
-
 #act-title {
-	margin-left: 40px;
+	padding-top: 10px;
 }
 
 
@@ -286,10 +282,6 @@ h5 {
 	margin-bottom: 50px;
 }	
 
-#bucketlist-info {
-	margin-left: 145px;
-}
-
 #bucketlist-title {
 	margin-left: 40px;
 }
@@ -297,7 +289,7 @@ h5 {
 #bucketlist-table {
 	border: 5px solid #73AD21;
 	border-radius: 25px;
-	width: 530px;
+	width: 540px;
 	margin: auto;
 	padding: 10px;
 	font-family: arial, sans-serif;
@@ -351,17 +343,13 @@ td {
 	margin-bottom: 50px;
 }	
 
-#user-info {
-	margin-left: 145px;
-}
-
 #all-bucketlists-title {
-	margin-left: 115px;
+	margin-left: 110px;
 }
 
  #all-bucketlists-links {
-	margin-left: 140px;
-
+	margin-left: 115px;
+	font-size: 18px;
  } 
 
  #profile-img {
