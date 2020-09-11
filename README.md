@@ -21,11 +21,11 @@ NPS Guide is a site where users can view available activities at a given nationa
 ## Features 
 * New user registration using Bootstrap
 * User functionality to:
-** Search a park of their choice
-** View the available activities at a given park
-** Save activities to an existing bucketlist or create a new bucketlist
-** Set a preferred date for these acivities to occur
-** Login and Logout
+⋅⋅* Search a park of their choice
+⋅⋅* View the available activities at a given park
+⋅⋅* Save activities to an existing bucketlist or create a new bucketlist
+⋅⋅* Set a preferred date for these acivities to occur
+⋅⋅* Login and Logout
 
 
 ## Getting Started
