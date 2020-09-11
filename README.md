@@ -1,7 +1,7 @@
 # National Park Service Guide
 
 ## About
-NPS Guide is a site where users can view available activities at a given national park and select their preferred activities to add to a bucketlist. The inspiration for my project stems from my passion for exploring national parks, where I save activities in my phone that I want to check out while I am there. NPS Guide is a perfect solution!
+NPS Guide is a site where users can view available activities at a given national park and select their preferred activities to add to a bucketlist. The inspiration for my project stems from my passion for exploring national parks, where I save activities in my phone that I want to check out while I am there. NPS Guide serves as a perfect solution!
 
 ## API
 [National Park Service API](https://www.nps.gov/subjects/developer/api-documentation.htm#/activities/parks)
@@ -18,13 +18,26 @@ NPS Guide is a site where users can view available activities at a given nationa
 * CSS
 * Bootstrap
 
-## Getting Started
 ## Features 
+* New user registration using Bootstrap
+* User functionality to:
+** Search a park of their choice
+** View the available activities at a given park
+** Save activities to an existing bucketlist or create a new bucketlist
+** Set a preferred date for these acivities to occur
+** Login and Logout
+
+
+## Getting Started
+
+
 ## Prerequisites
 
 ## Installation
+
+
 ## Author 
-### [Marissa Aguilera](https://www.linkedin.com/in/marissa-aguilera/)
+**[Marissa Aguilera](https://www.linkedin.com/in/marissa-aguilera/)**
 
 
 ## Acknowledgments
