@@ -18,13 +18,17 @@ National Park Service API
 * CSS
 * Bootstrap
 
-# Getting Started
+## Getting Started
 ## Features 
 ## Prerequisites
 
 ## Installation
 ## Author 
-[Marissa Aguilera](https://www.linkedin.com/in/marissa-aguilera/)
+### [Marissa Aguilera](https://www.linkedin.com/in/marissa-aguilera/)
 
 
 ## Acknowledgments
+A huge thank you to each of the following 
+* Hackbright Instructors: Marisa Gloor, Katrina Huber-Juma, Andrew Blum
+* Mentors: Nakita Strangeways, Rachael Morton
+
