@@ -34,8 +34,7 @@ NPS Guide is a site where users can view available activities at a given nationa
 
 ## Using NPS Guide
 ### 1. Register as a new user or login to your account
-[![](imgs/login-register.mov)](imgs/login-register.mov)
-[![Alt text for your video](imgs/login-register.mov)](imgs/login-register.mov "Login/Register")
+![](/static/imgs/login-register.gif?raw=true)
 
 
 ### 2. Choose a National Park 
