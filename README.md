@@ -32,7 +32,7 @@ NPS Guide is a site where users can view available activities at a given nationa
 ### Virtual Environment
 Create a virtual environment to install requirements 
 
-    ```zsh
+    ```
     $ virtualenv
     $ source env/bin/activate
     ```
@@ -40,12 +40,12 @@ Create a virtual environment to install requirements
 ### Prerequisites
 All the prerequisites are in the requirements.txt file 
 
-    ```zsh
+    ```
     pip3 install -r requirements.txt
     ```
 
 ### Run Server 
-    ```zsh
+    ```
     python3 server.py
     ```
 
