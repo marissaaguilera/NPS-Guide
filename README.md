@@ -27,8 +27,6 @@ NPS Guide is a site where users can view available activities at a given nationa
     * Set a preferred date for these acivities to occur
     * Login and Logout
 
-### Register as a new user & login as an existing user 
-
 ## Prerequisites
 
 ## Installation
@@ -48,9 +46,7 @@ NPS Guide is a site where users can view available activities at a given nationa
 
 
 ## Author 
-**Marissa Aguilera**
-[LinkedIn](https://www.linkedin.com/in/marissa-aguilera/)
-[GitHub](https://github.com/Meaguileraa)
+Marissa Aguilera - *Initial work* - **[LinkedIn](https://www.linkedin.com/in/marissa-aguilera/)** **[GitHub](https://github.com/Meaguileraa)**
 
 
 ## Acknowledgments
