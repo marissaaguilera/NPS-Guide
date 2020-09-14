@@ -1,14 +1,14 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Bucketlist Details - NPS Guide{% endblock %}
+{% block title %} Bucket List Details - NPS Guide{% endblock %}
 
 
 {% block content %}
 
 
 <div id="bucketlist-details-title">
-    <h1>Your {{bucketlist.park.park_name}} Bucketlist</h1>
+    <h1>Your {{bucketlist.park.park_name}} Bucket List</h1>
 </div>
 
 
@@ -17,14 +17,14 @@
     <div class="row">
       <div class="col">
         <div id="bucketlist-info">
-            <h3>Bucketlist Information:</h3>
+            <h3>Bucket List Information:</h3>
             <ul>
-                <li>This bucketlist includes activities added from {{bucketlist.park.park_name}}</li>
+                <li>This bucket list includes activities added from {{bucketlist.park.park_name}}</li>
             </ul>
         
         </div>
         <div id="bucketlist-title">
-            <br /><h3>Bucketlist:</h3>
+            <br /><h3>Bucket List:</h3>
         </div>
         <div id="bucketlist-table">  
             <table>
@@ -66,7 +66,7 @@
 
 
 <div id="all-bucketlists">
-    <p><img src="/static/imgs/pin.png" width="30" height="35" class="d-inline-block align-bottom"><a class="profile-link" href="/profile/{{session.get('user_id')}}">&nbsp;Click here to view all your bucketlists!</a></p>
+    <p><img src="/static/imgs/pin.png" width="30" height="35" class="d-inline-block align-bottom"><a class="profile-link" href="/profile/{{session.get('user_id')}}">&nbsp;Click here to view all your bucket lists!</a></p>
 </div>
 
 <!-- <img src="/static/imgs/tent-transparent.png"> -->
