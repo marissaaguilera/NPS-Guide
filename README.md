@@ -34,10 +34,15 @@ NPS Guide is a site where users can view available activities at a given nationa
 
 ## Using NPS Guide
 ### 1. Register as a new user or login to your account
+![](imgs/login-register.mov)
 ### 2. Choose a National Park 
+![]()
 ### 3. Select activity(s) that are available at that park to be added to a bucket list
+![]()
 ### 4. Once activity(s) are added to a bucket list you can update your planned date 
+![]()
 ### 5. In your profile you can view all of your bucket lists
+![]()
 
 ## Version 2.0 
 * Rebuild frontend using React 
