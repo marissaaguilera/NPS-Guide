@@ -48,7 +48,8 @@ NPS Guide is a site where users can view available activities at a given nationa
 
 
 ### 5. In your profile you can view all of your bucket lists
-![]()
+![](/static/imgs/profile-page.png)
+
 
 ## Version 2.0 
 * Rebuild frontend using React 
