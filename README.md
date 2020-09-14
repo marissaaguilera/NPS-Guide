@@ -43,8 +43,10 @@ NPS Guide is a site where users can view available activities at a given nationa
 ### 3. Select activity(s) that are available at that park to be added to a bucket list
 ![](/static/imgs/add-activities.gif?raw=true)
 
-### 4. Once activity(s) are added to a bucket list you can update your planned date 
-![]()
+### 4. Once activity(s) are added to a bucket list you can update your planned date
+![](/static/imgs/change-date.gif?raw=true)
+
+
 ### 5. In your profile you can view all of your bucket lists
 ![]()
 
