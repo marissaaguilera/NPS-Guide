@@ -32,22 +32,23 @@ NPS Guide is a site where users can view available activities at a given nationa
 ### Virtual Environment
 Create a virtual environment to install requirements 
 
-    ```
-    $ virtualenv
-    $ source env/bin/activate
-    ```
+```sh
+$ virtualenv
+$ source env/bin/activate
+```
+
 
 ### Prerequisites
 All the prerequisites are in the requirements.txt file 
 
-    ```
-    pip3 install -r requirements.txt
-    ```
+```sh
+pip3 install -r requirements.txt
+```
 
 ### Run Server 
-    ```
-    python3 server.py
-    ```
+```sh
+python3 server.py
+```
 
 
 
