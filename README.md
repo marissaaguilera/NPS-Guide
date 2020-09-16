@@ -1,4 +1,7 @@
 # National Park Service Guide :national_park:	
+```sh
+"Discover America's Story: The National Parks"
+```
 
 ## About
 NPS Guide is a site where users can view available activities at a given national park and select their preferred activities to add to a bucket list. The inspiration for my project stems from my passion for exploring national parks, where I save activities in my phone that I want to check out while I am there. NPS Guide serves as a perfect solution!
@@ -27,29 +30,10 @@ NPS Guide is a site where users can view available activities at a given nationa
     * Set a preferred date for these acivities to occur
     * Login and Logout
 
-## Installation
 
-### Virtual Environment
-Create a virtual environment to install requirements 
-
-```sh
-$ virtualenv
-$ source env/bin/activate
-```
-
-
-### Prerequisites
-All the prerequisites are in the requirements.txt file 
-
-```sh
-pip3 install -r requirements.txt
-```
-
-### Run Server 
-```sh
-python3 server.py
-```
-
+## Deployment
+* Deployed via Lightsail on AWS
+* Visit NPS Guide at [http://www.nps-guide.com/](http://www.nps-guide.com/)
 
 
 ## Using NPS Guide
