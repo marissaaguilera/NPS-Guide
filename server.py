@@ -158,7 +158,7 @@ def user_profile(user_id):
     """Shows a users profile with all their bucketlists."""
 
     user = crud.get_user_by_id(user_id)
-    bucketlists = crud.get_bucketlist_by_user(user_id)
+    bucketlists = crud.get_bucketlist_by_user(user)
 
 
   
