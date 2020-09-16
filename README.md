@@ -36,6 +36,31 @@ NPS Guide is a site where users can view available activities at a given nationa
 * Visit NPS Guide at [http://www.nps-guide.com/](http://www.nps-guide.com/)
 
 
+## Installation
+
+### Virtual Environment
+Create a virtual environment to install requirements 
+
+```sh
+$ virtualenv
+$ source env/bin/activate
+```
+
+
+### Prerequisites
+All the prerequisites are in the requirements.txt file 
+
+```sh
+pip3 install -r requirements.txt
+```
+
+### Run Server 
+```sh
+python3 server.py
+```
+
+
+
 ## Using NPS Guide
 ### 1. Register as a new user or login to your account
 ![](/static/imgs/login-register.gif?raw=true)
