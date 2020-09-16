@@ -31,11 +31,6 @@ NPS Guide is a site where users can view available activities at a given nationa
     * Login and Logout
 
 
-## Deployment
-* Deployed via Lightsail on AWS
-* Visit NPS Guide at [http://www.nps-guide.com/](http://www.nps-guide.com/)
-
-
 ## Installation
 
 ### Virtual Environment
