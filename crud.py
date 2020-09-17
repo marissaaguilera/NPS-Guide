@@ -21,7 +21,6 @@ def create_user(fname, lname, email, password):
     db.session.commit()
 
     return user
-      # Returns a user object: <User user_id=71 email=michelle.valdez@gmail.com>
 
 
 def get_users():
@@ -34,6 +33,7 @@ def get_user_by_id(user_id):
     """Return a user by primary_key."""
 
     return User.query.get(user_id)
+
 
 
 def get_user_by_email(email):
@@ -64,7 +64,6 @@ def create_park(park_name, designation, siteURL):
         db.session.commit()
 
     return park
-#Returns park object: <Park park_id=20 park_name=Zion National Park>
 
 
 def get_parks():
@@ -97,7 +96,7 @@ def create_activity(activity_name):
     db.session.commit()
 
     return activity
-#Returns activity object: <Activity activity_id=41 activity_name=Hiking>
+
 
 def get_activities():
     """Return all activities."""
@@ -130,16 +129,12 @@ def create_park_activity(activity_id, park_id):
     db.session.commit()
 
     return park_activity
-#Returns ParkActivity object: <Park Activity activity_id=41 park_id=6>
 
 
 def get_activities_by_park():
     """Return a park by the activitiy id."""
 
-    # return Activity.query.filter((Activity.activity_id == park_id) | (Activity.activity_id == park_id)).all()    
-
     return db.session.query(Activity, Park).join(Activity).all()
-#FIXME
 
 
 
@@ -153,7 +148,6 @@ def create_state(state_code):
     db.session.commit()
 
     return state
-#Returns state object: <State state_id=56 state_code=CA>
 
 
 def get_states():
@@ -217,7 +211,6 @@ def create_bucketlist(user_id, park_id):
     db.session.commit()
 
     return bucketlist
-    #Returns a bucketlist object: <Bucketlist bucketlist_id=5 user_id=2>
 
 
 def get_bucketlists():
@@ -240,11 +233,10 @@ def get_bucketlist_by_user(user_id):
 
 def get_bucketlist_by_park_and_user(park_id, user_id):
     """Return a users bucketlist by a park id."""
-    # park_id = get_park_by_id(park_id)
+
     return Bucketlist.query.filter(Bucketlist.park_id == park_id, Bucketlist.user_id == user_id).first()
 
 
-# def get_bucketlistitems_in_bucketlist():
 
 
 #BucketlistItem

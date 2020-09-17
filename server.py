@@ -84,18 +84,17 @@ def register():
         password = request.form.get('password')
 
         user = crud.get_user_by_email(email)
-
         if user: 
-            flash('Cannot create an account with that email. Please try again.') #not working 
+            flash('Cannot create an account with that email. Please try again.')  
         else:
             crud.create_user(fname, lname, email, password)
             session['user'] = email
             session['user_id'] = user
-            # flash('Account created.') 
             return redirect('/parks') 
-    else:
+    # else:
 
-        return render_template('registration.html')
+    #     return render_template('registration.html')
+    return render_template('registration.html')
 
 
 
@@ -157,11 +156,13 @@ def get_activities():
 def user_profile(user_id):
     """Shows a users profile with all their bucketlists."""
 
-    user = crud.get_user_by_id(user_id)
-    bucketlists = crud.get_bucketlist_by_user(user)
+    email = session['user']
 
-
-  
+    user = crud.get_user_by_email(email)
+    # print("EMAIL", email) #shows the users email 
+    # print("USER", user) #shows  <User user_id=60 email=dan@yahoo.com>
+    bucketlists = crud.get_bucketlist_by_user(user.user_id)
+    # print("BUCKETLIST", bucketlists)
 
     return render_template('user_profile.html', user=user, bucketlists=bucketlists)
 
@@ -193,7 +194,12 @@ def select_bucketlist_from_profile(bucketlist_id):
 def adding_to_a_bucketlist():
     """Creates a new bucketlist for a user."""
 
-    user_id = session['user_id'] 
+
+    email = session['user']
+
+    user = crud.get_user_by_email(email)
+
+    # user_id = session['user_id'] #returns None
     park_id = request.form.get('park_id')
     activity_list = request.form.getlist('activities')
 
@@ -201,10 +207,10 @@ def adding_to_a_bucketlist():
         flash('Oops, no activity was selected. Please try again')
         return redirect(f'parks/{park_id}')
 
-    bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user_id)
+    bucketlist = crud.get_bucketlist_by_park_and_user(park_id, user.user_id)
 
     if not bucketlist: 
-        bucketlist = crud.create_bucketlist(user_id, park_id)
+        bucketlist = crud.create_bucketlist(user.user_id, park_id)
 
     for activity_id in activity_list:
         new_bucketlist_item = crud.create_bucketlist_item(bucketlist.bucketlist_id, activity_id, datetime.now())
